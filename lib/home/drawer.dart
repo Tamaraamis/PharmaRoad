@@ -158,39 +158,23 @@ class _drawerState extends State<drawer> {
                             border:
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("contact");
-                            },
-                            child: Column(
-                              children: [
-                                // SizedBox(height: 10,),
-                                Image.asset(
-                                  "images/phar.png",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  "Ask a Pharmacist",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
+                  Container(child: GestureDetector(
+          onTap: () {Navigator.of(context).pushNamed("uploadpic");},
+                 child:Column(children: [
+                  SizedBox(height: 9,),
+                  //Image.asset("images/1906532.png",height: 100,width: 70,),
+                  Icon(Icons.camera_alt_outlined,color: Color(0xff41b2d6),size: 75),
+                  SizedBox(height: 4,),
+                  Text("Upload Your \nPrescription ",style: TextStyle(fontSize: 18,color: Color(0xff41b2d6),fontWeight: FontWeight.bold),),
+                 ],)
+                 
+                 
+                 ),
+                height: 150,width: 155,margin: EdgeInsets.only(left: 28),decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all( color: Color(0xff41b2d6) ,width: 2 
+              ),
+              borderRadius: BorderRadius.circular(15.0))),
                   ],
                 ),
               ),

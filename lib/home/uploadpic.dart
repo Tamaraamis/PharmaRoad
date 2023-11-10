@@ -43,12 +43,17 @@ body: SingleChildScrollView(
           return AlertDialog(
             backgroundColor: Color.fromARGB(255, 252, 252, 252),
             actions: [
-             
-             Row(children: [
-              Container(child: Text("Upload Prescription",style:TextStyle(fontWeight: FontWeight.bold),),),
+             Container(
+              color: Color.fromARGB(255, 232, 232, 232),
+              width:double.maxFinite,
+              height: 50,
+              child:Row(children: [
+              Container(
+                
+                child: Text("Upload Prescription",style:TextStyle(fontWeight: FontWeight.bold,color:Color(0xff41b2d6) ),),),
               SizedBox(width: 88,),
-              IconButton(onPressed:(){}, icon: Icon(Icons.close,))
-             ],),
+              IconButton(onPressed:(){}, icon: Icon(Icons.close,color: Color(0xff41b2d6),))
+             ],), ),
              SizedBox(height: 10,),
        Container(
         width: 110,
