@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class uploadpic extends StatefulWidget {
   const uploadpic({super.key});
@@ -52,11 +53,13 @@ body: SingleChildScrollView(
               child:Row(children: [
               Container(
                 
-                child: Text("Upload Prescription",style:TextStyle(fontWeight: FontWeight.bold,color:Color(0xff41b2d6) ),),),
-              SizedBox(width: 88,),
-              IconButton(onPressed:(){}, icon: Icon(Icons.close,color: Color(0xff41b2d6),))
+                child: Text("Upload Prescription",style:TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color:Color(0xff41b2d6) ),),),
+              SizedBox(width: 63,),
+              IconButton(onPressed:(){
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.close,color: Color(0xff41b2d6),))
              ],), ),
-             SizedBox(height: 10,),
+             SizedBox(height: 25,),
              Row(children: [
               
        Container(
@@ -68,7 +71,11 @@ body: SingleChildScrollView(
               border: Border.all( color:Color(0xff41b2d6) ,width: 2 
               ),
               borderRadius: BorderRadius.circular(10.0)),
-        child: Row(children: [
+        child: GestureDetector(
+          onTap: () {
+            _pickImageFromCamera();
+          },
+          child:Row(children: [
           
         SizedBox(width: 5,),
 Icon(Icons.camera_alt_outlined,size: 25,color: Color(0xff41b2d6) ,),
@@ -76,7 +83,7 @@ SizedBox(width: 5,),
 Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
 
 
-       ],),),
+       ],),)),
               
               SizedBox(width: 10,),
 
@@ -89,7 +96,12 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
               border: Border.all( color:Color(0xff41b2d6) ,width: 2 
               ),
               borderRadius: BorderRadius.circular(10.0)),
-        child: Row(children: [
+        child:GestureDetector(
+          onTap: () {
+            _pickImageFromGallery();
+          },
+          child: 
+         Row(children: [
           
         SizedBox(width: 5,),
 Icon(Icons.add_photo_alternate_outlined,size: 25,color: Color(0xff41b2d6) ,),
@@ -97,11 +109,11 @@ SizedBox(width: 5,),
 Text("Gallery",style: TextStyle(color: Color(0xff41b2d6) ),),
 
 
-       ],),)
+       ],),))
        
        
        ,],),
-          SizedBox(height: 30,)
+          SizedBox(height: 50,)
           
              ],
 alignment: Alignment.bottomCenter,
@@ -125,5 +137,13 @@ alignment: Alignment.bottomCenter,
 ),
     );
     
+  }
+  Future _pickImageFromGallery()async{
+   final returnedImage= await ImagePicker().pickImage(source:ImageSource.gallery);
+
+  }
+   Future _pickImageFromCamera()async{
+   final returnedImage= await ImagePicker().pickImage(source:ImageSource.camera);
+
   }
 }
