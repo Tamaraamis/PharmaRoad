@@ -20,6 +20,7 @@ import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'package:flutter_application_2/home/uploadpic.dart';
+import 'home/contactD.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         "region7": (context) => region7(),
         "region8": (context) => region8(),
         "uploadpic": (context) => uploadpic(),
+        "contactD": (context) => contactd(),
       },
     );
   }
