@@ -38,7 +38,7 @@ body: SingleChildScrollView(
       Container(child: GestureDetector(
         child:Container(
           margin: EdgeInsets.only(top:10,left: 70),
-          child: Text("Upload More Prescription",style: TextStyle(fontSize: 18,color:Color(0xff41b2d6) ),)),
+          child: Text("Upload Prescription",style: TextStyle(fontSize: 18,color:Color(0xff41b2d6) ),)),
           onTap: () {
             showDialog(context: context, builder: (context)
         {
