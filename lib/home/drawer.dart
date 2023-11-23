@@ -79,7 +79,7 @@ class _drawerState extends State<drawer> {
                 },
               ),
               ListTile(
-                title: Text("Contact Uss"),
+                title: Text("Contact Us"),
                 leading: const Icon(Icons.call),
                 onTap: () {
                   Navigator.of(context).pushNamed("contactD");
