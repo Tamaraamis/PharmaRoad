@@ -25,6 +25,8 @@ appBar: AppBar(
 ),
 body: SingleChildScrollView(
   child: Column(children: [
+    Image.asset("images/women.png",height: 320,width: 500,),
+
     Row(children: [
      Container(child:Icon(Icons.wysiwyg,size: 55,color:Color(0xff41b2d6),)
      ,margin: EdgeInsets.only(left: 25,top: 45),),

@@ -25,6 +25,8 @@ class _drawerState extends State<drawer> {
                 ),
                 backgroundColor: Color(0xffEDFAFF)),
             BottomNavigationBarItem(
+          
+                  
                 label: "Profile",
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
@@ -68,28 +70,22 @@ class _drawerState extends State<drawer> {
                 title: Text("Login/Register"),
                 leading: const Icon(Icons.login),
                 onTap: () {
-                  Navigator.of(context).pushNamed("Login");
+                  Navigator.of(context).pushNamed("try");
                 },
               ),
-              ListTile(
-                title: Text("Pharmacy Locator"),
-                leading: const Icon(Icons.add_location_rounded),
-                onTap: () {
-                  Navigator.of(context).pushNamed("pharmacyloc");
-                },
-              ),
+             
               ListTile(
                 title: Text("Contact Us"),
                 leading: const Icon(Icons.call),
                 onTap: () {
-                  Navigator.of(context).pushNamed("contactD");
+                  Navigator.of(context).pushNamed("profilee");
                 },
               ),
               ListTile(
                 title: Text("Log-out"),
                 leading: const Icon(Icons.logout),
                 onTap: () {
-                  Navigator.of(context).pushNamed("User");
+                  Navigator.of(context).pushNamed("Welcome");
                 },
               ),
             ],
