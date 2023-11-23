@@ -1,4 +1,5 @@
-//import 'dart:io';
+
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,7 +11,7 @@ class uploadpic extends StatefulWidget {
 }
 
 class _uploadpicState extends State<uploadpic> {
- // File? imagefile;
+ File? imagefile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
