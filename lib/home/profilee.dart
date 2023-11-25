@@ -188,8 +188,12 @@ class _MyListViewState extends State<MyListView> {
           
           onTap: () {
             // Navigate to the edit screen when ListTile is tapped
+             if(index ==4){
+       Navigator.of(context).pushNamed("perscription");
+    }
+         else
             navigateToEditScreen(index);
-            
+           
           },
         )
         ),
@@ -211,10 +215,12 @@ class _MyListViewState extends State<MyListView> {
   }
   // Function to navigate to the edit screen
   void navigateToEditScreen(int index) async {
+   
     // Wait for the user to edit the subtitle and get the updated data
     ItemData updatedItem = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => EditScreen(item: items[index])),
+       
     );
 
     // Update the data if the user made changes
@@ -223,6 +229,7 @@ class _MyListViewState extends State<MyListView> {
         items[index] = updatedItem;
       });
     }
+    
   }
 }
 

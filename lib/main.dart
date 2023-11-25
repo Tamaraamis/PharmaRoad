@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
+import 'package:flutter_application_2/home/perscription.dart';
 import 'package:flutter_application_2/home/profilee.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
         "uploadpic": (context) => uploadpic(),
         "profilee": (context) => profile(),
         "contactR": (context) => contactR(),
-
+        "perscription": (context) => yourPerscription(),
       },
     );
   }
