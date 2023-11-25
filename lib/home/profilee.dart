@@ -122,23 +122,23 @@ class _MyListViewState extends State<MyListView> {
                      // selectedImage!=null? Image.file(selectedImage!)
                              
                             Positioned(
-                              bottom: 2,
+                              bottom: 0,
                               right: 0,
                              
                               child: Container(
                                 height: 45,
-                                width: 45,
+                                width: 47,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     width: 4,
                                     color: Colors.white,
                                   ),
-                                 color: Color(0xFF41B2D6),
+                                 color: Color(0xffc7f1ff),
                                 ),
                                 child:  IconButton(onPressed: (){
                                 _pickImage();
-                                }, icon:Icon(Icons.camera_alt_outlined),color: Colors.white,)
+                                }, icon:Icon(Icons.camera_alt),color:Color.fromARGB(255, 155, 162, 163),)
 
 
                               )),
