@@ -38,7 +38,7 @@ dependencies:
   url_launcher: ^6.0.6
   flutter_phone_direct_caller: ^2.1.1
   image_picker: ^1.0.4
-
+  flutter_svg: ^2.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

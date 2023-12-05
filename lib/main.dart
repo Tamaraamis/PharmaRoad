@@ -1,6 +1,7 @@
 //C:\Users\USER\OneDrive\Desktop\flutter_application_2
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/popularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
 import 'auth/logmanager.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         "region8": (context) => region8(),
         "uploadpic": (context) => uploadpic(),
         "contactD": (context) => contactd(),
+        "product":(context) => product(),
       },
     );
   }
