@@ -19,15 +19,12 @@ class _drawerState extends State<drawer> {
           backgroundColor: Color(0xff41b2d6),
           onTap: (index) {
             if (index==0){
-               Navigator.of(context).pushNamed("User");
+               Navigator.of(context).pushNamed("drawer");
             }
             else if(index==1){
                Navigator.of(context).pushNamed("profilee");
             }
-            else 
-            {
-              // Navigator.of(context).pushNamed("contactR");
-            }
+            
           },
           items: [
             BottomNavigationBarItem(
@@ -42,10 +39,7 @@ class _drawerState extends State<drawer> {
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
                 backgroundColor: Color(0xff41b2d6)),
-            BottomNavigationBarItem(
-                label: "Warhouses",
-                icon: Icon(Icons.warehouse),
-                backgroundColor: Color(0xff41b2d6)),
+
           ],
         ),
         appBar: AppBar(
@@ -89,14 +83,14 @@ class _drawerState extends State<drawer> {
                 title: Text("Contact Us"),
                 leading: const Icon(Icons.call),
                 onTap: () {
-                  Navigator.of(context).pushNamed("contactR");
+                  Navigator.of(context).pushNamed("contact-us");
                 },
               ),
               ListTile(
                 title: Text("Log-out"),
                 leading: const Icon(Icons.logout),
                 onTap: () {
-                  Navigator.of(context).pushNamed("Welcome");
+                  Navigator.of(context).pushNamed("User");
                 },
               ),
             ],

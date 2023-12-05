@@ -17,7 +17,7 @@ class _UserState extends State<User> {
         backgroundColor: const Color(0xffEDFAFF),
         body: //Center
             Container(
-          margin: const EdgeInsets.only(top: 50),
+          margin: const EdgeInsets.only(top: 90),
           decoration: BoxDecoration(
               color: const Color(0xffFFFFFF),
               borderRadius: BorderRadius.circular(150)),
@@ -38,7 +38,7 @@ class _UserState extends State<User> {
                     textAlign: TextAlign.left,
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 30,
                   ),
                   Image.asset(
                     "images/p5.png",
@@ -63,7 +63,7 @@ class _UserState extends State<User> {
                     // splashColor: Colors.blue,
                   ),
                   const SizedBox(
-                    height: 2,
+                    height: 30,
                   ),
                   Image.asset(
                     "images/pp1.png",
@@ -85,27 +85,27 @@ class _UserState extends State<User> {
                     ),
                   ),
                   const SizedBox(
-                    height: 2,
+                    height: 90,
                   ),
-                  Image.asset(
-                    "images/pharm.png",
-                    height: 150,
-                    width: 450,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const Log()));
-                    },
-                    elevation: 20,
-                    height: 10,
-                    minWidth: 200,
-                    splashColor: Colors.blue,
-                    child: const Text(
-                      "Distributor",
-                      style: TextStyle(fontSize: 30, color: pColor),
-                    ),
-                  ),
+                  // Image.asset(
+                  //   "images/pharm.png",
+                  //   height: 150,
+                  //   width: 450,
+                  // ),
+                  // MaterialButton(
+                  //   onPressed: () {
+                  //     Navigator.pushReplacement(context,
+                  //         MaterialPageRoute(builder: (context) => const Log()));
+                  //   },
+                  //   elevation: 20,
+                  //   height: 10,
+                  //   minWidth: 200,
+                  //   splashColor: Colors.blue,
+                  //   child: const Text(
+                  //     "Distributor",
+                  //     style: TextStyle(fontSize: 30, color: pColor),
+                  //   ),
+                  // ),
                 ],
               )),
         ));

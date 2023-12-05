@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
+import 'package:flutter_application_2/home/profilee.dart';
 
 import 'package:flutter_application_2/popularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         //"contactD": (context) => contactd(),
         "product":(context) => product(),
         "contact-us":(context) => contactR(),
+        "profilee":(context) => profile(),
       },
     );
   }
