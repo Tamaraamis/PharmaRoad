@@ -1,11 +1,13 @@
 //C:\Users\USER\OneDrive\Desktop\flutter_application_2
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/contact-us.dart';
+
 import 'package:flutter_application_2/popularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
 import 'auth/logmanager.dart';
-import 'home/contact.dart';
+//import 'home/contact.dart';
 import 'home/drawer.dart';
 import 'auth/signup.dart';
 import 'auth/user.dart';
@@ -21,7 +23,7 @@ import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'package:flutter_application_2/home/uploadpic.dart';
-import 'home/contactD.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         "Searchdrug": (context) => const Searchdrug(),
         "Welcome": (context) => const Welcome(),
         "drawer": (context) => drawer(),
-        "contact": (context) => Contact(),
+        //"contact": (context) => Contact(),
         "LoginManger": (context) => LogM(),
         "homeph": (context) => Homeph(),
         //"drug":(context) => Drug(),
@@ -58,8 +60,9 @@ class MyApp extends StatelessWidget {
         "region7": (context) => region7(),
         "region8": (context) => region8(),
         "uploadpic": (context) => uploadpic(),
-        "contactD": (context) => contactd(),
+        //"contactD": (context) => contactd(),
         "product":(context) => product(),
+        "contact-us":(context) => contactR(),
       },
     );
   }

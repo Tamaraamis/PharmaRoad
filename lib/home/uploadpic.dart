@@ -1,5 +1,5 @@
-import 'dart:io';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,7 +11,7 @@ class uploadpic extends StatefulWidget {
 }
 
 class _uploadpicState extends State<uploadpic> {
-  File? imagefile;
+ File? imagefile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +25,8 @@ appBar: AppBar(
 ),
 body: SingleChildScrollView(
   child: Column(children: [
+    Image.asset("images/women.png",height: 320,width: 500,),
+
     Row(children: [
      Container(child:Icon(Icons.wysiwyg,size: 55,color:Color(0xff41b2d6),)
      ,margin: EdgeInsets.only(left: 25,top: 45),),
@@ -89,7 +91,7 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
 
        Container(
         width: 110,
-        height: 50,
+        height: 50, 
         margin: EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
              //color: Color.fromARGB(255, 127, 122, 122),Color.fromARGB(255, 230, 230, 230)
