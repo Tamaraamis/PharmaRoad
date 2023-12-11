@@ -214,7 +214,7 @@ class _drawerState extends State<drawer> {
                                 ),
                               ],
                             )),
-                        height: 150,
+                        height: 150, 
                         width: 155,
                         margin: EdgeInsets.only(left: 28),
                         decoration: BoxDecoration(

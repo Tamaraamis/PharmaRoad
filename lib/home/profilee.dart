@@ -189,7 +189,7 @@ class _MyListViewState extends State<MyListView> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20, 
                   ),
                 ],
               );
