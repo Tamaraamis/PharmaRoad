@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -75,8 +76,8 @@ class _drawerState extends State<drawer> {
               ),
              
               ListTile(
-                title: Text("Contact Us"),
-                leading: const Icon(Icons.call),
+                title: Text("Profile"),
+                leading: const Icon(Icons.person),
                 onTap: () {
                   Navigator.of(context).pushNamed("profilee");
                 },
@@ -84,8 +85,9 @@ class _drawerState extends State<drawer> {
               ListTile(
                 title: Text("Log-out"),
                 leading: const Icon(Icons.logout),
-                onTap: () {
-                  Navigator.of(context).pushNamed("Welcome");
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamed("try");
                 },
               ),
             ],

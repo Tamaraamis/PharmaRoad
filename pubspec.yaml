@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mongo_dart: ^0.9.3
   http: ^0.13.5
   get: ^4.1.4
   # The following adds the Cupertino Icons font to your application.
@@ -37,7 +38,21 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.6
   flutter_phone_direct_caller: ^2.1.1
-  image_picker: ^1.0.4
+  image_picker: any 
+  api_cache_manager: ^1.0.2
+  snippet_coder_utils: ^1.0.15
+  firebase_core: ^2.24.0
+  cloud_firestore: ^4.13.3
+  firebase_storage: ^11.5.3
+  firebase_messaging: ^14.7.6
+  firebase_auth: ^4.15.0
+  google_sign_in: ^6.1.6
+  awesome_dialog: ^3.1.0
+  firebase_app_check: ^0.2.1+6
+  webview_flutter: ^3.0.0
+  firebase_remote_config: ^4.3.8
+  email_validator: ^2.1.17
+
 
 dev_dependencies:
   flutter_test:

@@ -23,7 +23,7 @@ appBar: AppBar(
    ),
        body:SingleChildScrollView(child:Column(children: [
         SizedBox(height: 20,),
-      Container(child:Text("حي الشرقي",style: TextStyle(fontSize: 40,color:Color( 0xff41b2d6),
+      Container(child:Text("الحي الشرقي",style: TextStyle(fontSize: 40,color:Color( 0xff41b2d6),
       fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),margin: EdgeInsets.only(left:50),),
        SizedBox(height: 10,),
      
