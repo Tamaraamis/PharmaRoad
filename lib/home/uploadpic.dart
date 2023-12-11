@@ -89,7 +89,7 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
               
               SizedBox(width: 10,),
 
-       Container(
+       Container( 
         width: 110,
         height: 50, 
         margin: EdgeInsets.only(right: 10),
