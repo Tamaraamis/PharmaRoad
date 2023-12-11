@@ -18,6 +18,18 @@ class _drawerState extends State<drawer> {
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.black,
           backgroundColor: Color(0xff41b2d6),
+           onTap: (index) {
+            if (index==0){
+               Navigator.of(context).pushNamed("User");
+            }
+            else if(index==1){
+               Navigator.of(context).pushNamed("profilee");
+            }
+            else 
+            {
+              
+            }
+          },
           items: [
             BottomNavigationBarItem(
                 label: "HOME",
@@ -32,10 +44,7 @@ class _drawerState extends State<drawer> {
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
                 backgroundColor: Color(0xff41b2d6)),
-            BottomNavigationBarItem(
-                label: "Warhouses",
-                icon: Icon(Icons.warehouse),
-                backgroundColor: Color(0xff41b2d6)),
+            
           ],
         ),
         appBar: AppBar(
@@ -76,10 +85,10 @@ class _drawerState extends State<drawer> {
               ),
              
               ListTile(
-                title: Text("Profile"),
+                title: Text("Contact Us"),
                 leading: const Icon(Icons.person),
                 onTap: () {
-                  Navigator.of(context).pushNamed("profilee");
+                  Navigator.of(context).pushNamed("contact-us");
                 },
               ),
               ListTile(
@@ -150,7 +159,7 @@ class _drawerState extends State<drawer> {
                             )),
                         height: 150,
                         width: 155,
-                        margin: EdgeInsets.only(left: 28),
+                        margin: EdgeInsets.only(left: 3),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
@@ -216,7 +225,7 @@ class _drawerState extends State<drawer> {
                             )),
                         height: 150, 
                         width: 155,
-                        margin: EdgeInsets.only(left: 28),
+                        margin: EdgeInsets.only(left: 3),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:

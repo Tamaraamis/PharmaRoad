@@ -1,6 +1,7 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
         "region7": (context) => region7(),
         "region8": (context) => region8(),
         "uploadpic": (context) => uploadpic(),
-        "contactD": (context) => contactd(),
+        "contact-us": (context) => contactR(),
         "profilee": (context) => profile(),
       },
     );
