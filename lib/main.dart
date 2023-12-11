@@ -1,8 +1,6 @@
-//C:\Users\USER\OneDrive\Desktop\flutter_application_2
+//main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
-import 'package:flutter_application_2/home/contact-us.dart';
-import 'package:flutter_application_2/home/perscription.dart';
 import 'package:flutter_application_2/home/profilee.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
@@ -10,7 +8,7 @@ import 'auth/logmanager.dart';
 import 'home/contact.dart';
 import 'home/drawer.dart';
 import 'auth/signup.dart';
-import 'auth/user.dart';
+import 'auth/users.dart';
 import 'home/searche.dart';
 import 'home/try.dart';
 import 'pharmacyloc/pharmacyloc.dart';
@@ -23,10 +21,19 @@ import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'package:flutter_application_2/home/uploadpic.dart';
+import 'home/contactD.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'firebase_options.dart';
 
-
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,11 +43,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const splach(),
+      home: FirebaseAuth.instance.currentUser == null ? splach() :  drawer(),
       theme: ThemeData(primaryColor: const Color.fromRGBO(115, 144, 215, 0.86)),
       routes: {
         "Signup": (context) => const Signup(),
-        "User": (context) => const User(),
+        "Users": (context) => const Users(),
         "Searchdrug": (context) => const Searchdrug(),
         "Welcome": (context) => const Welcome(),
         "drawer": (context) => drawer(),
@@ -60,9 +67,8 @@ class MyApp extends StatelessWidget {
         "region7": (context) => region7(),
         "region8": (context) => region8(),
         "uploadpic": (context) => uploadpic(),
+        "contactD": (context) => contactd(),
         "profilee": (context) => profile(),
-        "contactR": (context) => contactR(),
-        "perscription": (context) => yourPerscription(),
       },
     );
   }
@@ -77,6 +83,15 @@ class splach extends StatefulWidget {
 class _splachState extends State<splach> {
   @override
   void initState() {
+
+    FirebaseAuth.instance.authStateChanges()
+   .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
