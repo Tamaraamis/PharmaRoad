@@ -47,7 +47,7 @@ class _SignupState extends State<Signup> {
             ),
             const Padding(
               padding: EdgeInsets.all(20),
-              child: Column(
+            /*  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
@@ -55,7 +55,7 @@ class _SignupState extends State<Signup> {
                     style: TextStyle(color: Color(0xffEDFAFF), fontSize: 40),
                   ),
                 ],
-              ),
+              ),*/
             ),
             const SizedBox(
               height: 20,
