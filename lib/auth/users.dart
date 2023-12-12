@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/home/color.dart';
 import '../home/try.dart';
-import 'logmanager.dart' ;
+import 'logmanager.dart';
 
 class Users extends StatefulWidget {
   const Users({super.key});
