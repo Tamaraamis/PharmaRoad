@@ -1,23 +1,26 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+//import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
 
-class profile extends StatefulWidget {
-  const profile({super.key});
+
+
+class pro extends StatefulWidget {
+  const pro({super.key});
 
   @override
-  State<profile> createState() => _profileState();
+  State<pro> createState() => _proState();
 }
 
-class _profileState extends State<profile> {
+class _proState extends State<pro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+appBar: AppBar(
         title: Text(
-          "Profile",
+          "Profile Manager",
           style: TextStyle(fontSize: 30, color: Color(0xffEDFAFF)),
         ),
         leading: IconButton(
@@ -26,14 +29,14 @@ class _profileState extends State<profile> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed("drawer");
+            Navigator.of(context).pushNamed("homeph");
           },
         ),
         centerTitle: true,
         backgroundColor: Color(0xFF41B2D6),
       ),
       backgroundColor: Color(0xffEDFAFF),
-      body: MyListView(Column(
+  body: MyListView(Column(
         children: [
           const SizedBox(
             height: 20,
@@ -51,7 +54,6 @@ class _profileState extends State<profile> {
     );
   }
 }
-
 class MyListView extends StatefulWidget {
   MyListView(Column column);
 
@@ -73,9 +75,7 @@ class _MyListViewState extends State<MyListView> {
       });
     }
   }
-
-  // Sample data for demonstration
-  List<ItemData> items = [
+   List<ItemData> items = [
     ItemData(
       title: 'Name',
       subtitle: 'Name',
@@ -89,21 +89,9 @@ class _MyListViewState extends State<MyListView> {
       trailingIcon: Icons.arrow_forward,
     ),
     ItemData(
-      title: 'Address',
-      subtitle: 'Abc.address/city',
-      icon: Icons.location_pin,
-      trailingIcon: Icons.arrow_forward,
-    ),
-    ItemData(
       title: 'Email',
       subtitle: 'Email',
       icon: Icons.mail,
-      trailingIcon: Icons.arrow_forward,
-    ),
-    ItemData(
-      title: 'Your Prescription',
-      subtitle: 'Your Prescription',
-      icon: Icons.content_paste,
       trailingIcon: Icons.arrow_forward,
     ),
   ];
@@ -127,10 +115,6 @@ class _MyListViewState extends State<MyListView> {
                 backgroundColor: Color(0xffc7f1ff),
                 radius: 65,
               ),
-
-              // if (
-              // selectedImage!=null? Image.file(selectedImage!)
-
               Positioned(
                   bottom: 0,
                   right: 0,
@@ -186,7 +170,7 @@ class _MyListViewState extends State<MyListView> {
                           onTap: () {
                             // Navigate to the edit screen when ListTile is tapped
                             if (index == 4) {
-                              Navigator.of(context).pushNamed("perscription");
+                             // Navigator.of(context).pushNamed("perscription");
                             } else
                               navigateToEditScreen(index);
                           },

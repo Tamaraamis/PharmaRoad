@@ -15,6 +15,15 @@ class _HomephState extends State<Homeph> {
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.black,
           backgroundColor: Color(0xff41b2d6),
+          onTap: (index) {
+            if (index==0){
+               Navigator.of(context).pushNamed("homeph");
+            }
+            else if(index==1){
+               Navigator.of(context).pushNamed("profileM");
+            }
+            
+          },
           items: [
             BottomNavigationBarItem(
                 label: "HOME",
