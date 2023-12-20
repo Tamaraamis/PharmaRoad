@@ -1,7 +1,9 @@
 
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class uploadpic extends StatefulWidget {
   const uploadpic({super.key});
@@ -12,6 +14,7 @@ class uploadpic extends StatefulWidget {
 
 class _uploadpicState extends State<uploadpic> {
  File? imagefile;
+ String imageUrl = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,8 +77,25 @@ body: SingleChildScrollView(
               ),
               borderRadius: BorderRadius.circular(10.0)),
         child: GestureDetector(
-          onTap: () {
-            _pickImageFromCamera();
+          onTap: () async{
+            ImagePicker imagePicker=ImagePicker();
+            XFile? file=await ImagePicker().pickImage(source:ImageSource.camera);
+           
+           print('${file?.path}');
+
+                    if (file == null) return;
+           String uniqueFileName=DateTime.now().millisecondsSinceEpoch.toString();
+           Reference referenceRoot=FirebaseStorage.instance.ref();
+           Reference referenceDirImages=referenceRoot.child('images');
+           Reference referenceImageToUpload=referenceDirImages.child(uniqueFileName);
+            try {
+                      //Store the file
+                      await referenceImageToUpload.putFile(File(file!.path));
+                      //Success: get the download URL
+                      imageUrl = await referenceImageToUpload.getDownloadURL();
+                    } catch (error) {
+                      //Some error occurred
+                    }
           },
           child:Row(children: [
           
@@ -100,8 +120,25 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
               ),
               borderRadius: BorderRadius.circular(10.0)),
         child:GestureDetector(
-          onTap: () {
-            _pickImageFromGallery();
+          onTap: ()  async{
+            ImagePicker imagePicker=ImagePicker();
+            XFile? file=await ImagePicker().pickImage(source:ImageSource.gallery);
+           
+           print('${file?.path}');
+
+                    if (file == null) return;
+           String uniqueFileName=DateTime.now().millisecondsSinceEpoch.toString();
+           Reference referenceRoot=FirebaseStorage.instance.ref();
+           Reference referenceDirImages=referenceRoot.child('images');
+           Reference referenceImageToUpload=referenceDirImages.child(uniqueFileName);
+            try {
+                      //Store the file
+                      await referenceImageToUpload.putFile(File(file!.path));
+                      //Success: get the download URL
+                      imageUrl = await referenceImageToUpload.getDownloadURL();
+                    } catch (error) {
+                      //Some error occurred
+                    }
           },
           child: 
          Row(children: [
