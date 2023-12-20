@@ -57,7 +57,7 @@ appBar: AppBar(
               padding: EdgeInsets.only(right:70),),
               
              ],
-alignment: Alignment.bottomCenter,
+  alignment: Alignment.bottomCenter,
           );
 
         }
@@ -66,7 +66,7 @@ alignment: Alignment.bottomCenter,
       
       },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
       IconButton(onPressed: (){
-MapUtils.openMap('https://maps.app.goo.gl/XehwPHVtBRKY7ZHL7');
+  MapUtils.openMap('https://maps.app.goo.gl/XehwPHVtBRKY7ZHL7');
       },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
       ],),),
       
@@ -75,7 +75,7 @@ MapUtils.openMap('https://maps.app.goo.gl/XehwPHVtBRKY7ZHL7');
       ,color: Color.fromARGB(255, 236, 238, 239)),
       ),
         
-          SizedBox(height: 15,),
+          SizedBox(height: 18,),
           Container(
             child:SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -122,7 +122,7 @@ MapUtils.openMap('https://maps.app.goo.gl/3UoGkuAwdBhdJjvB8');
       ,color: Color.fromARGB(255, 236, 238, 239)),
       ),
         
-          SizedBox(height: 15,),
+          SizedBox(height: 18,),
           Container(
             
             child:SingleChildScrollView(
@@ -172,7 +172,7 @@ MapUtils.openMap('https://maps.app.goo.gl/Dgvx9LHaiEcXFD369');
       ),
      
         
-          SizedBox(height: 15,),
+          SizedBox(height: 18,),
           Container(
             child:SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -220,7 +220,7 @@ alignment: Alignment.bottomCenter,
       ),
        
        
-          SizedBox(height: 15,),
+          SizedBox(height: 18,),
           Container(
             child:SingleChildScrollView(
         scrollDirection: Axis.horizontal,

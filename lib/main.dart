@@ -1,8 +1,10 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
+import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
 import 'PharmacyManger/homeph.dart';
 import 'auth/logmanager.dart';
@@ -21,7 +23,9 @@ import 'pharmacyloc/region5.dart';
 import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
+import 'home/uploadpic.dart';
 import 'package:flutter_application_2/home/uploadpic.dart';
+
 import 'home/contactD.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +58,7 @@ class MyApp extends StatelessWidget {
         "drawer": (context) => drawer(),
         "contact": (context) => Contact(),
         "LoginManger": (context) => LogM(),
-        "homeph": (context) => Homeph(),
+        "homeph": (context) => LogM(),
         //"drug":(context) => Drug(),
         "list": (context) => Medicine(),
         "try": (context) => Log(),
@@ -70,6 +74,9 @@ class MyApp extends StatelessWidget {
         "uploadpic": (context) => uploadpic(),
         "contact-us": (context) => contactR(),
         "profilee": (context) => profile(),
+        "product":(context) => product(),
+        "profileM":(context) => pro(),
+
       },
     );
   }

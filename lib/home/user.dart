@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/home/color.dart';
 import '../home/try.dart';
-import 'logmanager.dart';
+import '../auth/logmanager.dart';
 
-class Users extends StatefulWidget {
-  const Users({super.key});
+class User extends StatefulWidget {
+  const User({super.key});
 
   @override
-  State<Users> createState() => _UsersState();
+  State<User> createState() => _UserState();
 }
 
-class _UsersState extends State<Users> {
- @override
+class _UserState extends State<User> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xffEDFAFF),

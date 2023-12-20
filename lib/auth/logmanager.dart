@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 
 class LogM extends StatefulWidget {
   const LogM({Key? key}) : super(key: key);
@@ -35,7 +36,9 @@ class _LogMState extends State<LogM> {
         final String storedPassword = pharmacyDoc['password'];
 
         if (passwordController.text.trim() == storedPassword) {
-          Navigator.of(context).pushNamed("homeph");
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => PharmacyMedicinesPage(pharmacyDoc.id)),
+          );
         } else {
           showSnackBar('Incorrect password');
         }
@@ -66,11 +69,12 @@ class _LogMState extends State<LogM> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Center(
-                    child: Container(
-                        margin: const EdgeInsets.only(top: 70),
-                        child: Image.asset("images/ph1.png",
-                            height: 300, width: 300))),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 70),
+                    child: Image.asset("images/ph1.png", height: 300, width: 300),
+                  ),
+                ),
                 TextFormField(
                   controller: pharmacyIdController,
                   validator: (value) {
@@ -82,7 +86,7 @@ class _LogMState extends State<LogM> {
                   decoration: InputDecoration(
                     hintText: "Pharmacy Id",
                     hintStyle: TextStyle(color: Colors.grey),
-                   border: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 20),

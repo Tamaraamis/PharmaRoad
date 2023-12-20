@@ -234,7 +234,7 @@ class _drawerState extends State<drawer> {
                     Container(
                         child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed("contact");
+                              Navigator.of(context).pushNamed("product");
                             },
                             child: Column(
                               children: [
@@ -250,7 +250,7 @@ class _drawerState extends State<drawer> {
                                   height: 3,
                                 ),
                                 Text(
-                                  "Products For You",
+                                  "Popular Medicine",
                                   style: TextStyle(
                                       fontSize: 17,
                                       color: Color(0xff41b2d6),

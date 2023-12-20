@@ -1,252 +1,214 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Homeph extends StatefulWidget {
-  const Homeph({super.key});
+class PharmacyMedicinesPage extends StatefulWidget {
+  final String pharmacyId;
+
+  const PharmacyMedicinesPage(this.pharmacyId, {Key? key}) : super(key: key);
 
   @override
-  State<Homeph> createState() => _HomephState();
+  State<PharmacyMedicinesPage> createState() => _PharmacyMedicinesPageState();
 }
 
-class _HomephState extends State<Homeph> {
+class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  List<String> medicines = [];
+  String text = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchMedicines();
+  }
+
+  Future<void> fetchMedicines() async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await _firestore.collection('Pharmacies').doc(widget.pharmacyId).collection('medicine').get();
+
+      setState(() {
+        medicines = querySnapshot.docs.map((doc) => doc['Mname'] as String).toList();
+      });
+    } catch (e) {
+      print('Error fetching medicines: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffEDFAFF),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          backgroundColor: Color(0xff41b2d6),
-          items: [
-            BottomNavigationBarItem(
-                label: "HOME",
-                icon: Icon(
-                  Icons.home,
-                ),
-                backgroundColor: Color(0xffEDFAFF)),
-            BottomNavigationBarItem(
-                label: "Profile",
-                tooltip: "Profile",
-                icon: Icon(Icons.person),
-                backgroundColor: Color(0xff41b2d6)),
-          ],
-        ),
-        appBar: AppBar(
-          backgroundColor: Color(0xff41b2d6),
-          title: Text(
-            "Pharma Road",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 35,
+      appBar: AppBar(
+        title: Text('Pharmacy Medicines'),
+      ),
+      body: ListView.builder(
+        itemCount: medicines.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Card(
+              elevation: 20,
+              shadowColor: Color(0xff41b2d6),
               color: Color(0xffEDFAFF),
+              child: ListTile(
+                title: Text(medicines[index]),
+                trailing: Container(
+                  width: 70,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => SimpleDialog(
+                                children: [
+                                  TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        text = value;
+                                      });
+                                    },
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff41b2d6),
+                                    ),
+                                    onPressed: () {
+                                      // Update the medicine in Firestore
+                                      _firestore
+                                          .collection('Pharmacies')
+                                          .doc(widget.pharmacyId)
+                                          .collection('medicine')
+                                          .doc(medicines[index])
+                                          .update({'Mname': text});
+
+                                      // Update the local list
+                                      setState(() {
+                                        medicines[index] = text;
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Update"),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ),
+                      Expanded(
+                        child: IconButton(
+                          onPressed: () {
+                            showDeleteDialog(index);
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          centerTitle: true,
-        ),
-        drawer: Drawer(
-          child: Column(
-            children: [
-              UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  child: Image.asset(
-                    "images/p5.png",
-                    height: 150,
-                    width: 400,
-                  ), //Icon(Icons.person),
-                  backgroundColor: Color(0xffEDFAFF),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff41b2d6),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              final TextEditingController textController = TextEditingController();
+              return AlertDialog(
+                title: Text(
+                  'Add Medicine',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Color(0xff41b2d6),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                accountName: Text(""),
-                accountEmail: Text(""),
-                decoration: BoxDecoration(
-                  color: Color(0xff41b2d6), // Background color of the header
+                content: TextField(
+                  controller: textController,
                 ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Add the new medicine to Firestore
+                      _firestore
+                          .collection('Pharmacies')
+                          .doc(widget.pharmacyId)
+                          .collection('medicine')
+                          .doc(textController.text)
+                          .set({'Mname': textController.text});
+
+                      // Add the new medicine to the local list
+                      setState(() {
+                        medicines.add(textController.text);
+                      });
+
+                      textController.clear();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Add'),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  Future<void> showDeleteDialog(int index) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Medicine'),
+          content: Text('Are you sure you want to delete this medicine?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
               ),
-              ListTile(
-                title: Text("Support"),
-              ),
-              ListTile(
-                title: Text("Login/Register"),
-                leading: const Icon(Icons.login),
-                onTap: () {
-                  Navigator.of(context).pushNamed("LoginManger");
-                },
-              ),
-              ListTile(
-                title: Text("Log-out"),
-                leading: const Icon(Icons.logout),
-                onTap: () {
-                  Navigator.of(context).pushNamed("Users");
-                },
-              ),
-            ],
-          ),
-        ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Text("Medicine Classifications",
-                  style: TextStyle(color: Color(0xff41B2D6), fontSize: 30)),
-              SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                Image.asset(
-                                  "images/d2.jpg",
-                                  height: 100,
-                                  width: 80,
-                                ),
-                                Text(
-                                  "Syrups",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                // SizedBox(height: 10,),
-                                Image.asset(
-                                  "images/d6.jpg",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  "Needles",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                             Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 9,
-                                ),
-                                Image.asset(
-                                  "images/d3.jpg",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                Text(
-                                  "Capsules",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                             Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Image.asset(
-                                  "images/z1.jpg",
-                                  height: 100,
-                                  width: 140,
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  "Pills",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
-        ));
+              onPressed: () {
+                // Delete the medicine from Firestore
+                _firestore
+                    .collection('Pharmacies')
+                    .doc(widget.pharmacyId)
+                    .collection('medicine')
+                    .doc(medicines[index])
+                    .delete();
+
+                // Delete the medicine from the local list
+                setState(() {
+                  medicines.removeAt(index);
+                });
+
+                Navigator.of(context).pop();
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
