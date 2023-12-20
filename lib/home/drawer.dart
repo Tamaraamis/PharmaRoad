@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
+import 'try.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class drawer extends StatefulWidget {
   const drawer({super.key});
 
@@ -11,8 +13,18 @@ class drawer extends StatefulWidget {
 
 class _drawerState extends State<drawer> {
   //String id = "locater";
+
   @override
   Widget build(BuildContext context) {
+      
+ getEmail()  {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+    String userEmail = _auth.currentUser!.email ?? '';
+    print('User Email: $userEmail');
+    // You can use userEmail as needed in your code.
+  return userEmail;
+}
+
     return Scaffold(
         backgroundColor: Color(0xffEDFAFF),
         bottomNavigationBar: BottomNavigationBar(
@@ -67,8 +79,8 @@ class _drawerState extends State<drawer> {
                   child: Icon(Icons.person),
                   backgroundColor: Color(0xffEDFAFF),
                 ),
-                accountName: Text("danyah"),
-                accountEmail: Text("danyah@gmail.com"),
+                accountName: Text(""),
+                accountEmail: Text(getEmail()),
                 decoration: BoxDecoration(
                   color: Color(0xff41b2d6), // Background color of the header
                 ),
@@ -88,6 +100,7 @@ class _drawerState extends State<drawer> {
                 title: Text("Contact Us"),
                 leading: const Icon(Icons.person),
                 onTap: () {
+                  getEmail();
                   Navigator.of(context).pushNamed("contact-us");
                 },
               ),
@@ -116,7 +129,9 @@ class _drawerState extends State<drawer> {
               Container(
                   margin: EdgeInsets.all(20),
                   child: TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Navigator.of(context).pushNamed("logmanager");
+                    },
                     decoration: InputDecoration(
                       hintText: "Search for medicines ",
                       prefixIcon: Icon(Icons.search),
