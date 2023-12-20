@@ -72,6 +72,7 @@ class _drawerState extends State<drawer> {
           centerTitle: true,
         ),
         drawer: Drawer(
+          
           child: Column(
             children: [
               UserAccountsDrawerHeader(
