@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         "profilee": (context) => profile(),
         "product":(context) => product(),
         "profileM":(context) => pro(),
+"YourPersc":(context) => perscShow(),
 
       },
     );

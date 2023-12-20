@@ -3,6 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_application_2/pharmacyloc/forMap.dart';
 
 class Searchdrug extends StatefulWidget {
   const Searchdrug({Key? key}) : super(key: key);
@@ -177,6 +178,7 @@ class _SearchdrugState extends State<Searchdrug> {
                 IconButton(
                   onPressed: () {
                     // Location icon action (you can add an action if needed)
+                     MapUtils.openMap(pharmacyInfo['location']);
                   },
                   icon: Icon(Icons.location_on, color: Color(0xff41b2d6)),
                 ),

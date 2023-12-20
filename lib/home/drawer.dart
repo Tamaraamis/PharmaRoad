@@ -166,13 +166,20 @@ class _drawerState extends State<drawer> {
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
                   Container(child: GestureDetector(
-          onTap: () {Navigator.of(context).pushNamed("uploadpic");},
+          onTap: () {
+            Navigator.of(context).pushNamed("Searchdrug");
+          },
                  child:Column(children: [
                   SizedBox(height: 9,),
                   //Image.asset("images/1906532.png",height: 100,width: 70,),
-                  Icon(Icons.camera_alt_outlined,color: Color(0xff41b2d6),size: 75),
+                 Image.asset(
+                                  "images/d4.png",
+                                  height: 70,
+                                  width: 90,
+                                  color: Color(0xff41b2d6),
+                                ), 
                   SizedBox(height: 4,),
-                  Text("Upload Your \nPrescription ",style: TextStyle(fontSize: 18,color: Color(0xff41b2d6),fontWeight: FontWeight.bold),),
+                  Text("      Find Your \n Medicine Now",style: TextStyle(fontSize: 18,color: Color(0xff41b2d6),fontWeight: FontWeight.bold),),
                  ],)
                  
                  
@@ -195,26 +202,24 @@ class _drawerState extends State<drawer> {
                     Container(
                         child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed("Searchdrug");
+                             Navigator.of(context).pushNamed("uploadpic");
+                              
                             },
                             child: Column(
                               children: [
                                 SizedBox(
                                   height: 9,
                                 ),
-                                Image.asset(
-                                  "images/d4.png",
-                                  height: 70,
-                                  width: 90,
-                                  color: Color(0xff41b2d6),
-                                ),
+                                 Icon(Icons.camera_alt_outlined,color: Color(0xff41b2d6),size: 75),
+                                
                                 // Icon(Icons.search,
                                 //     color: Color(0xff41b2d6), size: 75),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 Text(
-                                  "Find Your Medicine Now",
+                                  "Upload Your \nPrescription "
+                                  ,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 18,

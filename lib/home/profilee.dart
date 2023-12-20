@@ -189,7 +189,7 @@ class _MyListViewState extends State<MyListView> {
           onTap: () {
             // Navigate to the edit screen when ListTile is tapped
              if(index ==4){
-       Navigator.of(context).pushNamed("uploadpic");
+       Navigator.of(context).pushNamed("YourPersc");
     }
          else
             navigateToEditScreen(index);
