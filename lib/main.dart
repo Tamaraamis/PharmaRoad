@@ -85,25 +85,25 @@ class MyApp extends StatelessWidget {
 class splach extends StatefulWidget {
   const splach({super.key});
   @override
-  State<splach> createState() => _splachState();
+  State<splach> createState() => _SplashScreenState();
 }
 
-class _splachState extends State<splach> {
+class _SplashScreenState extends State<splach> {
   @override
   void initState() {
-
-    FirebaseAuth.instance.authStateChanges()
-   .listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User is signed in!');
-    }
-  });
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Welcome()));
+        context,
+        MaterialPageRoute(builder: (context) => const Welcome()),
+      );
     });
   }
 
