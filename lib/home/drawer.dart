@@ -72,7 +72,7 @@ class _drawerState extends State<drawer> {
           centerTitle: true,
         ),
         drawer: Drawer(
-          
+
           child: Column(
             children: [
               UserAccountsDrawerHeader(
@@ -127,27 +127,13 @@ class _drawerState extends State<drawer> {
                 height: 150,
                 width: 200,
               ),
-              Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextFormField(
-                    onChanged: (value) {
-                      Navigator.of(context).pushNamed("logmanager");
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Search for medicines ",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        width: 1,
-                      )),
-                    ),
-                  )),
+              
               SizedBox(
                 height: 10,
               ),
               SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+                scrollDirection: Axis.vertical,
+                child: Column(
                   children: [
                     Container(
                         child: GestureDetector(
@@ -157,7 +143,7 @@ class _drawerState extends State<drawer> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 7,
+                                  height: 1,
                                 ),
                                 Image.asset(
                                   "images/1906532.png",
@@ -173,20 +159,21 @@ class _drawerState extends State<drawer> {
                                 ),
                               ],
                             )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 3),
+                        height: 130,
+                        width: 290,
+                        margin: EdgeInsets.only(left: 35),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
+                            SizedBox(height: 20,),
                   Container(child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed("Searchdrug");
           },
                  child:Column(children: [
-                  SizedBox(height: 9,),
+                  SizedBox(height: 3,),
                   //Image.asset("images/1906532.png",height: 100,width: 70,),
                  Image.asset(
                                   "images/d4.png",
@@ -200,7 +187,7 @@ class _drawerState extends State<drawer> {
                  
                  
                  ),
-                height: 150,width: 155,margin: EdgeInsets.only(left: 28),decoration: BoxDecoration(
+                height: 130,width: 290,margin: EdgeInsets.only(left: 35),decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all( color: Color(0xff41b2d6) ,width: 2 
               ),
@@ -209,12 +196,9 @@ class _drawerState extends State<drawer> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
+             
                     Container(
                         child: GestureDetector(
                             onTap: () {
@@ -224,7 +208,7 @@ class _drawerState extends State<drawer> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 9,
+                                  height: 3,
                                 ),
                                  Icon(Icons.camera_alt_outlined,color: Color(0xff41b2d6),size: 75),
                                 
@@ -244,14 +228,15 @@ class _drawerState extends State<drawer> {
                                 ),
                               ],
                             )),
-                        height: 150, 
-                        width: 155,
-                        margin: EdgeInsets.only(left: 3),
+                        height: 130, 
+                        width: 290,
+                        margin: EdgeInsets.only(left: 33),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
+                            SizedBox(height: 15 ,),
                     Container(
                         child: GestureDetector(
                             onTap: () {
@@ -260,7 +245,7 @@ class _drawerState extends State<drawer> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 8,
+                                  height: 3,
                                 ),
                                 Image.asset(
                                   "images/download.png",
@@ -278,18 +263,16 @@ class _drawerState extends State<drawer> {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
+                          )),
+                        height: 130,
+                        width: 290,
+                        margin: EdgeInsets.only(left: 33),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
-                  ],
-                ),
-              )
+                  SizedBox(height: 10,)
             ],
           ),
         ));
