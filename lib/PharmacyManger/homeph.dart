@@ -245,20 +245,32 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     );
   }
 
-  Future<void> addMedicine(String medicineName) async {
-    final DocumentReference<Map<String, dynamic>> newDocRef =
-        await _firestore.collection('Pharmacies').doc(widget.pharmacyId).collection('medicine').add({
-      'Mname': medicineName,
-    });
+Future<void> addMedicine(String medicineName) async {
+  if (medicineName.trim().isNotEmpty) {
+    try {
+      final DocumentReference<Map<String, dynamic>> newDocRef =
+          await _firestore
+              .collection('Pharmacies')
+              .doc(widget.pharmacyId)
+              .collection('medicine')
+              .add({
+            'Mname': medicineName,
+          });
 
-    final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
-        await newDocRef.get();
+      final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
+          await newDocRef.get();
 
-    setState(() {
-      medicines.add(newDocSnapshot['Mname'] as String);
-    });
+      setState(() {
+        medicines.add(newDocSnapshot['Mname'] as String);
+      });
+    } catch (e) {
+      print('Error adding medicine: $e');
+    }
+  } else {
+    // Handle the case where the medicineName is null or empty
+    print('Medicine name cannot be null or empty');
   }
-
+}
  Future<void> updateMedicine(int index, String newName) async {
   try {
     final String oldMedicineName = medicines[index];

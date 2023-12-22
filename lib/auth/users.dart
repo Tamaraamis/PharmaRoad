@@ -4,110 +4,93 @@ import '../home/try.dart';
 import 'logmanager.dart';
 
 class Users extends StatefulWidget {
-  const Users({super.key});
+  const Users({Key? key});
 
   @override
   State<Users> createState() => _UsersState();
 }
 
 class _UsersState extends State<Users> {
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffEDFAFF),
-        body: //Center
-            Container(
+      backgroundColor: const Color(0xffEDFAFF),
+      body: Center(
+        child: Container(
           margin: const EdgeInsets.only(top: 90),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           decoration: BoxDecoration(
-              color: const Color(0xffFFFFFF),
-              borderRadius: BorderRadius.circular(150)),
-          child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    "You Will Sign Up As",
-                    style: TextStyle(
-                        color: pColor,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
-                        wordSpacing: 1),
-                    textAlign: TextAlign.left,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Image.asset(
-                    "images/p5.png",
-                    height: 150,
-                    width: 400,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      // Navigator.of(context) .pushNamed("Login");
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LogM()));
-                    },
+            color: const Color(0xffFFFFFF),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "You Will Sign Up As",
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                  wordSpacing: 1,
+                ),
+              ),
+              const SizedBox(height: 30),
+              buildUserTypeButton(
+                imagePath: "images/p5.png",
+                buttonText: "Pharmacy",
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogM()),
+                  );
+                },
+              ),
+              const SizedBox(height: 30),
+              buildUserTypeButton(
+                imagePath: "images/pp1.png",
+                buttonText: "Patient",
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Log()),
+                  );
+                },
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-                    elevation: 20,
-                    height: 10,
-                    minWidth: 200,
-
-                    child: const Text("Pharmacy",
-                        style: TextStyle(fontSize: 30, color: pColor)),
-                    // splashColor: Colors.blue,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Image.asset(
-                    "images/pp1.png",
-                    height: 150,
-                    width: 400,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const Log()));
-                    },
-                    elevation: 20,
-                    height: 10,
-                    minWidth: 200,
-                    splashColor: Colors.blue,
-                    child: const Text(
-                      "Patient",
-                      style: TextStyle(fontSize: 30, color: pColor),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 90,
-                  ),
-                  // Image.asset(
-                  //   "images/pharm.png",
-                  //   height: 150,
-                  //   width: 450,
-                  // ),
-                  // MaterialButton(
-                  //   onPressed: () {
-                  //     Navigator.pushReplacement(context,
-                  //         MaterialPageRoute(builder: (context) => const Log()));
-                  //   },
-                  //   elevation: 20,
-                  //   height: 10,
-                  //   minWidth: 200,
-                  //   splashColor: Colors.blue,
-                  //   child: const Text(
-                  //     "Distributor",
-                  //     style: TextStyle(fontSize: 30, color: pColor),
-                  //   ),
-                  // ),
-                ],
-              )),
-        ));
+  Widget buildUserTypeButton({
+    required String imagePath,
+    required String buttonText,
+    required VoidCallback onPressed,
+  }) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.all(0),
+      ),
+      child: Column(
+        children: [
+          Image.asset(
+            imagePath,
+            height: 150,
+            width: 400,
+          ),
+          const SizedBox(height: 20),
+          Text(
+            buttonText,
+            style: const TextStyle(fontSize: 30, color: pColor),
+          ),
+        ],
+      ),
+    );
   }
 }

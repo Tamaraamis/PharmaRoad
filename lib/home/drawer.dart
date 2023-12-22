@@ -17,13 +17,21 @@ class _drawerState extends State<drawer> {
   @override
   Widget build(BuildContext context) {
       
- getEmail()  {
+String getEmail() {
   FirebaseAuth _auth = FirebaseAuth.instance;
-    String userEmail = _auth.currentUser!.email ?? '';
+  User? user = _auth.currentUser;
+
+  if (user != null) {
+    String userEmail = user.email ?? '';
     print('User Email: $userEmail');
     // You can use userEmail as needed in your code.
-  return userEmail;
+    return userEmail;
+  } else {
+    print('User is not authenticated');
+    return ''; // or throw an exception, depending on your logic
+  }
 }
+
 
     return Scaffold(
         backgroundColor: Color(0xffEDFAFF),
@@ -167,7 +175,7 @@ class _drawerState extends State<drawer> {
                                 Text(
                                   "Pharmacy locator",
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -273,7 +281,7 @@ class _drawerState extends State<drawer> {
                                 Text(
                                   "Popular Medicine",
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),

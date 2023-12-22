@@ -75,6 +75,7 @@ class _LogMState extends State<LogM> {
                     child: Image.asset("images/ph1.png", height: 300, width: 300),
                   ),
                 ),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: pharmacyIdController,
                   validator: (value) {
@@ -84,7 +85,7 @@ class _LogMState extends State<LogM> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: "Pharmacy Id",
+                    hintText: "Pharmacy ID",
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(),
                   ),
@@ -124,7 +125,7 @@ class _LogMState extends State<LogM> {
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff41B2D6),
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                     textStyle: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

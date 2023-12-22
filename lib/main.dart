@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "Signup": (context) => const Signup(),
         "Users": (context) => const Users(),
-        "Searchdrug": (context) => const Searchdrug(),
+        "Searchdrug": (context) => const SearchDrug(),
         "Welcome": (context) => const Welcome(),
         "drawer": (context) => drawer(),
         "contact": (context) => Contact(),

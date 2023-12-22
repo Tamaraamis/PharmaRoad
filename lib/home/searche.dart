@@ -3,19 +3,19 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:flutter_application_2/pharmacyloc/forMap.dart';
 
-class Searchdrug extends StatefulWidget {
-  const Searchdrug({Key? key}) : super(key: key);
+class SearchDrug extends StatefulWidget {
+  const SearchDrug({Key? key}) : super(key: key);
 
   @override
-  State<Searchdrug> createState() => _SearchdrugState();
+  State<SearchDrug> createState() => _SearchDrugState();
 }
 
-class _SearchdrugState extends State<Searchdrug> {
+class _SearchDrugState extends State<SearchDrug> {
   TextEditingController searchController = TextEditingController();
   Map<String, List<Map<String, dynamic>>> pharmaciesByMedicine = {};
   StreamController<String> _searchController = StreamController<String>();
+  bool isLoading = false;
 
   CollectionReference pharmacy = FirebaseFirestore.instance.collection("Pharmacies");
 
@@ -23,22 +23,26 @@ class _SearchdrugState extends State<Searchdrug> {
   void initState() {
     super.initState();
     _searchController.stream
-        .debounceTime(Duration(milliseconds: 500)) // Debounce time to reduce unnecessary requests
+        .debounceTime(Duration(milliseconds: 500))
         .listen((medicineName) {
       retrievePharmacyData(medicineName);
     });
   }
 
   void retrievePharmacyData(String medicineName) async {
-    pharmaciesByMedicine.clear(); // Clear the previous results
+    setState(() {
+      isLoading = true;
+    });
+
+    pharmaciesByMedicine.clear();
     setState(() {});
 
-    // Convert the medicine name to lowercase
     medicineName = medicineName.toLowerCase();
 
     if (medicineName.isEmpty) {
-      // Show a message if the search bar is empty
-      // showInfoDialog(context, "Please enter a medicine name.");
+      setState(() {
+        isLoading = false;
+      });
       return;
     }
 
@@ -68,8 +72,9 @@ class _SearchdrugState extends State<Searchdrug> {
       });
     }
 
-    // Update the UI with the fetched data
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -97,7 +102,6 @@ class _SearchdrugState extends State<Searchdrug> {
                 IconButton(
                   onPressed: () async {
                     retrievePharmacyData(searchController.text);
-                    // Clear the search bar and body when initiating a new search
                     searchController.clear();
                   },
                   icon: Icon(Icons.search),
@@ -106,18 +110,22 @@ class _SearchdrugState extends State<Searchdrug> {
             ),
             SizedBox(height: 20),
             Expanded(
-              child: pharmaciesByMedicine.isEmpty
+              child: isLoading
                   ? Center(
-                      child: Text("No results found."),
+                      child: CircularProgressIndicator(),
                     )
-                  : ListView.builder(
-                      itemCount: pharmaciesByMedicine.length,
-                      itemBuilder: (context, index) {
-                        String medicineName = pharmaciesByMedicine.keys.elementAt(index);
-                        List<Map<String, dynamic>> pharmacies = pharmaciesByMedicine[medicineName]!;
-                        return buildMedicineCard(medicineName, pharmacies);
-                      },
-                    ),
+                  : pharmaciesByMedicine.isEmpty
+                      ? Center(
+                          child: Text("No results found."),
+                        )
+                      : ListView.builder(
+                          itemCount: pharmaciesByMedicine.length,
+                          itemBuilder: (context, index) {
+                            String medicineName = pharmaciesByMedicine.keys.elementAt(index);
+                            List<Map<String, dynamic>> pharmacies = pharmaciesByMedicine[medicineName]!;
+                            return buildMedicineCard(medicineName, pharmacies);
+                          },
+                        ),
             ),
           ],
         ),
@@ -178,7 +186,7 @@ class _SearchdrugState extends State<Searchdrug> {
                 IconButton(
                   onPressed: () {
                     // Location icon action (you can add an action if needed)
-                     MapUtils.openMap(pharmacyInfo['location']);
+                    // MapUtils.openMap(pharmacyInfo['location']);
                   },
                   icon: Icon(Icons.location_on, color: Color(0xff41b2d6)),
                 ),

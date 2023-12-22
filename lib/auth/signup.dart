@@ -12,9 +12,9 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   var obscureText = true;
 
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   SnackBar buildSnackBar(String message) {
     return SnackBar(
@@ -42,24 +42,12 @@ class _SignupState extends State<Signup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             const Padding(
               padding: EdgeInsets.all(20),
-            /*  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Signup",
-                    style: TextStyle(color: Color(0xffEDFAFF), fontSize: 40),
-                  ),
-                ],
-              ),*/
+              // Add your logo or other header content here
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -72,209 +60,18 @@ class _SignupState extends State<Signup> {
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0xffEDFAFF),
-                                blurRadius: 20,
-                                offset: Offset(0, 10),
-                              )
-                            ],
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Color(0xff41b2d6),
-                                    ),
-                                  ),
-                                ),
-                                child: TextField(
-                                  controller: email,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    errorStyle: TextStyle(color: Colors.red),
-                                    prefixIcon: Icon(Icons.email),
-                                    hintText: "Email",
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Color(0xff41b2d6),
-                                    ),
-                                  ),
-                                ),
-                                child: TextField(
-                                  controller: name,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    errorStyle: TextStyle(color: Colors.red),
-                                    filled: true,
-                                    prefixIcon: Icon(Icons.person),
-                                    hintText: "Username",
-                                    hintStyle: TextStyle(color: Colors.grey),
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Color(0xff41b2d6),
-                                    ),
-                                  ),
-                                ),
-                                child: TextField(
-                                  controller: password,
-                                  obscureText: obscureText,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    errorStyle: TextStyle(color: Colors.red),
-                                    filled: true,
-                                    prefixIcon: const Icon(Icons.lock),
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          obscureText = !obscureText;
-                                        });
-                                      },
-                                      child: obscureText
-                                          ? const Icon(Icons.visibility_off)
-                                          : const Icon(Icons.visibility),
-                                    ),
-                                    hintText: "Password",
-                                    hintStyle:
-                                        const TextStyle(color: Colors.grey),
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Container(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      const Text(
-                                        "Have Account?",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.of(context)
-                                              .pushNamed("try");
-                                        },
-                                        child: const Text(
-                                          " ClickHere",
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Container(
-                                height: 50,
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 50,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: const Color(0xff41b2d6),
-                                ),
-                                child: Center(
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      if (email.text.isEmpty ||
-                                          name.text.isEmpty ||
-                                          password.text.isEmpty) {
-                                        showSnackBar(
-                                          'Please fill in all fields.',
-                                        );
-                                      } else if (!EmailValidator.validate(
-                                          email.text)) {
-                                        showSnackBar(
-                                          'Please enter a valid email address.',
-                                        );
-                                      } else {
-                                        try {
-                                          final credential =
-                                              await FirebaseAuth.instance
-                                                  .createUserWithEmailAndPassword(
-                                            email: email.text,
-                                            password: password.text,
-                                          );
-                                          Navigator.of(context)
-                                              .pushReplacementNamed("drawer");
-                                        } on FirebaseAuthException catch (e) {
-                                          if (e.code ==
-                                              'email-already-in-use') {
-                                            print(
-                                              '==================The account already exists for that email.',
-                                            );
-                                            showSnackBar(
-                                              'The account already exists for that email.',
-                                            );
-                                          } else if (e.code == 'weak-password') {
-                                            print(
-                                              '=================The password provided is too weak.',
-                                            );
-                                            showSnackBar(
-                                              'The password provided is too weak.',
-                                            );
-                                          }
-                                        } catch (e) {
-                                          print(e);
-                                        }
-                                      }
-                                    },
-                                    child: const Text(
-                                      "Signup",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        const SizedBox(height: 50),
+                        buildTextField(email, Icons.email, "Email"),
+                        const SizedBox(height: 20),
+                        buildTextField(name, Icons.person, "Username"),
+                        const SizedBox(height: 20),
+                        buildPasswordField(password),
+                        const SizedBox(height: 30),
+                        buildHaveAccountLink(),
+                        const SizedBox(height: 40),
+                        buildSignupButton(),
                       ],
                     ),
                   ),
@@ -282,6 +79,131 @@ class _SignupState extends State<Signup> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField(TextEditingController controller, IconData icon, String hintText) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: const Border(bottom: BorderSide(color: Color(0xff41b2d6))),
+      ),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          errorStyle: const TextStyle(color: Colors.red),
+          prefixIcon: Icon(icon),
+          hintText: hintText,
+          hintStyle: const TextStyle(color: Colors.grey),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
+  Widget buildPasswordField(TextEditingController controller) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: const Border(bottom: BorderSide(color: Color(0xff41b2d6))),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          errorStyle: const TextStyle(color: Colors.red),
+          prefixIcon: const Icon(Icons.lock),
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                obscureText = !obscureText;
+              });
+            },
+            child: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+          ),
+          hintText: "Password",
+          hintStyle: const TextStyle(color: Colors.grey),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
+  Widget buildHaveAccountLink() {
+    return Container(
+      child: Row(
+        children: [
+          const Text(
+            "Have Account?",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed("try");
+            },
+            child: const Text(
+              " ClickHere",
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 18,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildSignupButton() {
+    return Container(
+      height: 50,
+      margin: const EdgeInsets.symmetric(horizontal: 50),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: const Color(0xff41b2d6),
+      ),
+      child: Center(
+        child: TextButton(
+          onPressed: () async {
+            if (email.text.isEmpty || name.text.isEmpty || password.text.isEmpty) {
+              showSnackBar('Please fill in all fields.');
+            } else if (!EmailValidator.validate(email.text)) {
+              showSnackBar('Please enter a valid email address.');
+            } else {
+              try {
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: email.text,
+                  password: password.text,
+                );
+                Navigator.of(context).pushReplacementNamed("drawer");
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'email-already-in-use') {
+                  showSnackBar('The account already exists for that email.');
+                } else if (e.code == 'weak-password') {
+                  showSnackBar('The password provided is too weak.');
+                }
+              } catch (e) {
+                print(e);
+              }
+            }
+          },
+          child: const Text(
+            "Signup",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
