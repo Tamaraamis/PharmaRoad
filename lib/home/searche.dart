@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_application_2/pharmacyloc/forMap.dart';
 
 class SearchDrug extends StatefulWidget {
   const SearchDrug({Key? key}) : super(key: key);
@@ -22,14 +23,13 @@ class _SearchDrugState extends State<SearchDrug> {
   @override
   void initState() {
     super.initState();
-    _searchController.stream
-        .debounceTime(Duration(milliseconds: 500))
-        .listen((medicineName) {
-      retrievePharmacyData(medicineName);
+    _searchController.stream.listen((searchTerm) {
+      retrievePharmacyData(searchTerm);
     });
   }
 
-  void retrievePharmacyData(String medicineName) async {
+  void retrievePharmacyData(String searchTerm) async {
+    print('Searching for: $searchTerm');
     setState(() {
       isLoading = true;
     });
@@ -37,44 +37,72 @@ class _SearchDrugState extends State<SearchDrug> {
     pharmaciesByMedicine.clear();
     setState(() {});
 
-    medicineName = medicineName.toLowerCase();
+    searchTerm = searchTerm.toLowerCase();
 
-    if (medicineName.isEmpty) {
+    if (searchTerm.isEmpty) {
       setState(() {
         isLoading = false;
       });
       return;
     }
 
-    QuerySnapshot value = await pharmacy.get();
-    for (QueryDocumentSnapshot result in value.docs) {
-      QuerySnapshot subcol = await FirebaseFirestore.instance
-          .collection("Pharmacies")
-          .doc(result.id)
-          .collection("medicine")
-          .where('Mname', isEqualTo: medicineName)
-          .get();
+    QuerySnapshot pharmaciesSnapshot = await pharmacy.get();
 
-      subcol.docs.forEach((element) {
-        Map<String, dynamic> pharmacyInfo = {
-          'id': result.id,
-          'name': result['name'],
-          'location': result['location'],
-          'neighborhood': result['neighborhood'],
-          'phone': result['phone'],
-        };
+    for (QueryDocumentSnapshot pharmacyDoc in pharmaciesSnapshot.docs) {
+      String pharmacyId = pharmacyDoc.id;
 
-        if (!pharmaciesByMedicine.containsKey(medicineName)) {
-          pharmaciesByMedicine[medicineName] = [];
+      if (pharmacyDoc.data() is Map<String, dynamic>) {
+        Map<String, dynamic> pharmacyData = pharmacyDoc.data() as Map<String, dynamic>;
+
+        if (pharmacyData.containsKey('name') &&
+            pharmacyData.containsKey('location') &&
+            pharmacyData.containsKey('neighborhood') &&
+            pharmacyData.containsKey('phone')) {
+          String pharmacyName = pharmacyData['name'];
+          String pharmacyLocation = pharmacyData['location'];
+          String pharmacyNeighborhood = pharmacyData['neighborhood'];
+          String pharmacyPhone = pharmacyData['phone'];
+
+          QuerySnapshot medicinesSnapshot = await FirebaseFirestore.instance
+              .collection("Pharmacies")
+              .doc(pharmacyId)
+              .collection("medicine")
+              .where('isVisible', isEqualTo: true)
+              .get();
+
+          for (QueryDocumentSnapshot medicineDoc in medicinesSnapshot.docs) {
+            if (medicineDoc.data() is Map<String, dynamic>) {
+              Map<String, dynamic> medicineData = medicineDoc.data() as Map<String, dynamic>;
+
+              if (medicineData.containsKey('Mname')) {
+                String medicineName = medicineData['Mname'].toLowerCase();
+
+                if (medicineName.contains(searchTerm)) {
+                  Map<String, dynamic> pharmacyInfo = {
+                    'id': pharmacyId,
+                    'name': pharmacyName,
+                    'location': pharmacyLocation,
+                    'neighborhood': pharmacyNeighborhood,
+                    'phone': pharmacyPhone,
+                  };
+
+                  if (!pharmaciesByMedicine.containsKey(medicineName)) {
+                    pharmaciesByMedicine[medicineName] = [];
+                  }
+
+                  pharmaciesByMedicine[medicineName]!.add(pharmacyInfo);
+                }
+              }
+            }
+          }
         }
-
-        pharmaciesByMedicine[medicineName]!.add(pharmacyInfo);
-      });
+      }
     }
 
     setState(() {
       isLoading = false;
     });
+    print('Found pharmacies: $pharmaciesByMedicine');
   }
 
   @override
@@ -186,7 +214,7 @@ class _SearchDrugState extends State<SearchDrug> {
                 IconButton(
                   onPressed: () {
                     // Location icon action (you can add an action if needed)
-                    // MapUtils.openMap(pharmacyInfo['location']);
+                    MapUtils.openMap(pharmacyInfo['location']);
                   },
                   icon: Icon(Icons.location_on, color: Color(0xff41b2d6)),
                 ),
@@ -231,4 +259,10 @@ extension StringExtension on String {
   String capitalizeFirstLetter() {
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: SearchDrug(),
+  ));
 }

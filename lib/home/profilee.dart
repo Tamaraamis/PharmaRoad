@@ -83,11 +83,11 @@ class _MyListViewState extends State<MyListView> {
   }
   // Sample data for demonstration
   List<ItemData> items = [
-    ItemData(title: 'Name', subtitle: 'Name',icon:Icons.person, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Phone', subtitle: 'Phone', icon:Icons. phone_android, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Address', subtitle: 'Abc.address/city',icon:Icons.location_pin, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Email', subtitle: 'Email',icon:Icons.mail, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Your Prescription', subtitle: 'Your Prescription',icon:Icons.content_paste, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Name', subtitle: '',icon:Icons.person, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Phone', subtitle: '', icon:Icons. phone_android, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Address', subtitle: '',icon:Icons.location_pin, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Email',icon:Icons.mail, trailingIcon: Icons.arrow_forward, subtitle: '',),
+    ItemData(title: 'Your Prescription',icon:Icons.content_paste, trailingIcon: Icons.arrow_forward, subtitle: '',),
 
   ];
 

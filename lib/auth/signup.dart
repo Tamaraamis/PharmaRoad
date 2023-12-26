@@ -108,8 +108,8 @@ class _SignupState extends State<Signup> {
   Widget buildPasswordField(TextEditingController controller) {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: const Border(bottom: BorderSide(color: Color(0xff41b2d6))),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Color(0xff41b2d6))),
       ),
       child: TextField(
         controller: controller,
@@ -136,30 +136,28 @@ class _SignupState extends State<Signup> {
   }
 
   Widget buildHaveAccountLink() {
-    return Container(
-      child: Row(
-        children: [
-          const Text(
-            "Have Account?",
+    return Row(
+      children: [
+        const Text(
+          "Have Account?",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.grey,
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed("try");
+          },
+          child: const Text(
+            " ClickHere",
             style: TextStyle(
+              color: Colors.blue,
               fontSize: 18,
-              color: Colors.grey,
             ),
           ),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed("try");
-            },
-            child: const Text(
-              " ClickHere",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 18,
-              ),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 

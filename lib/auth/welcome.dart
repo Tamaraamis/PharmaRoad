@@ -22,11 +22,11 @@ class _WelcomeState extends State<Welcome> {
               children: [
                 Text(
                   "WEL",
-                  style: TextStyle(color: Color(0xff41B2D6), fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Color(0xff41B2D6), fontSize: 40, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "COME",
-                  style: TextStyle(color: Color(0xffC7F1FF), fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Color(0xffC7F1FF), fontSize: 40, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -34,7 +34,7 @@ class _WelcomeState extends State<Welcome> {
             Image.asset(
               "images/welc.png",
               width: 600,
-              height: 400,
+              height: 350,
               fit: BoxFit.fill,
             ),
             const SizedBox(height: 10),
@@ -58,10 +58,11 @@ class _WelcomeState extends State<Welcome> {
               ),
               style: ElevatedButton.styleFrom(
                 primary: Color(0xff41B2D6),
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                 elevation: 10,
                 textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xffC7F1FF)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+
               ),
             ),
           ],

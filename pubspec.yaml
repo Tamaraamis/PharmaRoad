@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.6
   flutter_phone_direct_caller: ^2.1.1
-  image_picker: any 
+  image_picker: ^1.0.4
   api_cache_manager: ^1.0.2
   snippet_coder_utils: ^1.0.15
   firebase_core: ^2.24.0
@@ -53,6 +53,8 @@ dependencies:
   firebase_remote_config: ^4.3.8
   email_validator: ^2.1.17
   rxdart: ^0.27.1
+  firebase_database: ^10.3.8
+  cloud_firestore_platform_interface: ^6.0.7
 
 
 

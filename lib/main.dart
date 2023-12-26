@@ -26,8 +26,7 @@ import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'home/uploadpic.dart';
 import 'package:flutter_application_2/home/uploadpic.dart';
-
-import 'home/contactD.dart';
+import 'home/chat_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -39,9 +38,10 @@ void main() async {
   options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate();
+
+
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -77,7 +77,8 @@ class MyApp extends StatelessWidget {
         "profilee": (context) => profile(),
         "product":(context) => product(),
         "profileM":(context) => pro(),
-"YourPersc":(context) => perscShow(),
+        "YourPersc":(context) => perscShow(),
+        'chat_page': (context) => ChatPage(),
 
       },
     );

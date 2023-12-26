@@ -17,11 +17,11 @@ class _UsersState extends State<Users> {
       backgroundColor: const Color(0xffEDFAFF),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.only(top: 90),
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          margin: const EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
           decoration: BoxDecoration(
             color: const Color(0xffFFFFFF),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(30),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,9 +32,7 @@ class _UsersState extends State<Users> {
                 style: TextStyle(
                   color: pColor,
                   fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  wordSpacing: 1,
+                  fontWeight: FontWeight.bold,                 
                 ),
               ),
               const SizedBox(height: 30),
