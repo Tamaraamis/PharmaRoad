@@ -12,17 +12,17 @@ class _ContactState extends State<Contact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffEDFAFF),
+        backgroundColor: const Color(0xffEDFAFF),
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "Contact Us",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -30,10 +30,10 @@ class _ContactState extends State<Contact> {
                         fontSize: 40.0,
                         color: Color(0xff41b2d6)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Have Questions?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -41,7 +41,7 @@ class _ContactState extends State<Contact> {
                         fontSize: 20.0,
                         color: Color(0xff41b2d6)),
                   ),
-                  Text(
+                  const Text(
                     "We're Here to Help",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -49,41 +49,41 @@ class _ContactState extends State<Contact> {
                         fontSize: 20.0,
                         color: Color(0xff41b2d6)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 16.0,
                         ),
-                        TextField(
+                        const TextField(
                           decoration: InputDecoration(
-                             prefixIcon: const Icon(Icons.person),
+                             prefixIcon: Icon(Icons.person),
                             filled: true,
                             fillColor: Colors.white,
                             hintText: "Name",
                             border: InputBorder.none,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
-                        TextField(
+                        const TextField(
                           decoration: InputDecoration(
-                             prefixIcon: const Icon(Icons.email),
+                             prefixIcon: Icon(Icons.email),
                             filled: true,
                             fillColor: Colors.white,
                             hintText: "Email",
                             border: InputBorder.none,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
-                        TextField(
+                        const TextField(
                           maxLines: 8,
                           decoration: InputDecoration(
                            //  prefixIcon: const Icon(Icons.message),
@@ -93,7 +93,7 @@ class _ContactState extends State<Contact> {
                             border: InputBorder.none,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         MaterialButton(
@@ -102,9 +102,9 @@ class _ContactState extends State<Contact> {
                           },
                           height: 60,
                           minWidth: double.infinity,
-                          color: Color(0xff41b2d6),
-                          padding: EdgeInsets.all(10),
-                          child: Text(
+                          color: const Color(0xff41b2d6),
+                          padding: const EdgeInsets.all(10),
+                          child: const Text(
                             "Submit",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,

@@ -161,39 +161,43 @@ class _SignupState extends State<Signup> {
     );
   }
 
-  Widget buildSignupButton() {
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.symmetric(horizontal: 50),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: const Color(0xff41b2d6),
-      ),
-      child: Center(
-        child: TextButton(
-          onPressed: () async {
-            if (email.text.isEmpty || name.text.isEmpty || password.text.isEmpty) {
-              showSnackBar('Please fill in all fields.');
-            } else if (!EmailValidator.validate(email.text)) {
-              showSnackBar('Please enter a valid email address.');
-            } else {
-              try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: email.text,
-                  password: password.text,
-                );
-                Navigator.of(context).pushReplacementNamed("drawer");
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'email-already-in-use') {
-                  showSnackBar('The account already exists for that email.');
-                } else if (e.code == 'weak-password') {
-                  showSnackBar('The password provided is too weak.');
-                }
-              } catch (e) {
-                print(e);
+Widget buildSignupButton() {
+  return Container(
+    height: 50,
+    margin: const EdgeInsets.symmetric(horizontal: 50),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(50),
+      color: const Color(0xff41b2d6),
+    ),
+    child: Center(
+      child: TextButton(
+        onPressed: () async {
+          email.text = email.text.trim();
+          name.text = name.text.trim();
+          password.text = password.text.trim();
+
+          if (email.text.isEmpty || name.text.isEmpty || password.text.isEmpty) {
+            showSnackBar('Please fill in all fields.');
+          } else if (!EmailValidator.validate(email.text)) {
+            showSnackBar('Please enter a valid email address.');
+          } else {
+            try {
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: email.text,
+                password: password.text,
+              );
+              Navigator.of(context).pushReplacementNamed("drawer");
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'email-already-in-use') {
+                showSnackBar('The account already exists for that email.');
+              } else if (e.code == 'weak-password') {
+                showSnackBar('The password provided is too weak.');
               }
+            } catch (e) {
+              print(e);
             }
-          },
+          }
+        },
           child: const Text(
             "Signup",
             style: TextStyle(

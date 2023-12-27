@@ -19,12 +19,12 @@ class _proState extends State<pro> {
   Widget build(BuildContext context) {
     return Scaffold(
 appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Profile Manager",
           style: TextStyle(fontSize: 30, color: Color(0xffEDFAFF)),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -33,20 +33,20 @@ appBar: AppBar(
           },
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF41B2D6),
+        backgroundColor: const Color(0xFF41B2D6),
       ),
-      backgroundColor: Color(0xffEDFAFF),
+      backgroundColor: const Color(0xffEDFAFF),
   body: MyListView(Column(
         children: [
           const SizedBox(
             height: 20,
           ),
           Container(
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 70,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           )
         ],
@@ -103,7 +103,7 @@ class _MyListViewState extends State<MyListView> {
         height: 20,
       ),
       Container(
-        padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
         child: GestureDetector(
           onTap: () {},
           child: Center(
@@ -111,8 +111,8 @@ class _MyListViewState extends State<MyListView> {
               CircleAvatar(
                 foregroundImage:
                     _selectedImage != null ? FileImage(_selectedImage!) : null,
-                backgroundImage: AssetImage("images/person.png"),
-                backgroundColor: Color(0xffc7f1ff),
+                backgroundImage: const AssetImage("images/person.png"),
+                backgroundColor: const Color(0xffc7f1ff),
                 radius: 65,
               ),
               Positioned(
@@ -127,14 +127,14 @@ class _MyListViewState extends State<MyListView> {
                           width: 4,
                           color: Colors.white,
                         ),
-                        color: Color(0xffc7f1ff),
+                        color: const Color(0xffc7f1ff),
                       ),
                       child: IconButton(
                         onPressed: () {
                           _pickImage();
                         },
-                        icon: Icon(Icons.camera_alt),
-                        color: Color.fromARGB(255, 155, 162, 163),
+                        icon: const Icon(Icons.camera_alt),
+                        color: const Color.fromARGB(255, 155, 162, 163),
                       ))),
             ]),
           ),
@@ -154,7 +154,7 @@ class _MyListViewState extends State<MyListView> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 offset: Offset(0, 3),
                                 color: Color(0xFF41B2D6),
@@ -175,7 +175,7 @@ class _MyListViewState extends State<MyListView> {
                               navigateToEditScreen(index);
                           },
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                   ],
@@ -228,20 +228,20 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Screen'),
+        title: const Text('Edit Screen'),
         centerTitle: true,
-        backgroundColor: Color(0xFF41B2D6),
+        backgroundColor: const Color(0xFF41B2D6),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Edit Subtitle:'),
+            const Text('Edit Subtitle:'),
             TextField(
               controller: _subtitleController,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Pass the updated data back to the calling screen
@@ -255,7 +255,7 @@ class _EditScreenState extends State<EditScreen> {
                   ),
                 );
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),

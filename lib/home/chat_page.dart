@@ -16,7 +16,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat'),
+        title: const Text('Chat'),
       ),
       body: Column(
         children: [
@@ -25,7 +25,7 @@ class _ChatPageState extends State<ChatPage> {
               stream: _firestore.collection('messages').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -60,13 +60,13 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type your message...',
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     sendMessage();
                   },
@@ -113,7 +113,7 @@ class MessageWidget extends StatelessWidget {
         children: [
           Text(
             sender,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.black54,
             ),
@@ -121,14 +121,14 @@ class MessageWidget extends StatelessWidget {
           Material(
             elevation: 5.0,
             borderRadius: BorderRadius.only(
-              topLeft: isMe ? Radius.circular(30.0) : Radius.circular(0.0),
-              topRight: isMe ? Radius.circular(0.0) : Radius.circular(30.0),
-              bottomLeft: Radius.circular(30.0),
-              bottomRight: Radius.circular(30.0),
+              topLeft: isMe ? const Radius.circular(30.0) : const Radius.circular(0.0),
+              topRight: isMe ? const Radius.circular(0.0) : const Radius.circular(30.0),
+              bottomLeft: const Radius.circular(30.0),
+              bottomRight: const Radius.circular(30.0),
             ),
             color: isMe ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
               child: Text(
                 text,
                 style: TextStyle(

@@ -1,401 +1,187 @@
+//managerhome
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class PharmacyMedicinesPage extends StatefulWidget {
-  final String pharmacyId;
-
-  const PharmacyMedicinesPage(this.pharmacyId, {Key? key}) : super(key: key);
+class Homeph extends StatefulWidget {
+  const Homeph({super.key});
 
   @override
-  State<PharmacyMedicinesPage> createState() => _PharmacyMedicinesPageState();
+  State<Homeph> createState() => _HomephState();
 }
 
-class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  List<Map<String, dynamic>> medicines = [];
-  String searchText = '';
-
-  @override
-  void initState() {
-    super.initState();
-    fetchMedicines();
-  }
-
-  Future<void> fetchMedicines() async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await _firestore
-              .collection('Pharmacies')
-              .doc(widget.pharmacyId)
-              .collection('medicine')
-              .get();
-
-      setState(() {
-        medicines = querySnapshot.docs.map((doc) => {
-          ...doc.data() as Map<String, dynamic>,
-          'isVisible': true, // Add a default value for visibility
-        }).toList();
-      });
-    } catch (e) {
-      print('Error fetching medicines: $e');
-    }
-  }
-
+class _HomephState extends State<Homeph> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Pharmacy Medicines'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  searchText = value;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: 'Search',
-                prefixIcon: Icon(Icons.search),
-              ),
+        backgroundColor: const Color(0xffEDFAFF),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          backgroundColor: const Color(0xff41b2d6),
+          onTap: (index) {
+            if (index == 0) {
+              Navigator.of(context).pushNamed("homeph");
+            } else if (index == 1) {
+              Navigator.of(context).pushNamed("profileM");
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
+                label: "HOME",
+                icon: Icon(
+                  Icons.home,
+                ),
+                backgroundColor: Color(0xffEDFAFF)),
+            BottomNavigationBarItem(
+                label: "Profile",
+                tooltip: "Profile",
+                icon: Icon(Icons.person),
+                backgroundColor: Color(0xff41b2d6)),
+          ],
+        ),
+        appBar: AppBar(
+          backgroundColor: const Color(0xff41b2d6),
+          title: const Text(
+            "Pharma Road",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 35,
+              color: Color(0xffEDFAFF),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: medicines.length,
-              itemBuilder: (context, index) {
-                final bool isVisible = medicines[index]['isVisible'] ?? false;
-
-                return matchesSearch(medicines[index]['Mname']) && isVisible
-                    ? buildMedicineCard(index)
-                    : SizedBox.shrink();
-              },
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff41b2d6),
-        onPressed: () {
-          showAddMedicineDialog();
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  bool matchesSearch(String medicine) {
-  final String searchLower = searchText.toLowerCase();
-  final String medicineLower = medicine.toLowerCase();
-  return medicineLower.contains(searchLower);
-}
-
-
-  Widget buildMedicineCard(int index) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Card(
-        elevation: 20,
-        shadowColor: Color(0xff41b2d6),
-        color: Color(0xffEDFAFF),
-        child: ListTile(
-          title: Text(medicines[index]['Mname']),
-          trailing: Container(
-            width: 70,
-            child: Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showUpdateMedicineDialog(index);
-                    },
-                    icon: Icon(Icons.edit),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      toggleMedicineVisibility(index);
-                    },
-                    icon: Icon(medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showDeleteDialog(index);
-                    },
-                    icon: Icon(Icons.delete),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          centerTitle: true,
         ),
-      ),
-    );
-  }
-
-  Future<void> showAddMedicineDialog() async {
-    final TextEditingController textController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Add Medicine',
-          style: TextStyle(
-            fontSize: 25,
-            color: Color(0xff41b2d6),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: TextField(
-          controller: textController,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                await addMedicine(textController.text);
-                textController.clear();
-                Navigator.of(context).pop(); // Close the dialog
-              } catch (e) {
-                print('Error adding medicine: $e');
-              }
-            },
-            child: Text('Add'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> showUpdateMedicineDialog(int index) async {
-    final TextEditingController textController =
-        TextEditingController(text: medicines[index]['Mname']);
-
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Update Medicine',
-          style: TextStyle(
-            fontSize: 25,
-            color: Color(0xff41b2d6),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: Form(
-          key: _formKey,
+        drawer: Drawer(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              TextFormField(
-                controller: textController,
+              UserAccountsDrawerHeader(
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: const Color(0xffEDFAFF),
+                  child: Image.asset(
+                    "images/p5.png",
+                    height: 150,
+                    width: 400,
+                  ),
+                ),
+                accountName: const Text(""),
+                accountEmail: const Text(""),
+                decoration: const BoxDecoration(
+                  color: Color(0xff41b2d6), // Background color of the header
+                ),
+              ),
+              const ListTile(
+                title: Text("Support"),
+              ),
+              ListTile(
+                title: const Text("Login/Register"),
+                leading: const Icon(Icons.login),
+                onTap: () {
+                  Navigator.of(context).pushNamed("LoginManger");
+                },
+              ),
+              ListTile(
+                title: const Text("Log-out"),
+                leading: const Icon(Icons.logout),
+                onTap: () {
+                  Navigator.of(context).pushNamed("User");
+                },
               ),
             ],
           ),
         ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xff41b2d6),
-            ),
-            onPressed: () async {
-              try {
-                if (_formKey.currentState?.validate() ?? false) {
-                  await updateMedicine(index, textController.text);
-                  Navigator.of(context).pop(); // Close the dialog
-                }
-              } catch (e) {
-                print('Error updating medicine: $e');
-              }
-            },
-            child: Text('Edit'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> showDeleteDialog(int index) async {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Delete Medicine'),
-          content: Text('Are you sure you want to delete this medicine?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  await deleteMedicine(index);
-                  Navigator.of(context).pop(); // Close the dialog
-                } catch (e) {
-                  print('Error deleting medicine: $e');
-                }
-              },
-              child: Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> addMedicine(String medicineName) async {
-    if (medicineName.trim().isNotEmpty) {
-      try {
-        final DocumentReference<Map<String, dynamic>> newDocRef =
-            await _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .add({
-              'Mname': medicineName,
-              'isVisible': true, // Set default visibility
-            });
-
-        final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
-            await newDocRef.get();
-
-        setState(() {
-          medicines.add({
-            ...newDocSnapshot.data() as Map<String, dynamic>,
-            'isVisible': true, // Set default visibility
-          });
-        });
-      } catch (e) {
-        print('Error adding medicine: $e');
-      }
-    } else {
-      print('Medicine name cannot be null or empty');
-    }
-  }
-
-  Future<void> updateMedicine(int index, String newName) async {
-    try {
-      final String oldMedicineName = medicines[index]['Mname'];
-      print('Updating medicine: $oldMedicineName to $newName');
-
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection('Pharmacies')
-          .doc(widget.pharmacyId)
-          .collection('medicine')
-          .where('Mname', isEqualTo: oldMedicineName)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        final DocumentReference<Map<String, dynamic>> docRef =
-            _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .doc(querySnapshot.docs.first.id);
-
-        await docRef.update({'Mname': newName});
-
-        // Update local list
-        setState(() {
-          medicines[index]['Mname'] = newName;
-        });
-
-        print('Medicine updated successfully');
-      } else {
-        print('Document does not exist');
-      }
-    } catch (e) {
-      print('Error updating medicine: $e');
-    }
-  }
-
-  Future<void> deleteMedicine(int index) async {
-    try {
-      final String medicineName = medicines[index]['Mname'];
-      print('Deleting medicine: $medicineName');
-
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection('Pharmacies')
-          .doc(widget.pharmacyId)
-          .collection('medicine')
-          .where('Mname', isEqualTo: medicineName)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        final DocumentReference<Map<String, dynamic>> docRef =
-            _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .doc(querySnapshot.docs.first.id);
-
-        await docRef.delete();
-
-        // Update local list
-        setState(() {
-          medicines.removeAt(index);
-        });
-
-        print('Medicine deleted successfully');
-      } else {
-        print('Document does not exist');
-      }
-    } catch (e) {
-      print('Error deleting medicine: $e');
-    }
-  }
-
-  Future<void> toggleMedicineVisibility(int index) async {
-    try {
-      final String medicineName = medicines[index]['Mname'];
-      final bool currentVisibility = medicines[index]['isVisible'] ?? true;
-
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection('Pharmacies')
-          .doc(widget.pharmacyId)
-          .collection('medicine')
-          .where('Mname', isEqualTo: medicineName)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        final DocumentReference<Map<String, dynamic>> docRef =
-            _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .doc(querySnapshot.docs.first.id);
-
-        await docRef.update({'isVisible': !currentVisibility});
-
-        // Update local list
-        setState(() {
-          medicines[index]['isVisible'] = !currentVisibility;
-        });
-
-        print('Medicine visibility toggled successfully');
-      } else {
-        print('Document does not exist');
-      }
-    } catch (e) {
-      print('Error toggling medicine visibility: $e');
-    }
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(children: [
+              const SizedBox(
+                height: 20,
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          Container(
+                              height: 220,
+                              width: 290,
+                              margin: const EdgeInsets.only(left: 35),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: const Color(0xff41b2d6), width: 2),
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed("current");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 1,
+                                      ),
+                                      Image.asset(
+                                        "images/invt3.png",
+                                        height: 180,
+                                        width: 330,
+                                      ),
+                                      const Text(
+                                        "Current Medications",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(0xff41b2d6),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ))),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              height: 250,
+                              width: 290,
+                              margin: const EdgeInsets.only(left: 35),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: const Color(0xff41b2d6), width: 2),
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed("list");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 3,
+                                      ),
+                                      //Image.asset("images/1906532.png",height: 100,width: 70,),
+                                      Image.asset(
+                                        "images/invt4.png",
+                                        height: 200,
+                                        width: 300,
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      const Text(
+                                        "Inventory",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(0xff41b2d6),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ))),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              )
+            ])));
   }
 }

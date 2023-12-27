@@ -1,6 +1,9 @@
+//managerlog
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_2/PharmacyManger/homeph.dart';
+
+
+import '../PharmacyManger/homeph.dart';
 
 class LogM extends StatefulWidget {
   const LogM({Key? key}) : super(key: key);
@@ -37,7 +40,7 @@ class _LogMState extends State<LogM> {
 
         if (passwordController.text.trim() == storedPassword) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => PharmacyMedicinesPage(pharmacyDoc.id)),
+           MaterialPageRoute(builder: (context) => Homeph()),
           );
         } else {
           showSnackBar('Incorrect password');

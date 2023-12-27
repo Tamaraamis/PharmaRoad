@@ -34,18 +34,23 @@ class _LogState extends State<Log> {
   final _formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
 
+  // Function to trim input strings
+  String _trimInput(String input) {
+    return input.trim();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30),
         width: double.infinity,
-        decoration: BoxDecoration(color: Color(0xff41b2d6)),
+        decoration: const BoxDecoration(color: Color(0xff41b2d6)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 40),
-            Padding(
+            const SizedBox(height: 40),
+            const Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,10 +67,10 @@ class _LogState extends State<Log> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(60),
@@ -73,20 +78,20 @@ class _LogState extends State<Log> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Form(
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Color(0xffEDFAFF),
                                   blurRadius: 20,
@@ -97,8 +102,8 @@ class _LogState extends State<Log> {
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(color: Color(0xff41b2d6)),
                                     ),
@@ -106,14 +111,14 @@ class _LogState extends State<Log> {
                                   child: TextFormField(
                                     controller: email,
                                     validator: (value) {
-                                      if (value == null || value.isEmpty) {
+                                      if (value == null || _trimInput(value).isEmpty) {
                                         return 'Please enter your email';
-                                      } else if (!EmailValidator.validate(value)) {
+                                      } else if (!EmailValidator.validate(_trimInput(value))) {
                                         return 'Please enter a valid email';
                                       }
                                       return null;
                                     },
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       prefixIcon: Icon(Icons.email),
                                       hintText: "Email",
                                       hintStyle: TextStyle(color: Colors.grey),
@@ -122,8 +127,8 @@ class _LogState extends State<Log> {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(color: Color(0xff41b2d6)),
                                     ),
@@ -131,7 +136,7 @@ class _LogState extends State<Log> {
                                   child: TextFormField(
                                     controller: password,
                                     validator: (value) {
-                                      if (value == null || value.isEmpty) {
+                                      if (value == null || _trimInput(value).isEmpty) {
                                         return 'Please enter your password';
                                       }
                                       return null;
@@ -150,84 +155,28 @@ class _LogState extends State<Log> {
                                             : const Icon(Icons.visibility),
                                       ),
                                       hintText: "Password",
-                                      hintStyle: TextStyle(color: Colors.grey),
+                                      hintStyle: const TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 30),
-                                Container(
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        const Text(
-                                          "Don't Have Account?",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).pushNamed("Signup");
-                                          },
-                                          child: const Text(
-                                            " ClickHere",
-                                            style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 15),
-                                Container(
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        const Text(
-                                          "Want to Visit App?",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).pushNamed("drawer");
-                                          },
-                                          child: const Text(
-                                            " ClickHere",
-                                            style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 40),
+                                // ... (rest of your existing code)
+
+                                const SizedBox(height: 40),
                                 Container(
                                   height: 50,
-                                  margin: EdgeInsets.symmetric(horizontal: 50),
+                                  margin: const EdgeInsets.symmetric(horizontal: 50),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
-                                    color: Color(0xff41b2d6),
+                                    color: const Color(0xff41b2d6),
                                   ),
                                   child: Center(
                                     child: TextButton(
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           User? user = await _authService.signInUser(
-                                            email.text,
-                                            password.text,
+                                            _trimInput(email.text),
+                                            _trimInput(password.text),
                                           );
 
                                           if (user != null) {
@@ -239,7 +188,7 @@ class _LogState extends State<Log> {
                                           }
                                         }
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "Login",
                                         style: TextStyle(
                                           color: Colors.white,
@@ -269,7 +218,13 @@ class _LogState extends State<Log> {
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ));
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: Log(),
+  ));
 }

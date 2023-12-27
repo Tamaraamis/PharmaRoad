@@ -13,10 +13,10 @@ class _contactRState extends State<contactR> {
     return  Scaffold(
     
   appBar:AppBar(
-    title: Text("Contact Us" ,style: TextStyle(fontSize:27,color:Color.fromARGB(255, 253, 252, 252),fontWeight: FontWeight.bold),),
-    backgroundColor: Color(0xFF41B2D6),
+    title: const Text("Contact Us" ,style: TextStyle(fontSize:27,color:Color.fromARGB(255, 253, 252, 252),fontWeight: FontWeight.bold),),
+    backgroundColor: const Color(0xFF41B2D6),
     leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Color.fromARGB(255, 255, 254, 254),
               
@@ -31,11 +31,11 @@ class _contactRState extends State<contactR> {
     
   ),
 
-  backgroundColor: Color(0xffEDFAFF),
+  backgroundColor: const Color(0xffEDFAFF),
    body: SingleChildScrollView(
     child: Container(
     
-     margin: EdgeInsets.all(20),
+     margin: const EdgeInsets.all(20),
      decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(10)
@@ -50,29 +50,29 @@ class _contactRState extends State<contactR> {
           Container(
             //alignment:Alignment.center ,
             height: 200,
-            width: 500,
+            width: 500,margin: const EdgeInsets.only(top: 15),
             child:Image.asset("images/contact.png")
           
-          ,margin: EdgeInsets.only(top: 15),
+          ,
          
           ),
           Container(
             alignment: Alignment.center,
-            margin:EdgeInsets.only(top:20 ,right: 20,left: 20) ,
-            child: Text("We're committed to improving your experience.For any concerns or formal complaints, reach out to us through the form or email customercare@pharmaroad.jo. Call us at +962788592457. Expect feedback within 48 hours.",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),)
+            margin:const EdgeInsets.only(top:20 ,right: 20,left: 20) ,
+            child: const Text("We're committed to improving your experience.For any concerns or formal complaints, reach out to us through the form or email customercare@pharmaroad.jo. Call us at +962788592457. Expect feedback within 48 hours.",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),)
 
 
           ),
           Container(
          height: 50,
        width:600 ,
-       margin: EdgeInsets.only(right: 10,top: 30,left: 10),
+       margin: const EdgeInsets.only(right: 10,top: 30,left: 10),
         
-        child: TextField(
+        child: const TextField(
             
          
           
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             
              border:OutlineInputBorder() ,
             labelText: " Email *" ,labelStyle: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),
@@ -86,8 +86,8 @@ class _contactRState extends State<contactR> {
         Container(
            height:150,
        width:600 ,
-       margin: EdgeInsets.only(right: 10,top:20,left: 10),
-       child: TextField(
+       margin: const EdgeInsets.only(right: 10,top:20,left: 10),
+       child: const TextField(
     
         maxLines: 10,
         decoration: InputDecoration(
@@ -103,18 +103,18 @@ class _contactRState extends State<contactR> {
             height: 55,
             width: 350,
           
-            margin: EdgeInsets.only(right: 10,top:20,left: 10),
+            margin: const EdgeInsets.only(right: 10,top:20,left: 10),
             child:
            ElevatedButton(
             onPressed: () {
               
             },
               style: ElevatedButton.styleFrom(
-             primary: Color(0xFF41B2D6), // لون الزر
+             primary: const Color(0xFF41B2D6), // لون الزر
             ),
               
          
-           child: Text("Send" ,style: TextStyle(color:Colors.black,fontSize: 15)),)
+           child: const Text("Send" ,style: TextStyle(color:Colors.black,fontSize: 15)),)
             
            ),
 

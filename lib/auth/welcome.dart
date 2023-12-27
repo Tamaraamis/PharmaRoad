@@ -18,7 +18,7 @@ class _WelcomeState extends State<Welcome> {
         child: Column(
           children: [
             const SizedBox(height: 40),
-            Row(
+            const Row(
               children: [
                 Text(
                   "WEL",
@@ -38,11 +38,11 @@ class _WelcomeState extends State<Welcome> {
               fit: BoxFit.fill,
             ),
             const SizedBox(height: 10),
-            Text(
+            const Text(
               "Time is money",
               style: TextStyle(color: Color(0xff41B2D6), fontSize: 40, fontWeight: FontWeight.bold),
             ),
-            Text(
+            const Text(
               "Pharma Road to try a series to choose your medicine",
               style: TextStyle(color: Color(0xffC7F1FF), fontSize: 20),
               textAlign: TextAlign.center,
@@ -52,17 +52,17 @@ class _WelcomeState extends State<Welcome> {
               onPressed: () {
                 Navigator.of(context).pushNamed("Users");
               },
-              child: Text(
-                "Next",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xff41B2D6),
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                primary: const Color(0xff41B2D6),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                 elevation: 10,
-                textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xffC7F1FF)),
+                textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xffC7F1FF)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
 
+              ),
+              child: const Text(
+                "Next",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
           ],
