@@ -160,7 +160,65 @@ class _LogState extends State<Log> {
                                     ),
                                   ),
                                 ),
-                                // ... (rest of your existing code)
+                                 SizedBox(height: 30),
+                                Container(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          "Don't Have Account?",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed("Signup");
+                                          },
+                                          child: const Text(
+                                            " ClickHere",
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                Container(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          "Want to Visit App?",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed("drawer");
+                                          },
+                                          child: const Text(
+                                            " ClickHere",
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                
 
                                 const SizedBox(height: 40),
                                 Container(

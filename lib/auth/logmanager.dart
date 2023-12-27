@@ -40,7 +40,7 @@ class _LogMState extends State<LogM> {
 
         if (passwordController.text.trim() == storedPassword) {
           Navigator.of(context).pushReplacement(
-           MaterialPageRoute(builder: (context) => Homeph()),
+           MaterialPageRoute(builder: (context) => Homeph(pharmacyId:passwordController.text.trim(),)),
           );
         } else {
           showSnackBar('Incorrect password');

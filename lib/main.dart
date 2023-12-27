@@ -1,6 +1,7 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/PharmacyManger/current.dart';
+import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
-import 'PharmacyManger/homeph.dart';
 import 'auth/logmanager.dart';
 import 'home/contact.dart';
 import 'home/drawer.dart';
@@ -26,7 +26,6 @@ import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'home/uploadpic.dart';
-import 'package:flutter_application_2/home/uploadpic.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -79,7 +78,9 @@ class MyApp extends StatelessWidget {
         "product":(context) => const product(),
         "profileM":(context) => const pro(),
         "YourPersc":(context) => const perscShow(),
-        //'current': (context) => const PharmacyMedicinesPage('pharmacyId'),
+        // ignore: equal_keys_in_map
+        "homeph": (context) => const Homeph(pharmacyId: ''),
+        'current': (context) => PharmacyMedicinesPage(),
       },
     );
   }
