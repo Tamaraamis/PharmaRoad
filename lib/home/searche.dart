@@ -27,73 +27,80 @@ class _SearchDrugState extends State<SearchDrug> {
     super.initState();
     _searchController.stream.listen((searchTerm) {
       retrievePharmacyData(searchTerm);
+
+      print(retrievePharmacyData);
     });
   }
 
-  void retrievePharmacyData(String searchTerm) async {
-    print('Searching for: $searchTerm');
+ void retrievePharmacyData(String searchTerm) async {
+  print('Searching for: $searchTerm');
+  setState(() {
+    isLoading = true;
+  });
+
+  pharmaciesByMedicine.clear();
+  setState(() {});
+
+  searchTerm = searchTerm.toLowerCase();
+
+  if (searchTerm.isEmpty) {
     setState(() {
-      isLoading = true;
+      isLoading = false;
     });
+    return;
+  }
 
-    pharmaciesByMedicine.clear();
-    setState(() {});
+  QuerySnapshot pharmaciesSnapshot = await pharmacy.get();
 
-    searchTerm = searchTerm.toLowerCase();
+  for (QueryDocumentSnapshot pharmacyDoc in pharmaciesSnapshot.docs) {
+    String pharmacyId = pharmacyDoc.id;
 
-    if (searchTerm.isEmpty) {
-      setState(() {
-        isLoading = false;
-      });
-      return;
-    }
+    if (pharmacyDoc.data() is Map<String, dynamic>) {
+      Map<String, dynamic> pharmacyData = pharmacyDoc.data() as Map<String, dynamic>;
 
-    QuerySnapshot pharmaciesSnapshot = await pharmacy.get();
+      if (pharmacyData.containsKey('name') &&
+          pharmacyData.containsKey('location') &&
+          pharmacyData.containsKey('neighborhood') &&
+          pharmacyData.containsKey('phone')) {
+        String pharmacyName = pharmacyData['name'];
+        String pharmacyLocation = pharmacyData['location'];
+        String pharmacyNeighborhood = pharmacyData['neighborhood'];
+        String pharmacyPhone = pharmacyData['phone'];
 
-    for (QueryDocumentSnapshot pharmacyDoc in pharmaciesSnapshot.docs) {
-      String pharmacyId = pharmacyDoc.id;
+        // Fetch medicines for the pharmacy
+        QuerySnapshot medicinesSnapshot = await FirebaseFirestore.instance
+            .collection("Pharmacies")
+            .doc(pharmacyId)
+            .collection("medicine")
+            .where('isVisible', isEqualTo: true)
+            .get();
 
-      if (pharmacyDoc.data() is Map<String, dynamic>) {
-        Map<String, dynamic> pharmacyData = pharmacyDoc.data() as Map<String, dynamic>;
+        for (QueryDocumentSnapshot medicineDoc in medicinesSnapshot.docs) {
+          if (medicineDoc.data() is Map<String, dynamic>) {
+            Map<String, dynamic> medicineData = medicineDoc.data() as Map<String, dynamic>;
 
-        if (pharmacyData.containsKey('name') &&
-            pharmacyData.containsKey('location') &&
-            pharmacyData.containsKey('neighborhood') &&
-            pharmacyData.containsKey('phone')) {
-          String pharmacyName = pharmacyData['name'];
-          String pharmacyLocation = pharmacyData['location'];
-          String pharmacyNeighborhood = pharmacyData['neighborhood'];
-          String pharmacyPhone = pharmacyData['phone'];
-          String pharmacyWhatsApp = pharmacyData['whatsapp'] ?? ''; // Added WhatsApp field
+            if (medicineData.containsKey('Mname')) {
+              String medicineName = medicineData['Mname'].toLowerCase();
 
-          QuerySnapshot medicinesSnapshot = await FirebaseFirestore.instance
-              .collection("Pharmacies")
-              .doc(pharmacyId)
-              .collection("medicine")
-              .where('isVisible', isEqualTo: true)
-              .get();
+              // Check if the medicine contains the search term
+              if (medicineName.contains(searchTerm)) {
+                Map<String, dynamic> pharmacyInfo = {
+                  'id': pharmacyId,
+                  'name': pharmacyName,
+                  'location': pharmacyLocation,
+                  'neighborhood': pharmacyNeighborhood,
+                  'phone': pharmacyPhone,
+                
+                };
 
-          for (QueryDocumentSnapshot medicineDoc in medicinesSnapshot.docs) {
-            if (medicineDoc.data() is Map<String, dynamic>) {
-              Map<String, dynamic> medicineData = medicineDoc.data() as Map<String, dynamic>;
+                // Add the pharmacy to the result for the specific medicine
+                if (!pharmaciesByMedicine.containsKey(medicineName)) {
+                  pharmaciesByMedicine[medicineName] = [];
+                }
 
-              if (medicineData.containsKey('Mname')) {
-                String medicineName = medicineData['Mname'].toLowerCase();
-
-                if (medicineName.contains(searchTerm)) {
-                  Map<String, dynamic> pharmacyInfo = {
-                    'id': pharmacyId,
-                    'name': pharmacyName,
-                    'location': pharmacyLocation,
-                    'neighborhood': pharmacyNeighborhood,
-                    'phone': pharmacyPhone,
-                    'whatsapp': pharmacyWhatsApp, // Added WhatsApp field
-                  };
-
-                  if (!pharmaciesByMedicine.containsKey(medicineName)) {
-                    pharmaciesByMedicine[medicineName] = [];
-                  }
-
+                // Check if the pharmacy is not already added for this medicine
+                if (!pharmaciesByMedicine[medicineName]!
+                    .any((pharmacy) => pharmacy['id'] == pharmacyId)) {
                   pharmaciesByMedicine[medicineName]!.add(pharmacyInfo);
                 }
               }
@@ -102,12 +109,15 @@ class _SearchDrugState extends State<SearchDrug> {
         }
       }
     }
-
-    setState(() {
-      isLoading = false;
-    });
-    print('Found pharmacies: $pharmaciesByMedicine');
   }
+
+  setState(() {
+    isLoading = false;
+  });
+
+  print('Found pharmacies: $pharmaciesByMedicine');
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +163,9 @@ class _SearchDrugState extends State<SearchDrug> {
                       : ListView.builder(
                           itemCount: pharmaciesByMedicine.length,
                           itemBuilder: (context, index) {
+                            print("========================================");
+                            print(pharmaciesByMedicine);
+                            print("===========================================");
                             String medicineName = pharmaciesByMedicine.keys.elementAt(index);
                             List<Map<String, dynamic>> pharmacies = pharmaciesByMedicine[medicineName]!;
                             return buildMedicineCard(medicineName, pharmacies);
@@ -217,7 +230,7 @@ class _SearchDrugState extends State<SearchDrug> {
                 ),
                 IconButton(
                   onPressed: () {
-                    // Location icon action (you can add an action if needed)
+                    
                     MapUtils.openMap(pharmacyInfo['location']);
                   },
                   icon: const Icon(Icons.location_on, color: Color(0xff41b2d6)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Homeph extends StatefulWidget {
   final String pharmacyId;
@@ -6,10 +7,19 @@ class Homeph extends StatefulWidget {
   const Homeph({Key? key, required this.pharmacyId}) : super(key: key);
 
   @override
-  State<Homeph> createState() => _HomephState();
+  State<Homeph> createState() => _HomephState(pharmacyId);
 }
 
 class _HomephState extends State<Homeph> {
+  final String pharmacyId;
+  _HomephState (this.pharmacyId);
+
+   void initState() {
+    super.initState();
+
+    // Print pharmacyId when the page loads
+    print('Pharmacy ID on Page Load: ${widget.pharmacyId}');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,12 +131,14 @@ class _HomephState extends State<Homeph> {
                           ),
                           child: GestureDetector(
                             onTap: () {
+                             print('id before: ${widget.pharmacyId}');
                               Navigator.of(context).pushNamed(
                                 "current",
                                 arguments: {
                                   'id': widget.pharmacyId,
                                 },
                               );
+                                print('id after: ${widget.pharmacyId}');
                             },
                             child: Column(
                               children: [

@@ -39,9 +39,10 @@ class _LogMState extends State<LogM> {
         final String storedPassword = pharmacyDoc['password'];
 
         if (passwordController.text.trim() == storedPassword) {
-          Navigator.of(context).pushReplacement(
-           MaterialPageRoute(builder: (context) => Homeph(pharmacyId:passwordController.text.trim(),)),
-          );
+           String pharmacyId = pharmacyIdController.text.trim();
+
+          Navigator.of(context).pushReplacementNamed("homeph", arguments: {'id': pharmacyId});
+        
         } else {
           showSnackBar('Incorrect password');
         }

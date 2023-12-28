@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         "drawer": (context) => const drawer(),
         "contact": (context) => const Contact(),
         "LoginManger": (context) => const LogM(),
-        "homeph": (context) => const LogM(),
+        //"homeph": (context) => const LogM(),
         //"drug":(context) => Drug(),
         "list": (context) => const Medicine(),
         "try": (context) => const Log(),
@@ -78,13 +78,30 @@ class MyApp extends StatelessWidget {
         "product":(context) => const product(),
         "profileM":(context) => const pro(),
         "YourPersc":(context) => const perscShow(),
-        // ignore: equal_keys_in_map
-        "homeph": (context) => const Homeph(pharmacyId: ''),
-        'current': (context) => PharmacyMedicinesPage(),
+       "homeph": (context) {
+  final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+  return Homeph(pharmacyId: args?['id'] ?? '');
+},
+
+       
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == 'current') {
+          final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
+
+          return MaterialPageRoute(
+            builder: (context) => PharmacyMedicinesPage(pharmacyId: args?['id'] ?? ''),
+          );
+        }
+
+
+        return null; 
       },
     );
   }
-}
+
+  }
 
 class splach extends StatefulWidget {
   const splach({super.key});
