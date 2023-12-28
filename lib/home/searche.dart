@@ -1,81 +1,118 @@
 import 'dart:async';
-import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart'; 
 import 'package:flutter_application_2/pharmacyloc/forMap.dart';
 
-class Searchdrug extends StatefulWidget {
-  const Searchdrug({Key? key}) : super(key: key);
+
+class SearchDrug extends StatefulWidget {
+  const SearchDrug({Key? key}) : super(key: key);
 
   @override
-  State<Searchdrug> createState() => _SearchdrugState();
+  State<SearchDrug> createState() => _SearchDrugState();
 }
 
-class _SearchdrugState extends State<Searchdrug> {
+class _SearchDrugState extends State<SearchDrug> {
   TextEditingController searchController = TextEditingController();
   Map<String, List<Map<String, dynamic>>> pharmaciesByMedicine = {};
-  StreamController<String> _searchController = StreamController<String>();
+  final StreamController<String> _searchController = StreamController<String>();
+  bool isLoading = false;
 
   CollectionReference pharmacy = FirebaseFirestore.instance.collection("Pharmacies");
 
   @override
   void initState() {
     super.initState();
-    _searchController.stream
-        .debounceTime(Duration(milliseconds: 500)) // Debounce time to reduce unnecessary requests
-        .listen((medicineName) {
-      retrievePharmacyData(medicineName);
+    _searchController.stream.listen((searchTerm) {
+      retrievePharmacyData(searchTerm);
     });
   }
 
-  void retrievePharmacyData(String medicineName) async {
-    pharmaciesByMedicine.clear(); // Clear the previous results
+  void retrievePharmacyData(String searchTerm) async {
+    print('Searching for: $searchTerm');
+    setState(() {
+      isLoading = true;
+    });
+
+    pharmaciesByMedicine.clear();
     setState(() {});
 
-    // Convert the medicine name to lowercase
-    medicineName = medicineName.toLowerCase();
+    searchTerm = searchTerm.toLowerCase();
 
-    if (medicineName.isEmpty) {
-      // Show a message if the search bar is empty
-      // showInfoDialog(context, "Please enter a medicine name.");
+    if (searchTerm.isEmpty) {
+      setState(() {
+        isLoading = false;
+      });
       return;
     }
 
-    QuerySnapshot value = await pharmacy.get();
-    for (QueryDocumentSnapshot result in value.docs) {
-      QuerySnapshot subcol = await FirebaseFirestore.instance
-          .collection("Pharmacies")
-          .doc(result.id)
-          .collection("medicine")
-          .where('Mname', isEqualTo: medicineName)
-          .get();
+    QuerySnapshot pharmaciesSnapshot = await pharmacy.get();
 
-      subcol.docs.forEach((element) {
-        Map<String, dynamic> pharmacyInfo = {
-          'id': result.id,
-          'name': result['name'],
-          'location': result['location'],
-          'neighborhood': result['neighborhood'],
-          'phone': result['phone'],
-        };
+    for (QueryDocumentSnapshot pharmacyDoc in pharmaciesSnapshot.docs) {
+      String pharmacyId = pharmacyDoc.id;
 
-        if (!pharmaciesByMedicine.containsKey(medicineName)) {
-          pharmaciesByMedicine[medicineName] = [];
+      if (pharmacyDoc.data() is Map<String, dynamic>) {
+        Map<String, dynamic> pharmacyData = pharmacyDoc.data() as Map<String, dynamic>;
+
+        if (pharmacyData.containsKey('name') &&
+            pharmacyData.containsKey('location') &&
+            pharmacyData.containsKey('neighborhood') &&
+            pharmacyData.containsKey('phone')) {
+          String pharmacyName = pharmacyData['name'];
+          String pharmacyLocation = pharmacyData['location'];
+          String pharmacyNeighborhood = pharmacyData['neighborhood'];
+          String pharmacyPhone = pharmacyData['phone'];
+          String pharmacyWhatsApp = pharmacyData['whatsapp'] ?? ''; // Added WhatsApp field
+
+          QuerySnapshot medicinesSnapshot = await FirebaseFirestore.instance
+              .collection("Pharmacies")
+              .doc(pharmacyId)
+              .collection("medicine")
+              .where('isVisible', isEqualTo: true)
+              .get();
+
+          for (QueryDocumentSnapshot medicineDoc in medicinesSnapshot.docs) {
+            if (medicineDoc.data() is Map<String, dynamic>) {
+              Map<String, dynamic> medicineData = medicineDoc.data() as Map<String, dynamic>;
+
+              if (medicineData.containsKey('Mname')) {
+                String medicineName = medicineData['Mname'].toLowerCase();
+
+                if (medicineName.contains(searchTerm)) {
+                  Map<String, dynamic> pharmacyInfo = {
+                    'id': pharmacyId,
+                    'name': pharmacyName,
+                    'location': pharmacyLocation,
+                    'neighborhood': pharmacyNeighborhood,
+                    'phone': pharmacyPhone,
+                    'whatsapp': pharmacyWhatsApp, // Added WhatsApp field
+                  };
+
+                  if (!pharmaciesByMedicine.containsKey(medicineName)) {
+                    pharmaciesByMedicine[medicineName] = [];
+                  }
+
+                  pharmaciesByMedicine[medicineName]!.add(pharmacyInfo);
+                }
+              }
+            }
+          }
         }
-
-        pharmaciesByMedicine[medicineName]!.add(pharmacyInfo);
-      });
+      }
     }
 
-    // Update the UI with the fetched data
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
+    print('Found pharmacies: $pharmaciesByMedicine');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEDFAFF),
+      backgroundColor: const Color(0xFFEDFAFF),
       body: Padding(
         padding: const EdgeInsets.all(40),
         child: Column(
@@ -97,27 +134,30 @@ class _SearchdrugState extends State<Searchdrug> {
                 IconButton(
                   onPressed: () async {
                     retrievePharmacyData(searchController.text);
-                    // Clear the search bar and body when initiating a new search
                     searchController.clear();
                   },
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
-              child: pharmaciesByMedicine.isEmpty
-                  ? Center(
-                      child: Text("No results found."),
+              child: isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
                     )
-                  : ListView.builder(
-                      itemCount: pharmaciesByMedicine.length,
-                      itemBuilder: (context, index) {
-                        String medicineName = pharmaciesByMedicine.keys.elementAt(index);
-                        List<Map<String, dynamic>> pharmacies = pharmaciesByMedicine[medicineName]!;
-                        return buildMedicineCard(medicineName, pharmacies);
-                      },
-                    ),
+                  : pharmaciesByMedicine.isEmpty
+                      ? const Center(
+                          child: Text("No results found."),
+                        )
+                      : ListView.builder(
+                          itemCount: pharmaciesByMedicine.length,
+                          itemBuilder: (context, index) {
+                            String medicineName = pharmaciesByMedicine.keys.elementAt(index);
+                            List<Map<String, dynamic>> pharmacies = pharmaciesByMedicine[medicineName]!;
+                            return buildMedicineCard(medicineName, pharmacies);
+                          },
+                        ),
             ),
           ],
         ),
@@ -129,16 +169,16 @@ class _SearchdrugState extends State<Searchdrug> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           "Medicine: ${medicineName.capitalizeFirstLetter()}",
-          style: TextStyle(fontSize: 20, color: Color(0xff121212), fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, color: Color(0xff121212), fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ...pharmacies.map((pharmacyInfo) {
           return buildPharmacyCard(pharmacyInfo);
         }).toList(),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -146,7 +186,7 @@ class _SearchdrugState extends State<Searchdrug> {
   Widget buildPharmacyCard(Map<String, dynamic> pharmacyInfo) {
     return Card(
       elevation: 3,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -154,33 +194,40 @@ class _SearchdrugState extends State<Searchdrug> {
           children: [
             Text(
               pharmacyInfo['name'] ?? '',
-              style: TextStyle(fontSize: 18, color: Color(0xff121212), fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 18, color: Color(0xff121212), fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               pharmacyInfo['neighborhood'] ?? '',
-              style: TextStyle(fontSize: 12, color: Color(0xff121212), fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 12, color: Color(0xff121212), fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 5),
-            Text(
+            const SizedBox(height: 5),
+            const Text(
               "Open 24 hours",
               style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 26, 107, 32)),
             ),
-            SizedBox(width: 66),
+            const SizedBox(width: 66),
             Row(
               children: [
                 IconButton(
                   onPressed: () {
                     showPhoneNumberAlertDialog(context, pharmacyInfo['phone'] ?? '');
                   },
-                  icon: Icon(Icons.phone, color: Color(0xff41b2d6)),
+                  icon: const Icon(Icons.phone, color: Color(0xff41b2d6)),
                 ),
                 IconButton(
                   onPressed: () {
                     // Location icon action (you can add an action if needed)
-                     MapUtils.openMap(pharmacyInfo['location']);
+                    MapUtils.openMap(pharmacyInfo['location']);
                   },
-                  icon: Icon(Icons.location_on, color: Color(0xff41b2d6)),
+                  icon: const Icon(Icons.location_on, color: Color(0xff41b2d6)),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // WhatsApp icon action
+                      showWhatsappAlertDialog(context, pharmacyInfo['phone'] ?? '');
+                  },
+                  icon: const Icon(Icons.message, color: Color(0xff41b2d6)),
                 ),
               ],
             ),
@@ -201,26 +248,64 @@ class _SearchdrugState extends State<Searchdrug> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.close),
+              icon: const Icon(Icons.close),
             ),
             IconButton(
               onPressed: () async {
                 Navigator.pop(context);
                 await FlutterPhoneDirectCaller.callNumber(phoneNumber);
               },
-              icon: Icon(Icons.phone),
+              icon: const Icon(Icons.phone),
             ),
           ],
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
         );
       },
     );
   }
+  void showWhatsappAlertDialog(BuildContext context, String phoneNumber) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: Text("Message $phoneNumber on WhatsApp?"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.close),
+          ),
+          IconButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              // Call the function to send WhatsApp message
+              sendWhatsAppMessage(phoneNumber);
+            },
+            icon: const Icon(Icons.message),
+          ),
+        ],
+        alignment: Alignment.center,
+      );
+    },
+  );
 }
+ void sendWhatsAppMessage(String phoneNumber) async {
+
+  final whatsappUrl = "https://wa.me/$phoneNumber";
+    await launchUrl(Uri.parse(whatsappUrl)); 
+  }
+  }
 
 // Extension to capitalize the first letter of a string
 extension StringExtension on String {
   String capitalizeFirstLetter() {
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: SearchDrug(),
+  ));
 }

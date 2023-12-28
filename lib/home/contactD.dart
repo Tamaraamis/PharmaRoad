@@ -14,16 +14,16 @@ class _contactdState extends State<contactd> {
     return Scaffold(
       
   appBar:AppBar(
-    title: Text("Contact Us" ,style: TextStyle(color:Color(0xffEDFAFF)),),
-    backgroundColor: Color(0xFF41B2D6),
+    title: const Text("Contact Us" ,style: TextStyle(color:Color(0xffEDFAFF)),),
+    backgroundColor: const Color(0xFF41B2D6),
 
     centerTitle: true,
     actions: [
-      IconButton(onPressed: (){}, icon: Icon(color: Color(0xffEDFAFF),Icons.search))
+      IconButton(onPressed: (){}, icon: const Icon(color: Color(0xffEDFAFF),Icons.search))
     ],
   ),
 
-  backgroundColor: Color(0xffEDFAFF),
+  backgroundColor: const Color(0xffEDFAFF),
 
   
   body: SingleChildScrollView(
@@ -31,8 +31,8 @@ class _contactdState extends State<contactd> {
     child:
     Column(children: [
      Container(
-    padding: EdgeInsets.only(left: 13,right: 2),
-     margin: EdgeInsets.all(20),
+    padding: const EdgeInsets.only(left: 13,right: 2),
+     margin: const EdgeInsets.all(20),
      decoration: BoxDecoration(
       
       color: Colors.white,
@@ -45,17 +45,17 @@ height: 750,
         child: Column(children: [
           Container(
             alignment:Alignment.center ,
+          margin: const EdgeInsets.only(top: 15),
             
             child:
-          Text("Contact Us ",style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),),
-          margin: EdgeInsets.only(top: 15),
+          const Text("Contact Us ",style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),),
          
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           
            Container(
-            margin: EdgeInsets.all(5),
-            child: Text("We continuously strive to enhance your experience and make it more enjoyable. Feel free to reach out to us!\nIf you have any issues, or wish to file a formal complaint, you can always contact us by filling out the below form or via email at customercare@pharmaroad.jo\nOr you can call us at +962788592457.\n\nWe ensure that guests receive feedback within a maximum of 48 hours.",
+            margin: const EdgeInsets.all(5),
+            child: const Text("We continuously strive to enhance your experience and make it more enjoyable. Feel free to reach out to us!\nIf you have any issues, or wish to file a formal complaint, you can always contact us by filling out the below form or via email at customercare@pharmaroad.jo\nOr you can call us at +962788592457.\n\nWe ensure that guests receive feedback within a maximum of 48 hours.",
             
             
             
@@ -64,13 +64,13 @@ height: 750,
       Container(
          height: 60,
        width:1600 ,
-       margin: EdgeInsets.only(right: 10,top: 30,left: 10),
+       margin: const EdgeInsets.only(right: 10,top: 30,left: 10),
        
-        child: TextField(
+        child: const TextField(
             
           
           
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             
              border:OutlineInputBorder() ,
             labelText: " Email *" ,labelStyle: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),
@@ -84,9 +84,9 @@ height: 750,
 
            Container(
            height:130,
-       width:600 ,padding:EdgeInsets.only(top: 5),
-       margin: EdgeInsets.only(right: 10,top:25,left: 10),
-       child: TextField(
+       width:600 ,padding:const EdgeInsets.only(top: 5),
+       margin: const EdgeInsets.only(right: 10,top:25,left: 10),
+       child: const TextField(
         
         
         maxLines: 20,
@@ -106,7 +106,7 @@ height: 750,
           
             height: 50,
             width: 350,
-            margin: EdgeInsets.only(right: 10,top:20,left: 10),
+            margin: const EdgeInsets.only(right: 10,top:20,left: 10),color:const Color(0xFF41B2D6),
             
             child:ElevatedButton(
             
@@ -114,8 +114,8 @@ height: 750,
 
               }
            ,
-           child: Text("Send" ,style: TextStyle(color:Color(0xffEDFAFF),fontSize: 17)),)
-            ,color:Color(0xFF41B2D6),
+           child: const Text("Send" ,style: TextStyle(color:Color(0xffEDFAFF),fontSize: 17)),)
+            ,
            ),
         ])
         

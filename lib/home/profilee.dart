@@ -21,10 +21,10 @@ class _profileState extends State<profile> {
     return Scaffold(
         appBar: AppBar(
                  
-       title: Text("Profile" ,style: TextStyle(fontSize: 30,color:Color(0xffEDFAFF)),),
+       title: const Text("Profile" ,style: TextStyle(fontSize: 30,color:Color(0xffEDFAFF)),),
         leading: IconButton(
       
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               
@@ -38,14 +38,14 @@ class _profileState extends State<profile> {
          
        
        centerTitle: true,
-    backgroundColor: Color(0xFF41B2D6),
+    backgroundColor: const Color(0xFF41B2D6),
         ),
-         backgroundColor: Color(0xffEDFAFF),
+         backgroundColor: const Color(0xffEDFAFF),
         body: MyListView(
           Column(children: [
             const SizedBox( height: 20,),
                  Container(child:
-                CircleAvatar(
+                const CircleAvatar(
                   
                   radius: 70,
                  
@@ -53,7 +53,7 @@ class _profileState extends State<profile> {
                   
                 ),
                 ),
-               SizedBox(height: 30,)
+               const SizedBox(height: 30,)
 
           ],)
         ),
@@ -83,11 +83,11 @@ class _MyListViewState extends State<MyListView> {
   }
   // Sample data for demonstration
   List<ItemData> items = [
-    ItemData(title: 'Name', subtitle: 'Name',icon:Icons.person, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Phone', subtitle: 'Phone', icon:Icons. phone_android, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Address', subtitle: 'Abc.address/city',icon:Icons.location_pin, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Email', subtitle: 'Email',icon:Icons.mail, trailingIcon: Icons.arrow_forward,),
-    ItemData(title: 'Your Prescription', subtitle: 'Your Prescription',icon:Icons.content_paste, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Name', subtitle: '',icon:Icons.person, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Phone', subtitle: '', icon:Icons. phone_android, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Address', subtitle: '',icon:Icons.location_pin, trailingIcon: Icons.arrow_forward,),
+    ItemData(title: 'Email',icon:Icons.mail, trailingIcon: Icons.arrow_forward, subtitle: '',),
+    ItemData(title: 'Your Prescription',icon:Icons.content_paste, trailingIcon: Icons.arrow_forward, subtitle: '',),
 
   ];
 
@@ -98,7 +98,7 @@ class _MyListViewState extends State<MyListView> {
       children:[
     const SizedBox( height: 20,),
                Container(
-                  padding:EdgeInsets.only(left: 15,right: 15,top: 10) ,
+                  padding:const EdgeInsets.only(left: 15,right: 15,top: 10) ,
                   child:
                   GestureDetector(onTap: (){
                   
@@ -110,8 +110,8 @@ class _MyListViewState extends State<MyListView> {
                             CircleAvatar(
                              
                                foregroundImage: _selectedImage != null ? FileImage(_selectedImage!) :null,
-                               backgroundImage:AssetImage("images/person.png") ,
-                              backgroundColor: Color(0xffc7f1ff),
+                               backgroundImage:const AssetImage("images/person.png") ,
+                              backgroundColor: const Color(0xffc7f1ff),
                        radius: 65,
                        
                      
@@ -134,11 +134,11 @@ class _MyListViewState extends State<MyListView> {
                                     width: 4,
                                     color: Colors.white,
                                   ),
-                                 color: Color(0xffc7f1ff),
+                                 color: const Color(0xffc7f1ff),
                                 ),
                                 child:  IconButton(onPressed: (){
                                 _pickImage();
-                                }, icon:Icon(Icons.camera_alt),color:Color.fromARGB(255, 155, 162, 163),)
+                                }, icon:const Icon(Icons.camera_alt),color:const Color.fromARGB(255, 155, 162, 163),)
 
 
                               )),
@@ -167,7 +167,7 @@ class _MyListViewState extends State<MyListView> {
             decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         offset: Offset(0, 3),
                         color: Color(0xFF41B2D6),
@@ -197,7 +197,7 @@ class _MyListViewState extends State<MyListView> {
           },
         )
         ),
-          SizedBox( height: 20,),
+          const SizedBox( height: 20,),
         ],
         );
     
@@ -258,22 +258,22 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Screen'),
+        title: const Text('Edit Screen'),
         centerTitle: true,
-    backgroundColor: Color(0xFF41B2D6),
+    backgroundColor: const Color(0xFF41B2D6),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Edit Subtitle:'),
+            const Text('Edit Subtitle:'),
             TextField(
               controller: _subtitleController,
               
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
            
 
             ElevatedButton(
@@ -290,7 +290,7 @@ class _EditScreenState extends State<EditScreen> {
                 ),
                 );
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),

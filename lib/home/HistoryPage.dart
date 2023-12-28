@@ -11,17 +11,17 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search History'),
+        title: const Text('Search History'),
       ),
       body: FutureBuilder(
         future: getUserSearchHistory(userId),
         builder: (context, AsyncSnapshot<List<String>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No search history available.'));
+            return const Center(child: Text('No search history available.'));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,

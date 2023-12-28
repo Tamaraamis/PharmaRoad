@@ -23,7 +23,7 @@ class MedicineState extends State<Medicine> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff41b2d6),
+        backgroundColor: const Color(0xff41b2d6),
         centerTitle: true,
         title: const Text(
           "Medicine Inventory",
@@ -40,8 +40,8 @@ class MedicineState extends State<Medicine> {
               padding: const EdgeInsets.all(20.0),
               child: Card(
                   elevation: 20,
-                  shadowColor: Color(0xff41b2d6),
-                  color: Color(0xffEDFAFF),
+                  shadowColor: const Color(0xff41b2d6),
+                  color: const Color(0xffEDFAFF),
                   child: ListTile(
                     title: Text(data[index]),
                     trailing: Container(
@@ -64,19 +64,19 @@ class MedicineState extends State<Medicine> {
                                           ),
                                           ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  primary: Color(0xff41b2d6)),
+                                                  primary: const Color(0xff41b2d6)),
                                               onPressed: (() {
                                                 setState(() {
                                                   data[index] = text;
                                                 });
                                                 Navigator.pop(context);
                                               }),
-                                              child: Text("Update"))
+                                              child: const Text("Update"))
                                         ],
                                       ),
                                     );
                                   }),
-                                  icon: Icon(Icons.edit))),
+                                  icon: const Icon(Icons.edit))),
                           Expanded(
                               child: IconButton(
                                   onPressed: (() {
@@ -84,7 +84,7 @@ class MedicineState extends State<Medicine> {
                                       data.removeAt(index);
                                     });
                                   }),
-                                  icon: Icon(Icons.delete))),
+                                  icon: const Icon(Icons.delete))),
                         ],
                       ),
                     ),
@@ -92,7 +92,7 @@ class MedicineState extends State<Medicine> {
             );
           })),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff41b2d6),
+        backgroundColor: const Color(0xff41b2d6),
         onPressed: () {
           // Show a dialog to input a new item
           showDialog(
@@ -101,7 +101,7 @@ class MedicineState extends State<Medicine> {
               final TextEditingController textController =
                   TextEditingController();
               return AlertDialog(
-                title: Text(
+                title: const Text(
                   'Add Medicine',
                   style: TextStyle(
                       fontSize: 25,
@@ -116,7 +116,7 @@ class MedicineState extends State<Medicine> {
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
                     },
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
                   TextButton(
                     onPressed: () {
@@ -127,14 +127,14 @@ class MedicineState extends State<Medicine> {
                       textController.clear();
                       Navigator.of(context).pop();
                     },
-                    child: Text('Add'),
+                    child: const Text('Add'),
                   ),
                 ],
               );
             },
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

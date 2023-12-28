@@ -12,10 +12,10 @@ class _productState extends State<product> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xffEDFAFF),
+       backgroundColor: const Color(0xffEDFAFF),
       appBar: AppBar(
-        backgroundColor: Color(0xff41b2d6),
-        title: Text(
+        backgroundColor: const Color(0xff41b2d6),
+        title: const Text(
           "Popular Medicine",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -26,10 +26,10 @@ class _productState extends State<product> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.all(15),
+        margin: const EdgeInsets.all(15),
       //  padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
@@ -52,7 +52,7 @@ class _productState extends State<product> {
 
                   ],),
                 )),
-                Text(data[index]['name'],style: TextStyle(fontSize: 25,color:Color(0xff41b2d6), fontWeight: FontWeight.bold ),),
+                Text(data[index]['name'],style: const TextStyle(fontSize: 25,color:Color(0xff41b2d6), fontWeight: FontWeight.bold ),),
                //  Text(data[index]['class'],style: TextStyle(fontSize: 15,color:Color(0xff41b2d6), fontWeight: FontWeight.bold ),),
               ],
             );
