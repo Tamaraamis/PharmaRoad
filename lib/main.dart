@@ -7,6 +7,7 @@ import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
+import 'package:flutter_application_2/home/searchph.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
 import 'auth/logmanager.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         //"drug":(context) => Drug(),
         "list": (context) => const Medicine(),
         "try": (context) => const Log(),
-        "pharmacyloc": (context) => const pharmacyloc(),
+        "pharmacyloc": (context) => const SearchPharmacy(),
         "region1": (context) => const region1(),
         "region2": (context) => const region2(),
         "region3": (context) => const region3(),
