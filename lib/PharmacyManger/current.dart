@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PharmacyMedicinesPage extends StatefulWidget {
-  final String pharmacyId;
+ final String pharmacyId;
 
-  const PharmacyMedicinesPage(this.pharmacyId, {Key? key}) : super(key: key);
+  const PharmacyMedicinesPage({required this.pharmacyId, Key? key}) : super(key: key);
 
   @override
   State<PharmacyMedicinesPage> createState() => _PharmacyMedicinesPageState();
@@ -18,23 +18,25 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   @override
   void initState() {
     super.initState();
+
     fetchMedicines();
+    print('Pharmacy ID inventory: ${widget.pharmacyId}');
   }
 
   Future<void> fetchMedicines() async {
     try {
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await _firestore
-              .collection('Pharmacies')
-              .doc(widget.pharmacyId)
-              .collection('medicine')
-              .get();
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+          .collection('Pharmacies')
+          .doc(widget.pharmacyId)
+          .collection('medicine')
+          .get();
 
       setState(() {
-        medicines = querySnapshot.docs.map((doc) => {
-          ...doc.data() as Map<String, dynamic>,
-          'isVisible': true, // Add a default value for visibility
-        }).toList();
+        medicines = querySnapshot.docs.map((doc) => {...doc.data(), 'isVisible':true }).toList();
+        print("----=================================");
+        print(medicines);
+
+        print("----=================================");
       });
     } catch (e) {
       print('Error fetching medicines: $e');
@@ -45,7 +47,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pharmacy Medicines'),
+        title: Text('Pharmacy Medicines'),
       ),
       body: Column(
         children: [
@@ -57,7 +59,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                   searchText = value;
                 });
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Search',
                 prefixIcon: Icon(Icons.search),
               ),
@@ -67,44 +69,39 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
             child: ListView.builder(
               itemCount: medicines.length,
               itemBuilder: (context, index) {
-                final bool isVisible = medicines[index]['isVisible'] ?? false;
-
-                return matchesSearch(medicines[index]['Mname']) && isVisible
+                return matchesSearch(medicines[index]['Mname']) && medicines[index]['isVisible']
                     ? buildMedicineCard(index)
-                    : const SizedBox.shrink();
+                    : SizedBox.shrink();
               },
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xff41b2d6),
+        backgroundColor: Color(0xff41b2d6),
         onPressed: () {
           showAddMedicineDialog();
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }
 
   bool matchesSearch(String medicine) {
-  final String searchLower = searchText.toLowerCase();
-  final String medicineLower = medicine.toLowerCase();
-  return medicineLower.contains(searchLower);
-}
-
+    return medicine.toLowerCase().contains(searchText.toLowerCase());
+  }
 
   Widget buildMedicineCard(int index) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Card(
         elevation: 20,
-        shadowColor: const Color(0xff41b2d6),
-        color: const Color(0xffEDFAFF),
+        shadowColor: Color(0xff41b2d6),
+        color: Color(0xffEDFAFF),
         child: ListTile(
           title: Text(medicines[index]['Mname']),
           trailing: Container(
-            width: 70,
+            width: 140,
             child: Row(
               children: [
                 Expanded(
@@ -112,7 +109,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                     onPressed: () {
                       showUpdateMedicineDialog(index);
                     },
-                    icon: const Icon(Icons.edit),
+                    icon: Icon(Icons.edit),
                   ),
                 ),
                 Expanded(
@@ -128,7 +125,15 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                     onPressed: () {
                       showDeleteDialog(index);
                     },
-                    icon: const Icon(Icons.delete),
+                    icon: Icon(Icons.delete),
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {
+                      unhideMedicine(index);
+                    },
+                    icon: Icon(Icons.visibility),
                   ),
                 ),
               ],
@@ -145,7 +150,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(
+        title: Text(
           'Add Medicine',
           style: TextStyle(
             fontSize: 25,
@@ -161,7 +166,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Cancel'),
+            child: Text('Cancel'),
           ),
           TextButton(
             onPressed: () async {
@@ -173,7 +178,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                 print('Error adding medicine: $e');
               }
             },
-            child: const Text('Add'),
+            child: Text('Add'),
           ),
         ],
       ),
@@ -181,15 +186,14 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   }
 
   Future<void> showUpdateMedicineDialog(int index) async {
-    final TextEditingController textController =
-        TextEditingController(text: medicines[index]['Mname']);
+    final TextEditingController textController = TextEditingController(text: medicines[index]['Mname']);
 
     GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(
+        title: Text(
           'Update Medicine',
           style: TextStyle(
             fontSize: 25,
@@ -211,7 +215,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: const Color(0xff41b2d6),
+              primary: Color(0xff41b2d6),
             ),
             onPressed: () async {
               try {
@@ -223,7 +227,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                 print('Error updating medicine: $e');
               }
             },
-            child: const Text('Edit'),
+            child: Text('Edit'),
           ),
         ],
       ),
@@ -235,14 +239,14 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Delete Medicine'),
-          content: const Text('Are you sure you want to delete this medicine?'),
+          title: Text('Delete Medicine'),
+          content: Text('Are you sure you want to delete this medicine?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child: Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -253,12 +257,84 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                   print('Error deleting medicine: $e');
                 }
               },
-              child: const Text('Delete'),
+              child: Text('Delete'),
             ),
           ],
         );
       },
     );
+  }
+
+  Future<void> toggleMedicineVisibility(int index) async {
+    try {
+      final String medicineName = medicines[index]['Mname'];
+
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+          .collection('Pharmacies')
+          .doc(widget.pharmacyId)
+          .collection('medicine')
+          .where('Mname', isEqualTo: medicineName)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final DocumentReference<Map<String, dynamic>> docRef =
+            _firestore
+                .collection('Pharmacies')
+                .doc(widget.pharmacyId)
+                .collection('medicine')
+                .doc(querySnapshot.docs.first.id);
+
+        final bool currentVisibility = medicines[index]['isVisible'];
+
+        await docRef.update({'isVisible': !currentVisibility});
+
+        // Update local list
+        setState(() {
+          medicines[index]['isVisible'] = !currentVisibility;
+        });
+
+        print('Medicine visibility toggled successfully');
+      } else {
+        print('Document does not exist');
+      }
+    } catch (e) {
+      print('Error toggling medicine visibility: $e');
+    }
+  }
+
+  Future<void> unhideMedicine(int index) async {
+    try {
+      final String medicineName = medicines[index]['Mname'];
+
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+          .collection('Pharmacies')
+          .doc(widget.pharmacyId)
+          .collection('medicine')
+          .where('Mname', isEqualTo: medicineName)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final DocumentReference<Map<String, dynamic>> docRef =
+            _firestore
+                .collection('Pharmacies')
+                .doc(widget.pharmacyId)
+                .collection('medicine')
+                .doc(querySnapshot.docs.first.id);
+
+        await docRef.update({'isVisible': true});
+
+        // Update local list
+        setState(() {
+          medicines[index]['isVisible'] = true;
+        });
+
+        print('Medicine unhidden successfully');
+      } else {
+        print('Document does not exist');
+      }
+    } catch (e) {
+      print('Error unhiding medicine: $e');
+    }
   }
 
   Future<void> addMedicine(String medicineName) async {
@@ -271,17 +347,14 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                 .collection('medicine')
                 .add({
               'Mname': medicineName,
-              'isVisible': true, // Set default visibility
+              'isVisible': true, // Default visibility
             });
 
         final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
             await newDocRef.get();
 
         setState(() {
-          medicines.add({
-            ...newDocSnapshot.data() as Map<String, dynamic>,
-            'isVisible': true, // Set default visibility
-          });
+          medicines.add({...?newDocSnapshot.data(), 'isVisible': true});
         });
       } catch (e) {
         print('Error adding medicine: $e');
@@ -294,7 +367,6 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   Future<void> updateMedicine(int index, String newName) async {
     try {
       final String oldMedicineName = medicines[index]['Mname'];
-      print('Updating medicine: $oldMedicineName to $newName');
 
       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
           .collection('Pharmacies')
@@ -330,7 +402,6 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   Future<void> deleteMedicine(int index) async {
     try {
       final String medicineName = medicines[index]['Mname'];
-      print('Deleting medicine: $medicineName');
 
       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
           .collection('Pharmacies')
@@ -360,42 +431,6 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
       }
     } catch (e) {
       print('Error deleting medicine: $e');
-    }
-  }
-
-  Future<void> toggleMedicineVisibility(int index) async {
-    try {
-      final String medicineName = medicines[index]['Mname'];
-      final bool currentVisibility = medicines[index]['isVisible'] ?? true;
-
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection('Pharmacies')
-          .doc(widget.pharmacyId)
-          .collection('medicine')
-          .where('Mname', isEqualTo: medicineName)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        final DocumentReference<Map<String, dynamic>> docRef =
-            _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .doc(querySnapshot.docs.first.id);
-
-        await docRef.update({'isVisible': !currentVisibility});
-
-        // Update local list
-        setState(() {
-          medicines[index]['isVisible'] = !currentVisibility;
-        });
-
-        print('Medicine visibility toggled successfully');
-      } else {
-        print('Document does not exist');
-      }
-    } catch (e) {
-      print('Error toggling medicine visibility: $e');
     }
   }
 }
