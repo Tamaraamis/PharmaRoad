@@ -18,7 +18,7 @@ class _WelcomeState extends State<Welcome> {
         child: Column(
           children: [
             const SizedBox(height: 40),
-            const Row(
+             Row(
               children: [
                 Text(
                   "WEL",

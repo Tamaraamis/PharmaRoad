@@ -47,12 +47,16 @@ appBar: AppBar(
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
                IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
-              
+             
+             
+              ],)
              ],
 alignment: Alignment.bottomCenter,
           );
@@ -94,12 +98,15 @@ MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                 Container(child:Text("Call 07 8066 6701",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 533 6950');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 07 8066 6701",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
-              
+             
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );
@@ -142,12 +149,15 @@ MapUtils.openMap('https://maps.app.goo.gl/MHbywBKG7A3rAJM98');
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                Container(child:Text("Call 07 8889 7230",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('07 8889 7230');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 07 8889 7230",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
               
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );
@@ -190,12 +200,15 @@ alignment: Alignment.bottomCenter,
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                Container(child:Text("Call 06 534 5857",style: TextStyle(fontSize: 20),),
+              ),
+              SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 534 5857');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 06 534 5857",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
               
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );
@@ -238,12 +251,15 @@ alignment: Alignment.bottomCenter,
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                Container(child:Text("Call 06 535 3955",style: TextStyle(fontSize: 20),),
+              ),
+              SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 535 3955');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 06 535 3955",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
               
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );
@@ -286,12 +302,15 @@ alignment: Alignment.bottomCenter,
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 1072",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 534 1072');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 06 534 1072",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
-              
+             
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );
@@ -334,12 +353,15 @@ alignment: Alignment.bottomCenter,
           return AlertDialog(
             
             actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 7632",style: TextStyle(fontSize: 20),),
+            ),
+            SizedBox(width: 55,),
               IconButton(onPressed: (){ 
                 
   FlutterPhoneDirectCaller.callNumber('06 534 7632');}, icon: Icon(Icons.phone)),
-              Container(child:Text("Call 06 534 7632",style: TextStyle(fontSize: 20),),
-              padding: EdgeInsets.only(right:70),),
-              
+             
+              ],)
               ],
 alignment: Alignment.bottomCenter,
           );

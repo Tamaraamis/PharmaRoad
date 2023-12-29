@@ -222,7 +222,7 @@ class _drawerState extends State<drawer> {
                       onTap: () {
                         Navigator.of(context).pushNamed("uploadpic");
                       },
-                      child: const Column(
+                      child:  Column(
                         children: [
                           SizedBox(
                             height: 3,
