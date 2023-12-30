@@ -4,9 +4,11 @@ import 'package:flutter_application_2/PharmacyManger/current.dart';
 import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/UserProfile.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
+
 import 'package:flutter_application_2/home/searchph.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
@@ -75,10 +77,12 @@ class MyApp extends StatelessWidget {
         "region8": (context) => const region8(),
         "uploadpic": (context) => const uploadpic(),
         "contact-us": (context) => const contactR(),
-        "profilee": (context) => const profile(),
+        "profilee": (context) => profile(),
         "product":(context) => const product(),
         "profileM":(context) => const pro(),
         "YourPersc":(context) => const perscShow(),
+        "UserProfile":(context) => const UserProfile(),
+        
        "homeph": (context) {
   final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 

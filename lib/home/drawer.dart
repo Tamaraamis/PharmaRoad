@@ -39,7 +39,7 @@ class _drawerState extends State<drawer> {
             if (index == 0) {
               Navigator.of(context).pushNamed("User");
             } else if (index == 1) {
-              Navigator.of(context).pushNamed("profilee");
+              Navigator.of(context).pushNamed("UserProfile");
             } 
             else {}
           },
