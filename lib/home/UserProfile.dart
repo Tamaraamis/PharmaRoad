@@ -251,36 +251,7 @@ Future<void> _loadUserData() async {
             ),
           
              const SizedBox(height: 20),
-          Container(
-            child: TextField(
-             decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.content_paste_rounded),
-                                      hintText: "Your Prescription",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                    ),
-            ),
-            
-          width: 330,
-          height: 60,
-            decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(0, 3),
-                        color: Color(0xFF41B2D6),
-                        spreadRadius: 3,
-                        blurRadius: 3,
-
-                      )
-            
-                    ]
-                   
-           ) 
-           
-            ),
-             SizedBox(height: 20),
+         
            Container(
              decoration: BoxDecoration(
                     color:Color(0xFF41B2D6), 
