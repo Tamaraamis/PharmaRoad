@@ -3,9 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class profile extends StatefulWidget {
-  const profile({super.key});
+   final FirestoreService _firestoreService = FirestoreService();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+
+profile({super.key}) {
+   
+  }
 
   @override
   State<profile> createState() => _profileState();
@@ -14,6 +25,7 @@ class profile extends StatefulWidget {
 class _profileState extends State<profile> {
   
    
+ 
   @override
 
   Widget build(BuildContext context) {
@@ -187,6 +199,18 @@ class _MyListViewState extends State<MyListView> {
           subtitle: Text(items[index].subtitle),
           
           onTap: () {
+            if(index==0){
+            String name1;
+            }
+            if(index==1){
+            String Phone1;
+            }
+            if(index==2){
+            String Address1;
+            }
+            if(index==3){
+            String Email1;
+            }
             // Navigate to the edit screen when ListTile is tapped
              if(index ==4){
        Navigator.of(context).pushNamed("YourPersc");
@@ -244,6 +268,8 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   late TextEditingController _subtitleController;
+  
+
  
 
   @override
@@ -270,18 +296,20 @@ class _EditScreenState extends State<EditScreen> {
             const Text('Edit Subtitle:'),
             TextField(
               controller: _subtitleController,
-              
+             
             ),
 
             const SizedBox(height: 20),
            
 
             ElevatedButton(
+              
               onPressed: () {
                 // Pass the updated data back to the calling screen
                 Navigator.pop(
                   context,
                   ItemData(
+                   
                     title: widget.item.title,
                     subtitle: _subtitleController.text,
                        icon: widget.item.icon,
@@ -289,6 +317,7 @@ class _EditScreenState extends State<EditScreen> {
                   
                 ),
                 );
+                
               },
               child: const Text('Save'),
             ),
@@ -300,11 +329,33 @@ class _EditScreenState extends State<EditScreen> {
   }
 }
 class ItemData {
+ 
   final String title;
   final String subtitle;
     final IconData icon;
    final IconData trailingIcon;
   
 
-  ItemData({required this.title, required this.subtitle,required this.icon, required this.trailingIcon,});
+  ItemData({required this.title, required this.subtitle,required this.icon, required this.trailingIcon});
+}
+class FirestoreService {
+  final CollectionReference userCollection = FirebaseFirestore.instance.collection('User');
+
+  Future<void> addUser({
+    required String name,
+    required String address,
+    required String email,
+    required String phone,
+  }) async {
+    try {
+      await userCollection.add({
+        'name': name,
+        'address': address,
+        'email': email,
+        'phone': phone,
+      });
+    } catch (e) {
+      print('Error adding user: $e');
+    }
+  }
 }

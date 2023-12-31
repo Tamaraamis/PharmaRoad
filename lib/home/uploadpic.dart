@@ -101,7 +101,7 @@ body: SingleChildScrollView(
                       //Some error occurred
                     }
           },
-          child:const Row(children: [
+          child: Row(children: [
           
         SizedBox(width: 5,),
 Icon(Icons.camera_alt_outlined,size: 25,color: Color(0xff41b2d6) ,),
@@ -145,7 +145,7 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
                     }
           },
           child: 
-         const Row(children: [
+          Row(children: [
           
         SizedBox(width: 5,),
 Icon(Icons.add_photo_alternate_outlined,size: 25,color: Color(0xff41b2d6) ,),
