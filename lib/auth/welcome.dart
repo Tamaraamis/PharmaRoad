@@ -23,8 +23,7 @@ Row(children: [
   Text("COME",style: TextStyle(color: Color(0xffC7F1FF),fontSize: 45),)
 ],),
 SizedBox(height: 20,),
-
-              ),
+              
 //SizedBox(height: 5,),
 Text("Time is money",style: TextStyle(color: Color(0xff41B2D6),fontSize: 35),),
 Text("Pharma Road to try a series to choose your medicine",style: TextStyle(color: Color(0xffC7F1FF),fontSize: 25),),
