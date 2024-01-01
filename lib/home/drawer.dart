@@ -143,7 +143,7 @@ class _drawerState extends State<drawer> {
                             borderRadius: BorderRadius.circular(15.0)),
                         child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed("pharmacyloc");
+                              Navigator.of(context).pushNamed("searchph");
                             },
                             child: Column(
                               children: [
