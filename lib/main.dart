@@ -6,7 +6,6 @@ import 'package:flutter_application_2/home/UserProfile.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
-
 import 'package:flutter_application_2/home/searchph.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
@@ -27,7 +26,6 @@ import 'pharmacyloc/region6.dart';
 import 'pharmacyloc/region7.dart';
 import 'pharmacyloc/region8.dart';
 import 'home/uploadpic.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -79,6 +77,11 @@ class MyApp extends StatelessWidget {
         "contact-us":(context) => contactR(),
         "profilee":(context) => profile(),
         "profileM":(context) => pro(),
+        "YourPersc":(context) => const perscShow(),
+        "UserProfile":(context) => const UserProfile(),
+        "searchph":(context) => const SearchPharmacy(),
+
+
       },
     );
   }
