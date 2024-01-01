@@ -1,10 +1,5 @@
 //main.dart
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
-import 'package:flutter_application_2/PharmacyManger/current.dart';
-import 'package:flutter_application_2/PharmacyManger/homeph.dart';
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/UserProfile.dart';
