@@ -1,4 +1,3 @@
-//current
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,6 +14,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Map<String, dynamic>> medicines = [];
   String searchText = '';
+
   @override
   void initState() {
     super.initState();
@@ -23,28 +23,46 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     print('Pharmacy ID inventory: ${widget.pharmacyId}');
   }
 
- Future<void> fetchMedicines() async {
+Future<void> fetchMedicines() async {
   String pharmacyId = widget.pharmacyId;
-  print('Fetching medicines for pharmacyId: $pharmacyId');
-
+print("pharmacyId : ${pharmacyId}");
   try {
-    final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-        .collection('Pharmacies')
-        .doc(pharmacyId)
-        .collection('medicine')
-        .get();
+  // Reference to the user's pharmacy collection
+      CollectionReference pharmacyCollection = _firestore.collection('Pharmacies');
 
-    setState(() {
-      medicines = querySnapshot.docs.map((doc) => {...doc.data(), 'isVisible': true}).toList();
-      print("----=================================");
-      print(medicines);
-      print("----=================================");
-    });
+      // Reference to the document with the user's UID
+      DocumentReference userDocRef = pharmacyCollection.doc(pharmacyId);
+
+      // Reference to the medicines subcollection
+      CollectionReference medicinesCollection = userDocRef.collection('medicine');
+
+      // Get all medicines
+      QuerySnapshot querySnapshot = await medicinesCollection.get();
+       // Convert QuerySnapshot to a list of Medicine objects
+     
+   
+
+    if (querySnapshot.docs.isNotEmpty) {
+
+      // Convert the QuerySnapshot to a Map<String, dynamic>
+  
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+         Map<String, dynamic> medicineData =  doc.data() as Map<String, dynamic>;
+          setState(() {
+        medicines.add(medicineData  );
+         });
+      }
+    
+      // setState(() {
+      //   medicines = medicineSnapshot.docs.map((doc) => {...doc.data(), 'isVisible': true}).toList();
+      // });
+    } else {
+      print('Pharmacy document not found for ID: $pharmacyId');
+    }
   } catch (e) {
     print('Error fetching medicines: $e');
   }
 }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,15 +87,21 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: medicines.length,
-              itemBuilder: (context, index) {
-                return matchesSearch(medicines[index]['Mname']) && medicines[index]['isVisible']
-                    ? buildMedicineCard(index)
-                    : SizedBox.shrink();
-              },
-            ),
-          ),
+  child: ListView.builder(
+    itemCount: medicines.length,
+    itemBuilder: (context, index) {
+      final medicine = medicines[index];
+
+  
+      if (medicine != null && medicine['Mname'] != null && medicine['isVisible']) {
+        return buildMedicineCard(index);
+      } else {
+        return Container();
+      }
+    },
+  ),
+),
+
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -271,14 +295,14 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   Future<void> toggleMedicineVisibility(int index) async {
     try {
       final String medicineName = medicines[index]['Mname'];
-
+       
       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
           .collection('Pharmacies')
           .doc(widget.pharmacyId)
           .collection('medicine')
           .where('Mname', isEqualTo: medicineName)
           .get();
-
+ 
       if (querySnapshot.docs.isNotEmpty) {
         final DocumentReference<Map<String, dynamic>> docRef =
             _firestore
@@ -340,32 +364,37 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     }
   }
 
-  Future<void> addMedicine(String medicineName) async {
-    if (medicineName.trim().isNotEmpty) {
-      try {
-        final DocumentReference<Map<String, dynamic>> newDocRef =
-            await _firestore
-                .collection('Pharmacies')
-                .doc(widget.pharmacyId)
-                .collection('medicine')
-                .add({
-              'Mname': medicineName,
-              'isVisible': true, // Default visibility
-            });
 
-        final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
-            await newDocRef.get();
+Future<void> addMedicine(String medicineName) async {
+  if (medicineName.trim().isNotEmpty) {
+    try {
+      print('Pharmacy ID in addMedicine: ${widget.pharmacyId}');
 
-        setState(() {
-          medicines.add({...?newDocSnapshot.data(), 'isVisible': true});
-        });
-      } catch (e) {
-        print('Error adding medicine: $e');
-      }
-    } else {
-      print('Medicine name cannot be null or empty');
+      final DocumentReference<Map<String, dynamic>> pharmacyRef =
+          _firestore.collection('Pharmacies').doc(widget.pharmacyId);
+
+      final DocumentReference<Map<String, dynamic>> newDocRef =
+          await pharmacyRef.collection('medicine').add({
+            'Mname': medicineName,
+            'isVisible': true, 
+          });
+
+      final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
+          await newDocRef.get();
+
+      setState(() {
+        medicines.add({...?newDocSnapshot.data(), 'isVisible': true});
+      });
+    } catch (e) {
+      print('Error adding medicine: $e');
     }
+  } else {
+    print('Medicine name cannot be null or empty');
   }
+}
+
+
+
 
   Future<void> updateMedicine(int index, String newName) async {
     try {

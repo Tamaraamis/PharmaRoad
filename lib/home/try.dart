@@ -52,7 +52,7 @@ class _LogState extends State<Log> {
             const SizedBox(height: 40),
             const Padding(
               padding: EdgeInsets.all(20),
-             /* child: Column(
+             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
@@ -65,7 +65,7 @@ class _LogState extends State<Log> {
                     style: TextStyle(color: Color(0xffEDFAFF), fontSize: 18),
                   ),
                 ],
-              ),*/
+              ),
             ),
             const SizedBox(height: 20),
             Expanded(
