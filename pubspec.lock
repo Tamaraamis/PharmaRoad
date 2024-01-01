@@ -704,7 +704,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
-<<<<<<< HEAD
   petitparser:
     dependency: transitive
     description:
@@ -713,16 +712,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-  pigeon:
-    dependency: transitive
-    description:
-      name: pigeon
-      sha256: "5a79fd0b10423f6b5705525e32015597f861c31220b522a67d1e6b580da96719"
-      url: "https://pub.dev"
-    source: hosted
-    version: "11.0.1"
-=======
->>>>>>> 7604f2a2833d18f8d0a9417e350ca758814b2413
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -1032,7 +1021,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.9.5"
-<<<<<<< HEAD
   xml:
     dependency: transitive
     description:
@@ -1049,8 +1037,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
-=======
->>>>>>> 7604f2a2833d18f8d0a9417e350ca758814b2413
 sdks:
   dart: ">=3.2.0 <4.0.0"
   flutter: ">=3.16.0"

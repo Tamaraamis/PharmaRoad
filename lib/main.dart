@@ -85,6 +85,8 @@ class MyApp extends StatelessWidget {
           "product": (context) => const product(),
           "profileM": (context) => const pro(),
           "YourPersc": (context) => const perscShow(),
+          "searchph":(context) => const SearchPharmacy(),
+          
           'homeph': (context) {
             final Map<String, dynamic> args = ModalRoute.of(context)!
                 .settings

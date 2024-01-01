@@ -95,7 +95,7 @@ class _HomephState extends State<Homeph> {
               title: const Text("Log-out"),
               leading: const Icon(Icons.logout),
               onTap: () {
-                Navigator.of(context).pushNamed("User");
+                Navigator.of(context).pushNamed("Users");
               },
             ),
           ],
