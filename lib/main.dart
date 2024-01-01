@@ -36,50 +36,65 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate();
 
-
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FirebaseAuth.instance.currentUser == null ? const splach() :  const drawer(),
-      theme: ThemeData(primaryColor: const Color.fromRGBO(115, 144, 215, 0.86)),
-      routes: {
-        "Signup": (context) => const Signup(),
-        "Users": (context) => const Users(),
-        "Searchdrug": (context) => const SearchDrug(),
-        "Welcome": (context) => const Welcome(),
-        "drawer": (context) => const drawer(),
-        "contact": (context) => const Contact(),
-        "LoginManger": (context) => const LogM(),
-        //"homeph": (context) => const LogM(),
-        //"drug":(context) => Drug(),
-        "list": (context) => const Medicine(),
-        "try": (context) => const Log(),
-        "pharmacyloc": (context) => const SearchPharmacy(),
-        "region1": (context) => const region1(),
-        "region2": (context) => const region2(),
-        "region3": (context) => const region3(),
-        "region4": (context) => const region4(),
-        "region5": (context) => const region5(),
-        "region6": (context) => const region6(),
-        "region7": (context) => const region7(),
-        "region8": (context) => const region8(),
-        "uploadpic": (context) => const uploadpic(),
-        "contact-us": (context) => const contactR(),
-        "profilee": (context) => const profile(),
-        "product":(context) => const product(),
-        "profileM":(context) => const pro(),
-        "YourPersc":(context) => const perscShow(),
-       "homeph": (context) {
+        debugShowCheckedModeBanner: false,
+        home: FirebaseAuth.instance.currentUser == null
+            ? const splach()
+            : const drawer(),
+        theme:
+            ThemeData(primaryColor: const Color.fromRGBO(115, 144, 215, 0.86)),
+        routes: {
+          "Signup": (context) => const Signup(),
+          "Users": (context) => const Users(),
+          "Searchdrug": (context) => const SearchDrug(),
+          "Welcome": (context) => const Welcome(),
+          "drawer": (context) => const drawer(),
+          "contact": (context) => const Contact(),
+          "LoginManger": (context) => const LogM(),
+          //"homeph": (context) => const LogM(),
+          //"drug":(context) => Drug(),
+          "list": (context) => const Medicine(),
+          "try": (context) => const Log(),
+          "pharmacyloc": (context) => const SearchPharmacy(),
+          "region1": (context) => const region1(),
+          "region2": (context) => const region2(),
+          "region3": (context) => const region3(),
+          "region4": (context) => const region4(),
+          "region5": (context) => const region5(),
+          "region6": (context) => const region6(),
+          "region7": (context) => const region7(),
+          "region8": (context) => const region8(),
+          "uploadpic": (context) => const uploadpic(),
+          "contact-us": (context) => const contactR(),
+          "profilee": (context) => const profile(),
+          "product": (context) => const product(),
+          "profileM": (context) => const pro(),
+          "YourPersc": (context) => const perscShow(),
+          'homeph': (context) {
+            final Map<String, dynamic> args = ModalRoute.of(context)!
+                .settings
+                .arguments as Map<String, dynamic>;
+            return Homeph(pharmacyId: args['id']);
+          },
+          'current': (context) {
+            final Map<String, dynamic> args = ModalRoute.of(context)!
+                .settings
+                .arguments as Map<String, dynamic>;
+            return PharmacyMedicinesPage(pharmacyId: args['id']);
+          },
+          /* "homeph": (context) {
   final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
   return Homeph(pharmacyId: args?['id'] ?? '');
@@ -98,11 +113,10 @@ class MyApp extends StatelessWidget {
 
 
         return null; 
-      },
-    );
+      },*/
+        });
   }
-
-  }
+}
 
 class splach extends StatefulWidget {
   const splach({super.key});

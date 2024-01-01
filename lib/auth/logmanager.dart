@@ -1,8 +1,6 @@
 //managerlog
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 import '../PharmacyManger/homeph.dart';
 
 class LogM extends StatefulWidget {
@@ -20,37 +18,36 @@ class _LogMState extends State<LogM> {
   TextEditingController pharmacyIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> loginUser() async {
-    try {
-      if (_formKey.currentState!.validate()) {
-        final QuerySnapshot<Map<String, dynamic>> result =
-            await _firestore.collection('Pharmacies').where(
-                  'id',
-                  isEqualTo: pharmacyIdController.text.trim(),
-                ).get();
+ Future<void> loginUser() async {
+  try {
+    if (_formKey.currentState!.validate()) {
+      final QuerySnapshot<Map<String, dynamic>> result =
+          await _firestore.collection('Pharmacies').where(
+                'id',
+                isEqualTo: pharmacyIdController.text.trim(),
+              ).get();
 
-        if (result.docs.isEmpty) {
-          showSnackBar('Pharmacy ID not found');
-          return;
-        }
-
-        final QueryDocumentSnapshot<Map<String, dynamic>> pharmacyDoc =
-            result.docs.first;
-        final String storedPassword = pharmacyDoc['password'];
-
-        if (passwordController.text.trim() == storedPassword) {
-           String pharmacyId = pharmacyIdController.text.trim();
-
-          Navigator.of(context).pushReplacementNamed("homeph", arguments: {'id': pharmacyId});
-        
-        } else {
-          showSnackBar('Incorrect password');
-        }
+      if (result.docs.isEmpty) {
+        showSnackBar('Pharmacy ID not found');
+        return;
       }
-    } catch (e) {
-      print('Error: $e');
+
+      final QueryDocumentSnapshot<Map<String, dynamic>> pharmacyDoc =
+          result.docs.first;
+      final String storedPassword = pharmacyDoc['password'];
+
+      if (passwordController.text.trim() == storedPassword) {
+        String pharmacyId = pharmacyIdController.text.trim();
+
+        Navigator.of(context).pushReplacementNamed("homeph", arguments: {'id': pharmacyId});
+      } else {
+        showSnackBar('Incorrect password');
+      }
     }
+  } catch (e) {
+    print('Error: $e');
   }
+}
 
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
