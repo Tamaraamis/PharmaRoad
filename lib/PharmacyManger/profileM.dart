@@ -19,12 +19,20 @@ class _proState extends State<pro> {
   Widget build(BuildContext context) {
     return Scaffold(
 appBar: AppBar(
+<<<<<<< HEAD
         title: Text(
+=======
+        title: const Text(
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
           "Profile Manager",
           style: TextStyle(fontSize: 30, color: Color(0xffEDFAFF)),
         ),
         leading: IconButton(
+<<<<<<< HEAD
           icon: Icon(
+=======
+          icon: const Icon(
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -33,20 +41,34 @@ appBar: AppBar(
           },
         ),
         centerTitle: true,
+<<<<<<< HEAD
         backgroundColor: Color(0xFF41B2D6),
       ),
       backgroundColor: Color(0xffEDFAFF),
+=======
+        backgroundColor: const Color(0xFF41B2D6),
+      ),
+      backgroundColor: const Color(0xffEDFAFF),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
   body: MyListView(Column(
         children: [
           const SizedBox(
             height: 20,
           ),
           Container(
+<<<<<<< HEAD
             child: CircleAvatar(
               radius: 70,
             ),
           ),
           SizedBox(
+=======
+            child: const CircleAvatar(
+              radius: 70,
+            ),
+          ),
+          const SizedBox(
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
             height: 30,
           )
         ],
@@ -103,7 +125,11 @@ class _MyListViewState extends State<MyListView> {
         height: 20,
       ),
       Container(
+<<<<<<< HEAD
         padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+=======
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
         child: GestureDetector(
           onTap: () {},
           child: Center(
@@ -111,8 +137,13 @@ class _MyListViewState extends State<MyListView> {
               CircleAvatar(
                 foregroundImage:
                     _selectedImage != null ? FileImage(_selectedImage!) : null,
+<<<<<<< HEAD
                 backgroundImage: AssetImage("images/person.png"),
                 backgroundColor: Color(0xffc7f1ff),
+=======
+                backgroundImage: const AssetImage("images/person.png"),
+                backgroundColor: const Color(0xffc7f1ff),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                 radius: 65,
               ),
               Positioned(
@@ -127,14 +158,23 @@ class _MyListViewState extends State<MyListView> {
                           width: 4,
                           color: Colors.white,
                         ),
+<<<<<<< HEAD
                         color: Color(0xffc7f1ff),
+=======
+                        color: const Color(0xffc7f1ff),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                       ),
                       child: IconButton(
                         onPressed: () {
                           _pickImage();
                         },
+<<<<<<< HEAD
                         icon: Icon(Icons.camera_alt),
                         color: Color.fromARGB(255, 155, 162, 163),
+=======
+                        icon: const Icon(Icons.camera_alt),
+                        color: const Color.fromARGB(255, 155, 162, 163),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                       ))),
             ]),
           ),
@@ -154,7 +194,11 @@ class _MyListViewState extends State<MyListView> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
+<<<<<<< HEAD
                             boxShadow: [
+=======
+                            boxShadow: const [
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                               BoxShadow(
                                 offset: Offset(0, 3),
                                 color: Color(0xFF41B2D6),
@@ -175,7 +219,11 @@ class _MyListViewState extends State<MyListView> {
                               navigateToEditScreen(index);
                           },
                         )),
+<<<<<<< HEAD
                     SizedBox(
+=======
+                    const SizedBox(
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                       height: 20,
                     ),
                   ],
@@ -228,20 +276,34 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+<<<<<<< HEAD
         title: Text('Edit Screen'),
         centerTitle: true,
         backgroundColor: Color(0xFF41B2D6),
+=======
+        title: const Text('Edit Screen'),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF41B2D6),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+<<<<<<< HEAD
             Text('Edit Subtitle:'),
             TextField(
               controller: _subtitleController,
             ),
             SizedBox(height: 20),
+=======
+            const Text('Edit Subtitle:'),
+            TextField(
+              controller: _subtitleController,
+            ),
+            const SizedBox(height: 20),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
             ElevatedButton(
               onPressed: () {
                 // Pass the updated data back to the calling screen
@@ -255,7 +317,11 @@ class _EditScreenState extends State<EditScreen> {
                   ),
                 );
               },
+<<<<<<< HEAD
               child: Text('Save'),
+=======
+              child: const Text('Save'),
+>>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
             ),
           ],
         ),

@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   var Sindex = 0;
   List<Widget> widgetpages = [
     const HomeE(),
-    const Searchdrug(),
+    const SearchDrug(),
 
    // Search(),
     

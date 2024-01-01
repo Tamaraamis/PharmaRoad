@@ -22,7 +22,7 @@ class _DrugState extends State<Drug> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xff41b2d6),
+          backgroundColor: const Color(0xff41b2d6),
           centerTitle: true,
           title: const Text(
             "Add Drug",
@@ -43,7 +43,7 @@ class _DrugState extends State<Drug> {
                   ),
                   TextField(
                     controller: nameController,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         hintText: "Name",
                         border: OutlineInputBorder(
                             borderRadius:
@@ -54,7 +54,7 @@ class _DrugState extends State<Drug> {
                   ),
                   TextField(
                     controller: pController,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         hintText: "Prescription",
                         border: OutlineInputBorder(
                             borderRadius:
@@ -120,7 +120,7 @@ class _DrugState extends State<Drug> {
     return Card(
         child: ListTile(
       leading: CircleAvatar(
-        backgroundColor: index % 2 == 0 ? Color(0xffEDFAFF) : Color(0xff41b2d6),
+        backgroundColor: index % 2 == 0 ? const Color(0xffEDFAFF) : const Color(0xff41b2d6),
         foregroundColor: Colors.white,
         child: Text(
           drug[index].Name[0],

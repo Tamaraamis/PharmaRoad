@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "357683093346",
+    "project_id": "pharmaroad-1d43a",
+    "storage_bucket": "pharmaroad-1d43a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357683093346:android:ceb5226854b2313f91d63b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4eoyKJZfX0JdSUk3QmIkrggHlYIdstiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357683093346:android:793a989547db036c91d63b",
+        "android_client_info": {
+          "package_name": "huihkm.kh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4eoyKJZfX0JdSUk3QmIkrggHlYIdstiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

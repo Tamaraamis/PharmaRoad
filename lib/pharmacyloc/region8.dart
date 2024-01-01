@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'forMap.dart';
 class region8 extends StatefulWidget {
   const region8({super.key});
 
@@ -70,38 +71,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 66,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                Container(
-                                  child: Text(
-                                    "Call 06 535 3461",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(left: 55),
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '06 535 3461');
-                                    },
-                                    icon: Icon(Icons.phone))
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+                IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
@@ -143,38 +141,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 20,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '07 9545 1919');
-                                    },
-                                    icon: Icon(Icons.phone)),
-                                Container(
-                                  child: Text(
-                                    "Call 07 9545 1919",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(right: 70),
-                                ),
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+                IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
@@ -216,39 +211,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 20,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '07 8066 6701');
-                                    },
-                                    icon: Icon(Icons.phone)),
-                                Container(
-                                  child: Text(
-                                    "Call 07 8066 6701",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(right: 70),
-                                ),
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                // SizedBox(width: 4,),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+               IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
@@ -290,38 +281,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 20,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '06 477 4668');
-                                    },
-                                    icon: Icon(Icons.phone)),
-                                Container(
-                                  child: Text(
-                                    "Call 06 477 4668",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(right: 70),
-                                ),
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+                IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
@@ -363,38 +351,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 20,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '06 534 1072');
-                                    },
-                                    icon: Icon(Icons.phone)),
-                                Container(
-                                  child: Text(
-                                    "Call 06 534 1072",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(right: 70),
-                                ),
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                IconButton(
-                    onPressed: () async {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+               IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
@@ -436,38 +421,35 @@ class _region8State extends State<region8> {
                 SizedBox(
                   width: 20,
                 ),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          '06 534 1072');
-                                    },
-                                    icon: Icon(Icons.phone)),
-                                Container(
-                                  child: Text(
-                                    "Call 06 534 1072",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.only(right: 70),
-                                ),
-                              ],
-                              alignment: Alignment.bottomCenter,
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Color(0xff41b2d6),
-                    )),
-                IconButton(
-                    onPressed: () async {},
-                    icon: Icon(Icons.location_on, color: Color(0xff41b2d6))),
+                IconButton(onPressed: (){
+        showDialog(context: context, builder: (context)
+        {
+          return AlertDialog(
+            
+            actions: [
+              Row(children: [
+                 Container(child:Text("Call 06 534 3721",style: TextStyle(fontSize: 20),),
+             ),
+             SizedBox(width: 55,),
+               IconButton(onPressed: (){ 
+                
+  FlutterPhoneDirectCaller.callNumber('06 534 3721');}, icon: Icon(Icons.phone)),
+             
+             
+              ],)
+             ],
+alignment: Alignment.bottomCenter,
+          );
+
+        }
+        
+        );
+      
+      },  icon: Icon(Icons.phone,color: Color( 0xff41b2d6),)),
+     
+      IconButton(onPressed: (){
+MapUtils.openMap('https://maps.app.goo.gl/u1PcwycyAb14VaFC6');
+      },  icon: Icon(Icons.location_on,color: Color( 0xff41b2d6))),
               ],
             ),),
             height: 90,
