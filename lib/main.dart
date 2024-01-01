@@ -1,5 +1,7 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/PharmacyManger/current.dart';
+import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/UserProfile.dart';
@@ -34,13 +36,13 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate();
 
-
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -83,11 +85,18 @@ class MyApp extends StatelessWidget {
 
 
       },
-    );
-  }
+      onGenerateRoute: (settings) {
+        if (settings.name == 'current') {
+          final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
 
-  }
+          return MaterialPageRoute(
+            builder: (context) => PharmacyMedicinesPage(pharmacyId: args?['id'] ?? ''),
+          );
+        }
 
+
+        return null; 
+      }
 class splach extends StatefulWidget {
   const splach({super.key});
   @override

@@ -45,7 +45,20 @@ class _SignupState extends State<Signup> {
             const SizedBox(height: 40),
             const Padding(
               padding: EdgeInsets.all(20),
-              // Add your logo or other header content here
+    child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Sign UP",
+                    style: TextStyle(color: Color(0xffEDFAFF), fontSize: 40),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Create Your Account Now",
+                    style: TextStyle(color: Color(0xffEDFAFF), fontSize: 18),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             Expanded(

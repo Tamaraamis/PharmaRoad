@@ -1,8 +1,9 @@
+//current
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PharmacyMedicinesPage extends StatefulWidget {
- final String pharmacyId;
+  final String pharmacyId;
 
   const PharmacyMedicinesPage({required this.pharmacyId, Key? key}) : super(key: key);
 
@@ -14,7 +15,6 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Map<String, dynamic>> medicines = [];
   String searchText = '';
-
   @override
   void initState() {
     super.initState();
@@ -23,25 +23,28 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     print('Pharmacy ID inventory: ${widget.pharmacyId}');
   }
 
-  Future<void> fetchMedicines() async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection('Pharmacies')
-          .doc(widget.pharmacyId)
-          .collection('medicine')
-          .get();
+ Future<void> fetchMedicines() async {
+  String pharmacyId = widget.pharmacyId;
+  print('Fetching medicines for pharmacyId: $pharmacyId');
 
-      setState(() {
-        medicines = querySnapshot.docs.map((doc) => {...doc.data(), 'isVisible':true }).toList();
-        print("----=================================");
-        print(medicines);
+  try {
+    final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+        .collection('Pharmacies')
+        .doc(pharmacyId)
+        .collection('medicine')
+        .get();
 
-        print("----=================================");
-      });
-    } catch (e) {
-      print('Error fetching medicines: $e');
-    }
+    setState(() {
+      medicines = querySnapshot.docs.map((doc) => {...doc.data(), 'isVisible': true}).toList();
+      print("----=================================");
+      print(medicines);
+      print("----=================================");
+    });
+  } catch (e) {
+    print('Error fetching medicines: $e');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
