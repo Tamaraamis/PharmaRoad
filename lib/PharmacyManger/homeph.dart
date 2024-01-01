@@ -16,13 +16,11 @@ class _HomephState extends State<Homeph> {
           selectedItemColor: Colors.black,
           backgroundColor: Color(0xff41b2d6),
           onTap: (index) {
-            if (index==0){
-               Navigator.of(context).pushNamed("homeph");
+            if (index == 0) {
+              Navigator.of(context).pushNamed("homeph");
+            } else if (index == 1) {
+              Navigator.of(context).pushNamed("profileM");
             }
-            else if(index==1){
-               Navigator.of(context).pushNamed("profileM");
-            }
-            
           },
           items: [
             BottomNavigationBarItem(
@@ -89,173 +87,101 @@ class _HomephState extends State<Homeph> {
           ),
         ),
         body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
+            scrollDirection: Axis.vertical,
+            child: Column(children: [
               SizedBox(
-                height: 10,
-              ),
-              Text("Medicine Classifications",
-                  style: TextStyle(color: Color(0xff41B2D6), fontSize: 30)),
-              SizedBox(
-                height: 10,
+                height: 20,
               ),
               SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+                child: Column(
                   children: [
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                Image.asset(
-                                  "images/d2.jpg",
-                                  height: 100,
-                                  width: 80,
-                                ),
-                                Text(
-                                  "Syrups",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                // SizedBox(height: 10,),
-                                Image.asset(
-                                  "images/d6.jpg",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  "Needles",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          Container(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed("list");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Image.asset(
+                                        "images/invt3.png",
+                                        height: 180,
+                                        width: 330,
+                                      ),
+                                      Text(
+                                        "Current Medications",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(0xff41b2d6),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  )),
+                              height: 220,
+                              width: 290,
+                              margin: EdgeInsets.only(left: 35),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color(0xff41b2d6), width: 2),
+                                  borderRadius: BorderRadius.circular(15.0))),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed("list");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      //Image.asset("images/1906532.png",height: 100,width: 70,),
+                                      Image.asset(
+                                        "images/invt4.png",
+                                        height: 200,
+                                        width: 300,
+                                      ),
+                                      SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text(
+                                        "Inventory",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(0xff41b2d6),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  )),
+                              height: 250,
+                              width: 290,
+                              margin: EdgeInsets.only(left: 35),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color(0xff41b2d6), width: 2),
+                                  borderRadius: BorderRadius.circular(15.0))),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                             Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 9,
-                                ),
-                                Image.asset(
-                                  "images/d3.jpg",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                Text(
-                                  "Capsules",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                             Navigator.of(context).pushNamed("list");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Image.asset(
-                                  "images/z1.jpg",
-                                  height: 100,
-                                  width: 140,
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  "Pills",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
-        ));
+              )
+            ])));
   }
 }

@@ -18,13 +18,11 @@ class _drawerState extends State<drawer> {
           selectedItemColor: Colors.black,
           backgroundColor: Color(0xff41b2d6),
           onTap: (index) {
-            if (index==0){
-               Navigator.of(context).pushNamed("drawer");
+            if (index == 0) {
+              Navigator.of(context).pushNamed("drawer");
+            } else if (index == 1) {
+              Navigator.of(context).pushNamed("profilee");
             }
-            else if(index==1){
-               Navigator.of(context).pushNamed("profilee");
-            }
-            
           },
           items: [
             BottomNavigationBarItem(
@@ -32,14 +30,12 @@ class _drawerState extends State<drawer> {
                 icon: Icon(
                   Icons.home,
                 ),
-                backgroundColor: Color(0xffEDFAFF)
-                ),
+                backgroundColor: Color(0xffEDFAFF)),
             BottomNavigationBarItem(
                 label: "Profile",
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
                 backgroundColor: Color(0xff41b2d6)),
-
           ],
         ),
         appBar: AppBar(
@@ -78,7 +74,6 @@ class _drawerState extends State<drawer> {
                   Navigator.of(context).pushNamed("try");
                 },
               ),
-             
               ListTile(
                 title: Text("Contact Us"),
                 leading: const Icon(Icons.call),
@@ -104,28 +99,15 @@ class _drawerState extends State<drawer> {
               ),
               Image.asset(
                 "images/patient.png",
-                height: 150,
+                height: 100,
                 width: 200,
               ),
-              Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextFormField(
-                    onChanged: (value) {},
-                    decoration: InputDecoration(
-                      hintText: "Search for medicines ",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        width: 1,
-                      )),
-                    ),
-                  )),
               SizedBox(
                 height: 10,
               ),
               SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+                scrollDirection: Axis.vertical,
+                child: Column(
                   children: [
                     Container(
                         child: GestureDetector(
@@ -135,57 +117,33 @@ class _drawerState extends State<drawer> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 7,
+                                  height: 1,
                                 ),
                                 Image.asset(
                                   "images/1906532.png",
-                                  height: 100,
+                                  height: 80,
                                   width: 80,
                                 ),
                                 Text(
                                   "Pharmacy locator",
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
                             )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 5),
+                        height: 110,
+                        width: 280,
+                        margin: EdgeInsets.only(left: 35),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
                                 Border.all(color: Color(0xff41b2d6), width: 2),
                             borderRadius: BorderRadius.circular(15.0))),
-                  Container(child: GestureDetector(
-          onTap: () {Navigator.of(context).pushNamed("uploadpic");},
-                 child:Column(children: [
-                  SizedBox(height: 9,),
-                  //Image.asset("images/1906532.png",height: 100,width: 70,),
-                  Icon(Icons.camera_alt_outlined,color: Color(0xff41b2d6),size: 75),
-                  SizedBox(height: 4,),
-                  Text("Upload Your \nPrescription ",style: TextStyle(fontSize: 18,color: Color(0xff41b2d6),fontWeight: FontWeight.bold),),
-                 ],)
-                 
-                 
-                 ),
-                height: 150,width: 155,margin: EdgeInsets.only(left: 28),decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all( color: Color(0xff41b2d6) ,width: 2 
-              ),
-              borderRadius: BorderRadius.circular(15.0))),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                         child: GestureDetector(
                             onTap: () {
@@ -194,22 +152,20 @@ class _drawerState extends State<drawer> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 9,
+                                  height: 3,
                                 ),
+                                //Image.asset("images/1906532.png",height: 100,width: 70,),
                                 Image.asset(
                                   "images/d4.png",
                                   height: 70,
-                                  width: 90,
+                                  width: 70,
                                   color: Color(0xff41b2d6),
                                 ),
-                                // Icon(Icons.search,
-                                //     color: Color(0xff41b2d6), size: 75),
                                 SizedBox(
                                   height: 4,
                                 ),
                                 Text(
-                                  "Find Your Medicine Now",
-                                  textAlign: TextAlign.center,
+                                  "      Find Your \n Medicine Now",
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Color(0xff41b2d6),
@@ -217,44 +173,9 @@ class _drawerState extends State<drawer> {
                                 ),
                               ],
                             )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 5),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0))),
-                    Container(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("product");
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Image.asset(
-                                  "images/download.png",
-                                  height: 100,
-                                  width: 120,
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  "Popular Medicine",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      color: Color(0xff41b2d6),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                        height: 150,
-                        width: 155,
-                        margin: EdgeInsets.only(left: 28),
+                        height: 135,
+                        width: 290,
+                        margin: EdgeInsets.only(left: 35),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
@@ -262,6 +183,84 @@ class _drawerState extends State<drawer> {
                             borderRadius: BorderRadius.circular(15.0))),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("uploadpic");
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Icon(Icons.camera_alt_outlined,
+                              color: Color(0xff41b2d6), size: 55),
+
+                          // Icon(Icons.search,
+                          //     color: Color(0xff41b2d6), size: 75),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            "Upload Your \nPrescription ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Color(0xff41b2d6),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )),
+                  height: 120,
+                  width: 290,
+                  margin: EdgeInsets.only(left: 33),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xff41b2d6), width: 2),
+                      borderRadius: BorderRadius.circular(15.0))),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("product");
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Image.asset(
+                            "images/download.png",
+                            height: 90,
+                            width: 90,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            "Popular Medicine",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color(0xff41b2d6),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )),
+                  height: 130,
+                  width: 290,
+                  margin: EdgeInsets.only(left: 33),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xff41b2d6), width: 2),
+                      borderRadius: BorderRadius.circular(15.0))),
+              SizedBox(
+                height: 10,
               )
             ],
           ),
