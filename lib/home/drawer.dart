@@ -37,11 +37,10 @@ class _drawerState extends State<drawer> {
           backgroundColor: const Color(0xff41b2d6),
           onTap: (index) {
             if (index == 0) {
-              Navigator.of(context).pushNamed("User");
+              Navigator.of(context).pushNamed("drawer");
             } else if (index == 1) {
               Navigator.of(context).pushNamed("profilee");
-            } 
-            else {}
+            }
           },
           items: const [
             BottomNavigationBarItem(
@@ -49,14 +48,12 @@ class _drawerState extends State<drawer> {
                 icon: Icon(
                   Icons.home,
                 ),
-                backgroundColor: Color(0xff41b2d6)),
+                backgroundColor: Color(0xffEDFAFF)),
             BottomNavigationBarItem(
                 label: "Profile",
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
                 backgroundColor: Color(0xff41b2d6)),
-           
-                
           ],
         ),
         appBar: AppBar(
@@ -122,10 +119,10 @@ class _drawerState extends State<drawer> {
               ),
               Image.asset(
                 "images/patient.png",
-                height: 150,
+                height: 100,
                 width: 200,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               SingleChildScrollView(
@@ -147,7 +144,7 @@ class _drawerState extends State<drawer> {
                             },
                             child: Column(
                               children: [
-                                const SizedBox(
+                                SizedBox(
                                   height: 1,
                                 ),
                                 Image.asset(
@@ -158,77 +155,78 @@ class _drawerState extends State<drawer> {
                                 const Text(
                                   "Pharmacy locator",
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
-                            ))),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: 115,
-                        width: 310,
-                        margin: const EdgeInsets.only(left: 35),
+                            )),
+                        height: 110,
+                        width: 280,
+                        margin: EdgeInsets.only(left: 35),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border:
-                                Border.all(color: const Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0)),
+                                Border.all(color: Color(0xff41b2d6), width: 2),
+                            borderRadius: BorderRadius.circular(15.0))),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
                         child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).pushNamed("Searchdrug");
                             },
                             child: Column(
                               children: [
-                                const SizedBox(
+                                SizedBox(
                                   height: 3,
                                 ),
                                 //Image.asset("images/1906532.png",height: 100,width: 70,),
                                 Image.asset(
                                   "images/d4.png",
                                   height: 70,
-                                  width: 80,
-                                  color: const Color(0xff41b2d6),
+                                  width: 70,
+                                  color: Color(0xff41b2d6),
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 4,
                                 ),
-                                const Text(
-                                  "  Find Your Medicine Now",
+                                Text(
+                                  "      Find Your \n Medicine Now",
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
-                            ))),
+                            )),
+                        height: 135,
+                        width: 290,
+                        margin: EdgeInsets.only(left: 35),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border:
+                                Border.all(color: Color(0xff41b2d6), width: 2),
+                            borderRadius: BorderRadius.circular(15.0))),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 10,
               ),
               Container(
-                  height: 115,
-                  width: 310,
-                  margin: const EdgeInsets.only(left: 35),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xff41b2d6), width: 2),
-                      borderRadius: BorderRadius.circular(15.0)),
                   child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed("uploadpic");
                       },
-                      child: const Column(
+                      child: Column(
                         children: [
                           SizedBox(
                             height: 3,
                           ),
                           Icon(Icons.camera_alt_outlined,
-                              color: Color(0xff41b2d6), size: 75),
+                              color: Color(0xff41b2d6), size: 55),
 
                           // Icon(Icons.search,
                           //     color: Color(0xff41b2d6), size: 75),
@@ -236,7 +234,7 @@ class _drawerState extends State<drawer> {
                             height: 4,
                           ),
                           Text(
-                            "Upload Your Prescription ",
+                            "Upload Your \nPrescription ",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,
@@ -244,45 +242,52 @@ class _drawerState extends State<drawer> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
-                      ))),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                  height: 115,
-                  width: 310,
-                  margin: const EdgeInsets.only(left: 35),
+                      )),
+                  height: 120,
+                  width: 290,
+                  margin: EdgeInsets.only(left: 33),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: const Color(0xff41b2d6), width: 2),
-                      borderRadius: BorderRadius.circular(15.0)),
+                      border: Border.all(color: Color(0xff41b2d6), width: 2),
+                      borderRadius: BorderRadius.circular(15.0))),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
                   child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed("product");
                       },
                       child: Column(
                         children: [
-                          const SizedBox(
+                          SizedBox(
                             height: 3,
                           ),
                           Image.asset(
                             "images/download.png",
-                            height: 70,
-                            width: 70,
+                            height: 90,
+                            width: 90,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 3,
                           ),
-                          const Text(
+                          Text(
                             "Popular Medicine",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 color: Color(0xff41b2d6),
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
-                      ))),
-              const SizedBox(
+                      )),
+                  height: 130,
+                  width: 290,
+                  margin: EdgeInsets.only(left: 33),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xff41b2d6), width: 2),
+                      borderRadius: BorderRadius.circular(15.0))),
+              SizedBox(
                 height: 10,
               )
             ],

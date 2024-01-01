@@ -1,12 +1,12 @@
 //main.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/PharmacyManger/current.dart';
-import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/UserProfile.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
 import 'package:flutter_application_2/home/profilee.dart';
+
 import 'package:flutter_application_2/home/searchph.dart';
 import 'package:flutter_application_2/poplularmedicine/product.dart';
 import 'PharmacyManger/list.dart';
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
         debugShowCheckedModeBanner: false,
         home: FirebaseAuth.instance.currentUser == null
             ? const splach()
@@ -115,6 +116,42 @@ class MyApp extends StatelessWidget {
         return null; 
       },*/
         });
+=======
+      debugShowCheckedModeBanner: false,
+      home: FirebaseAuth.instance.currentUser == null ? const splach() :  const drawer(),
+      theme: ThemeData(primaryColor: const Color.fromRGBO(115, 144, 215, 0.86)),
+      routes: {
+        "Signup": (context) => const Signup(),
+        "Users": (context) => const Users(),
+        "Searchdrug": (context) => const SearchDrug(),
+        "Welcome": (context) => const Welcome(),
+        "drawer": (context) => const drawer(),
+        "contact": (context) => const Contact(),
+        "LoginManger": (context) => const LogM(),
+        //"homeph": (context) => const LogM(),
+        //"drug":(context) => Drug(),
+        "list": (context) => Medicine(),
+        "try": (context) => Log(),
+        "pharmacyloc": (context) => pharmacyloc(),
+        "region1": (context) => region1(),
+        "region2": (context) => region2(),
+        "region3": (context) => region3(),
+        "region4": (context) => region4(),
+        "region5": (context) => region5(),
+        "region6": (context) => region6(),
+        "region7": (context) => region7(),
+        "region8": (context) => region8(),
+        "uploadpic": (context) => uploadpic(),
+        //"contactD": (context) => contactd(),
+        "product":(context) => product(),
+        "contact-us":(context) => contactR(),
+        "profilee":(context) => profile(),
+        "profileM":(context) => pro(),
+      },
+    );
+  }
+
+>>>>>>> 7604f2a2833d18f8d0a9417e350ca758814b2413
   }
 }
 

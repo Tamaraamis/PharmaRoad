@@ -34,7 +34,7 @@ class _productState extends State<product> {
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               childAspectRatio: 0.65),
-          itemCount: 12,
+          itemCount: 38,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
