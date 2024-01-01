@@ -147,7 +147,7 @@ alignment: Alignment.bottomCenter,
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnedImage != null) {
       setState(() {
-        image = File(returnedImage.path);
+       // image = File(returnedImage.path);
       });
     }
   }
@@ -157,7 +157,7 @@ alignment: Alignment.bottomCenter,
         await ImagePicker().pickImage(source: ImageSource.camera);
          if (returnedImage != null) {
       setState(() {
-        image = File(returnedImage.path);
+        //image = File(returnedImage.path);
       });
     }
 

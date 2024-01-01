@@ -62,7 +62,6 @@ class MyApp extends StatelessWidget {
         "LoginManger": (context) => const LogM(),
         //"homeph": (context) => const LogM(),
         //"drug":(context) => Drug(),
-<<<<<<< HEAD
         "list": (context) => Medicine(),
         "try": (context) => Log(),
         "pharmacyloc": (context) => pharmacyloc(),
@@ -80,46 +79,6 @@ class MyApp extends StatelessWidget {
         "contact-us":(context) => contactR(),
         "profilee":(context) => profile(),
         "profileM":(context) => pro(),
-=======
-        "list": (context) => const Medicine(),
-        "try": (context) => const Log(),
-        "pharmacyloc": (context) => const SearchPharmacy(),
-        "region1": (context) => const region1(),
-        "region2": (context) => const region2(),
-        "region3": (context) => const region3(),
-        "region4": (context) => const region4(),
-        "region5": (context) => const region5(),
-        "region6": (context) => const region6(),
-        "region7": (context) => const region7(),
-        "region8": (context) => const region8(),
-        "uploadpic": (context) => const uploadpic(),
-        "contact-us": (context) => const contactR(),
-        "profilee": (context) => profile(),
-        "product":(context) => const product(),
-        "profileM":(context) => const pro(),
-        "YourPersc":(context) => const perscShow(),
-        "UserProfile":(context) => const UserProfile(),
-        
-       "homeph": (context) {
-  final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-  return Homeph(pharmacyId: args?['id'] ?? '');
-},
-
-       
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == 'current') {
-          final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
-
-          return MaterialPageRoute(
-            builder: (context) => PharmacyMedicinesPage(pharmacyId: args?['id'] ?? ''),
-          );
-        }
-
-
-        return null; 
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
       },
     );
   }

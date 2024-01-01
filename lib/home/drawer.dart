@@ -37,18 +37,10 @@ class _drawerState extends State<drawer> {
           backgroundColor: const Color(0xff41b2d6),
           onTap: (index) {
             if (index == 0) {
-<<<<<<< HEAD
               Navigator.of(context).pushNamed("drawer");
             } else if (index == 1) {
               Navigator.of(context).pushNamed("profilee");
             }
-=======
-              Navigator.of(context).pushNamed("User");
-            } else if (index == 1) {
-              Navigator.of(context).pushNamed("UserProfile");
-            } 
-            else {}
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
           },
           items: const [
             BottomNavigationBarItem(
@@ -56,21 +48,12 @@ class _drawerState extends State<drawer> {
                 icon: Icon(
                   Icons.home,
                 ),
-<<<<<<< HEAD
                 backgroundColor: Color(0xffEDFAFF)),
-=======
-                backgroundColor: Color(0xff41b2d6)),
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
             BottomNavigationBarItem(
                 label: "Profile",
                 tooltip: "Profile",
                 icon: Icon(Icons.person),
                 backgroundColor: Color(0xff41b2d6)),
-<<<<<<< HEAD
-=======
-           
-                
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
           ],
         ),
         appBar: AppBar(
@@ -139,11 +122,7 @@ class _drawerState extends State<drawer> {
                 height: 100,
                 width: 200,
               ),
-<<<<<<< HEAD
               SizedBox(
-=======
-              const SizedBox(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                 height: 10,
               ),
               SingleChildScrollView(
@@ -165,11 +144,7 @@ class _drawerState extends State<drawer> {
                             },
                             child: Column(
                               children: [
-<<<<<<< HEAD
                                 SizedBox(
-=======
-                                const SizedBox(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                                   height: 1,
                                 ),
                                 Image.asset(
@@ -185,7 +160,6 @@ class _drawerState extends State<drawer> {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
-<<<<<<< HEAD
                             )),
                         height: 110,
                         width: 280,
@@ -199,39 +173,19 @@ class _drawerState extends State<drawer> {
                       height: 10,
                     ),
                     Container(
-=======
-                            ))),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: 115,
-                        width: 310,
-                        margin: const EdgeInsets.only(left: 35),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(color: const Color(0xff41b2d6), width: 2),
-                            borderRadius: BorderRadius.circular(15.0)),
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                         child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).pushNamed("Searchdrug");
                             },
                             child: Column(
                               children: [
-<<<<<<< HEAD
                                 SizedBox(
-=======
-                                const SizedBox(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                                   height: 3,
                                 ),
                                 //Image.asset("images/1906532.png",height: 100,width: 70,),
                                 Image.asset(
                                   "images/d4.png",
                                   height: 70,
-<<<<<<< HEAD
                                   width: 70,
                                   color: Color(0xff41b2d6),
                                 ),
@@ -240,23 +194,12 @@ class _drawerState extends State<drawer> {
                                 ),
                                 Text(
                                   "      Find Your \n Medicine Now",
-=======
-                                  width: 80,
-                                  color: const Color(0xff41b2d6),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                const Text(
-                                  "  Find Your Medicine Now",
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Color(0xff41b2d6),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
-<<<<<<< HEAD
                             )),
                         height: 135,
                         width: 290,
@@ -273,42 +216,17 @@ class _drawerState extends State<drawer> {
                 height: 10,
               ),
               Container(
-=======
-                            ))),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                  height: 115,
-                  width: 310,
-                  margin: const EdgeInsets.only(left: 35),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xff41b2d6), width: 2),
-                      borderRadius: BorderRadius.circular(15.0)),
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                   child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed("uploadpic");
                       },
-<<<<<<< HEAD
                       child: Column(
-=======
-                      child:  Column(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                         children: [
                           SizedBox(
                             height: 3,
                           ),
                           Icon(Icons.camera_alt_outlined,
-<<<<<<< HEAD
                               color: Color(0xff41b2d6), size: 55),
-=======
-                              color: Color(0xff41b2d6), size: 75),
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
 
                           // Icon(Icons.search,
                           //     color: Color(0xff41b2d6), size: 75),
@@ -316,11 +234,7 @@ class _drawerState extends State<drawer> {
                             height: 4,
                           ),
                           Text(
-<<<<<<< HEAD
                             "Upload Your \nPrescription ",
-=======
-                            "Upload Your Prescription ",
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,
@@ -328,7 +242,6 @@ class _drawerState extends State<drawer> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
-<<<<<<< HEAD
                       )),
                   height: 120,
                   width: 290,
@@ -341,36 +254,17 @@ class _drawerState extends State<drawer> {
                 height: 10,
               ),
               Container(
-=======
-                      ))),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                  height: 115,
-                  width: 310,
-                  margin: const EdgeInsets.only(left: 35),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xff41b2d6), width: 2),
-                      borderRadius: BorderRadius.circular(15.0)),
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                   child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed("product");
                       },
                       child: Column(
                         children: [
-<<<<<<< HEAD
                           SizedBox(
-=======
-                          const SizedBox(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                             height: 3,
                           ),
                           Image.asset(
                             "images/download.png",
-<<<<<<< HEAD
                             height: 90,
                             width: 90,
                           ),
@@ -381,23 +275,10 @@ class _drawerState extends State<drawer> {
                             "Popular Medicine",
                             style: TextStyle(
                                 fontSize: 15,
-=======
-                            height: 70,
-                            width: 70,
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            "Popular Medicine",
-                            style: TextStyle(
-                                fontSize: 18,
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                                 color: Color(0xff41b2d6),
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
-<<<<<<< HEAD
                       )),
                   height: 130,
                   width: 290,
@@ -407,10 +288,6 @@ class _drawerState extends State<drawer> {
                       border: Border.all(color: Color(0xff41b2d6), width: 2),
                       borderRadius: BorderRadius.circular(15.0))),
               SizedBox(
-=======
-                      ))),
-              const SizedBox(
->>>>>>> bdf0ce657c704f84003df706684ea0f40b8bc03b
                 height: 10,
               )
             ],
