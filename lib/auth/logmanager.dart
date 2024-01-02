@@ -37,7 +37,8 @@ class _LogMState extends State<LogM> {
       final String storedPassword = pharmacyDoc['password'];
 
       if (passwordController.text.trim() == storedPassword) {
-        String pharmacyId = pharmacyIdController.text.trim();
+     
+        String pharmacyId = pharmacyDoc.id;
 
         Navigator.of(context).pushReplacementNamed("homeph", arguments: {'id': pharmacyId});
       } else {
