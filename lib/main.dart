@@ -4,6 +4,7 @@ import 'package:flutter_application_2/PharmacyManger/current.dart';
 import 'package:flutter_application_2/PharmacyManger/homeph.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
+import 'package:flutter_application_2/home/UserProfile.dart';
 //import 'package:flutter_application_2/home/UserProfile.dart';
 import 'package:flutter_application_2/home/YourPersc.dart';
 import 'package:flutter_application_2/home/contact-us.dart';
@@ -86,7 +87,8 @@ class MyApp extends StatelessWidget {
           "profileM": (context) => const pro(),
           "YourPersc": (context) => const perscShow(),
           "searchph":(context) => const SearchPharmacy(),
-          
+          "UserProfile":(context) => const UserProfile(),
+       
           'homeph': (context) {
             final Map<String, dynamic> args = ModalRoute.of(context)!
                 .settings

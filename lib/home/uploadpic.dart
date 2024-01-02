@@ -72,8 +72,8 @@ body: SingleChildScrollView(
              Row(children: [
               
        Container(
-        width: 110,
-        height: 50,
+        width: 130,
+        height: 60,
         margin: const EdgeInsets.only(left: 13),
         decoration: BoxDecoration(
              //color: Color.fromARGB(255, 127, 122, 122),Color.fromARGB(255, 230, 230, 230)
@@ -116,7 +116,7 @@ Text("Camera",style: TextStyle(color: Color(0xff41b2d6) ),),
        Container( 
         width: 110,  
         
-        height: 50, 
+        height: 60, 
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
              //color: Color.fromARGB(255, 127, 122, 122),Color.fromARGB(255, 230, 230, 230)
