@@ -185,7 +185,7 @@ class _HomephState extends State<Homeph> {
                             onTap: () {
                                print('id before: ${widget.pharmacyId}');
                               Navigator.of(context).pushNamed(
-                                "current",
+                                "inventory",
                                 arguments: {
                                   'id': widget.pharmacyId,
                                 },
