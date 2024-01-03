@@ -17,7 +17,7 @@ class _WelcomeState extends State<Welcome> {
         margin: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
              Row(
               children: [
                 Text(
@@ -47,7 +47,7 @@ class _WelcomeState extends State<Welcome> {
               style: TextStyle(color: Color(0xffC7F1FF), fontSize: 20),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("Users");
@@ -62,7 +62,7 @@ class _WelcomeState extends State<Welcome> {
               ),
               child: const Text(
                 "Next",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Color(0xffC7F1FF),),
               ),
             ),
           ],
