@@ -22,51 +22,34 @@ class _PharmacyInventoryPageState extends State<PharmacyInventoryPage> {
   }
 
 
-Future<void> fetchMedicines() async {
-  String pharmacyId = widget.pharmacyId;
-print("pharmacyId : ${pharmacyId}");
-  try {
-  // Reference to the user's pharmacy collection
+  Future<void> fetchMedicines() async {
+    String pharmacyId = widget.pharmacyId;
+    print("pharmacyId : ${pharmacyId}");
+
+    try {
       CollectionReference pharmacyCollection = _firestore.collection('Pharmacies');
-
-      // Reference to the document with the user's UID
       DocumentReference userDocRef = pharmacyCollection.doc(pharmacyId);
-
-      // Reference to the medicines subcollection
       CollectionReference medicinesCollection = userDocRef.collection('medicine');
-
-      // Get all medicines
       QuerySnapshot querySnapshot = await medicinesCollection.get();
-       // Convert QuerySnapshot to a list of Medicine objects
-     
-   
 
-    if (querySnapshot.docs.isNotEmpty) {
+      if (querySnapshot.docs.isNotEmpty) {
+        for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+          Map<String, dynamic> medicineData = doc.data() as Map<String, dynamic>;
+          bool isVisible = medicineData['isVisible'] ?? true;
 
-      // Convert the QuerySnapshot to a Map<String, dynamic>
-  for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-  Map<String, dynamic> medicineData = doc.data() as Map<String, dynamic>;
-
-  // Check if the medicine is visible
-  bool isVisible = medicineData['isVisible'] ?? true; // Default to true if not present
-
-  // Only add medicines with isVisible set to false
-  if (!isVisible) {
-    setState(() {
-      medicines.add(medicineData);
-    });
-  }
-}
-      // setState(() {
-      //   medicines = medicineSnapshot.docs.map((doc) => {...doc.data(), 'isVisible': true}).toList();
-      // });
-    } else {
-      print('Pharmacy document not found for ID: $pharmacyId');
+          if (!isVisible) {
+            setState(() {
+              medicines.add(medicineData);
+            });
+          }
+        }
+      } else {
+        print('Pharmacy document not found for ID: $pharmacyId');
+      }
+    } catch (e) {
+      print('Error fetching medicines: $e');
     }
-  } catch (e) {
-    print('Error fetching medicines: $e');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +79,13 @@ print("pharmacyId : ${pharmacyId}");
               itemBuilder: (context, index) {
                 final medicine = medicines[index];
 
-                return buildMedicineCard(index, medicine);
+                // Check if the medicine name contains the search text
+                if (medicine['Mname'].toLowerCase().contains(searchText.toLowerCase())) {
+                  return buildMedicineCard(index, medicine);
+                } else {
+                  // Return an empty container if the medicine should be filtered out
+                  return Container();
+                }
               },
             ),
           ),
@@ -112,40 +101,39 @@ print("pharmacyId : ${pharmacyId}");
     );
   }
 
-Widget buildMedicineCard(int index, Map<String, dynamic> medicine) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: Card(
-      elevation: 20,
-      shadowColor: Color(0xff41b2d6),
-      color: Color(0xffEDFAFF),
-      child: ListTile(
-        title: Text(medicine['Mname']),
-        trailing: Container(
-          width: 110, // Set the width according to your preference
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  showUpdateMedicineDialog(index, medicine);
-                },
-                icon: Icon(Icons.edit),
-              ),
-              SizedBox(width: 8),
-              IconButton(
-                onPressed: () {
-                  unhideMedicine(index);
-                },
-                icon: Icon(Icons.visibility),
-              ),
-            ],
+  Widget buildMedicineCard(int index, Map<String, dynamic> medicine) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Card(
+        elevation: 20,
+        shadowColor: Color(0xff41b2d6),
+        color: Color(0xffEDFAFF),
+        child: ListTile(
+          title: Text(medicine['Mname']),
+          trailing: Container(
+            width: 110,
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    showUpdateMedicineDialog(index, medicine);
+                  },
+                  icon: Icon(Icons.edit),
+                ),
+                SizedBox(width: 8),
+                IconButton(
+                  onPressed: () {
+                    unhideMedicine(index);
+                  },
+                  icon: Icon(Icons.visibility),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Future<void> unhideMedicine(int index) async {
     try {
