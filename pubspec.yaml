@@ -55,6 +55,7 @@ dependencies:
   rxdart: ^0.27.1
   firebase_database: ^10.3.8
   cloud_firestore_platform_interface: ^6.0.7
+
   #open_whatsapp: ^0.1.6
 
 

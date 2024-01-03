@@ -121,7 +121,7 @@ class _HomephState extends State<Homeph> {
                         Container(
                           height: 220,
                           width: 290,
-                          margin: const EdgeInsets.only(left: 35),
+                          margin: const EdgeInsets.only(left: 50),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
@@ -146,10 +146,13 @@ class _HomephState extends State<Homeph> {
                                 const SizedBox(
                                   height: 1,
                                 ),
-                                Image.asset(
-                                  "images/invt3.png",
-                                  height: 180,
-                                  width: 330,
+                                Container(
+                                  margin: const EdgeInsets.only(top: 30),
+                                  child: Image.asset(
+                                    "images/invt3.png",
+                                    height: 120,
+                                    width: 230,
+                                  ),
                                 ),
                                 const Text(
                                   "Current Medications",
@@ -169,7 +172,7 @@ class _HomephState extends State<Homeph> {
                         Container(
                           height: 250,
                           width: 290,
-                          margin: const EdgeInsets.only(left: 35),
+                          margin: const EdgeInsets.only(left: 55),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
@@ -180,17 +183,27 @@ class _HomephState extends State<Homeph> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushNamed("list");
+                               print('id before: ${widget.pharmacyId}');
+                              Navigator.of(context).pushNamed(
+                                "inventory",
+                                arguments: {
+                                  'id': widget.pharmacyId,
+                                },
+                              );
+                                print('id after: ${widget.pharmacyId}');
                             },
                             child: Column(
                               children: [
                                 const SizedBox(
                                   height: 3,
                                 ),
-                                Image.asset(
-                                  "images/invt4.png",
-                                  height: 200,
-                                  width: 300,
+                                Container(
+                                  margin: const EdgeInsets.only(top: 30),
+                                  child: Image.asset(
+                                    "images/invt4.png",
+                                    height: 140,
+                                    width: 270,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -198,7 +211,7 @@ class _HomephState extends State<Homeph> {
                                 const Text(
                                   "Inventory",
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 25,
                                     color: Color(0xff41b2d6),
                                     fontWeight: FontWeight.bold,
                                   ),

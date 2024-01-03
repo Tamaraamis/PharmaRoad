@@ -23,11 +23,12 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
     print('Pharmacy ID inventory: ${widget.pharmacyId}');
   }
 
-Future<void> fetchMedicines() async {
-  String pharmacyId = widget.pharmacyId;
-print("pharmacyId : ${pharmacyId}");
-  try {
-  // Reference to the user's pharmacy collection
+  Future<void> fetchMedicines() async {
+    String pharmacyId = widget.pharmacyId;
+    print("pharmacyId : ${pharmacyId}");
+
+    try {
+      // Reference to the user's pharmacy collection
       CollectionReference pharmacyCollection = _firestore.collection('Pharmacies');
 
       // Reference to the document with the user's UID
@@ -38,31 +39,22 @@ print("pharmacyId : ${pharmacyId}");
 
       // Get all medicines
       QuerySnapshot querySnapshot = await medicinesCollection.get();
-       // Convert QuerySnapshot to a list of Medicine objects
-     
-   
 
-    if (querySnapshot.docs.isNotEmpty) {
-
-      // Convert the QuerySnapshot to a Map<String, dynamic>
-  
-      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-         Map<String, dynamic> medicineData =  doc.data() as Map<String, dynamic>;
+      if (querySnapshot.docs.isNotEmpty) {
+        // Convert the QuerySnapshot to a Map<String, dynamic>
+        for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+          Map<String, dynamic> medicineData = doc.data() as Map<String, dynamic>;
           setState(() {
-        medicines.add(medicineData  );
-         });
+            medicines.add(medicineData);
+          });
+        }
+      } else {
+        print('Pharmacy document not found for ID: $pharmacyId');
       }
-    
-      // setState(() {
-      //   medicines = medicineSnapshot.docs.map((doc) => {...doc.data(), 'isVisible': true}).toList();
-      // });
-    } else {
-      print('Pharmacy document not found for ID: $pharmacyId');
+    } catch (e) {
+      print('Error fetching medicines: $e');
     }
-  } catch (e) {
-    print('Error fetching medicines: $e');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -87,21 +79,22 @@ print("pharmacyId : ${pharmacyId}");
             ),
           ),
           Expanded(
-  child: ListView.builder(
-    itemCount: medicines.length,
-    itemBuilder: (context, index) {
-      final medicine = medicines[index];
+            child: ListView.builder(
+              itemCount: medicines.length,
+              itemBuilder: (context, index) {
+                final medicine = medicines[index];
 
-  
-      if (medicine != null && medicine['Mname'] != null && medicine['isVisible']) {
-        return buildMedicineCard(index);
-      } else {
-        return Container();
-      }
-    },
-  ),
-),
-
+                if (medicine != null &&
+                    medicine['Mname'] != null &&
+                    matchesSearch(medicine['Mname']) &&
+                    medicine['isVisible']) {
+                  return buildMedicineCard(index);
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -128,7 +121,7 @@ print("pharmacyId : ${pharmacyId}");
         child: ListTile(
           title: Text(medicines[index]['Mname']),
           trailing: Container(
-            width: 140,
+            width: 100,
             child: Row(
               children: [
                 Expanded(
@@ -144,23 +137,8 @@ print("pharmacyId : ${pharmacyId}");
                     onPressed: () {
                       toggleMedicineVisibility(index);
                     },
-                    icon: Icon(medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showDeleteDialog(index);
-                    },
-                    icon: Icon(Icons.delete),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      unhideMedicine(index);
-                    },
-                    icon: Icon(Icons.visibility),
+                    icon: Icon(
+                        medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
                   ),
                 ),
               ],
@@ -200,6 +178,9 @@ print("pharmacyId : ${pharmacyId}");
               try {
                 await addMedicine(textController.text);
                 textController.clear();
+                setState(() {
+                  searchText = ''; // Clear the search text
+                });
                 Navigator.of(context).pop(); // Close the dialog
               } catch (e) {
                 print('Error adding medicine: $e');

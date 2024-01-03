@@ -199,7 +199,7 @@ Widget buildSignupButton() {
                 email: email.text,
                 password: password.text,
               );
-              Navigator.of(context).pushReplacementNamed("drawer");
+              Navigator.of(context).pushReplacementNamed("try");
             } on FirebaseAuthException catch (e) {
               if (e.code == 'email-already-in-use') {
                 showSnackBar('The account already exists for that email.');

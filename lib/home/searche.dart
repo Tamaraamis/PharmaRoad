@@ -304,7 +304,7 @@ class _SearchDrugState extends State<SearchDrug> {
   );
 }
  void sendWhatsAppMessage(String phoneNumber) async {
-
+   phoneNumber = phoneNumber.replaceFirst('0', '+962');
   final whatsappUrl = "https://wa.me/$phoneNumber";
     await launchUrl(Uri.parse(whatsappUrl)); 
   }
