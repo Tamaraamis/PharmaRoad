@@ -112,6 +112,7 @@ print("pharmacyId : ${pharmacyId}");
         },
         child: Icon(Icons.add),
       ),
+      
     );
   }
 
@@ -119,7 +120,7 @@ print("pharmacyId : ${pharmacyId}");
     return medicine.toLowerCase().contains(searchText.toLowerCase());
   }
 
-  Widget buildMedicineCard(int index) {
+ Widget buildMedicineCard(int index) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Card(
@@ -129,7 +130,7 @@ print("pharmacyId : ${pharmacyId}");
       child: ListTile(
         title: Text(medicines[index]['Mname']),
         trailing: Container(
-          width: 140,
+          width: 100,
           child: Row(
             children: [
               Expanded(
@@ -148,14 +149,6 @@ print("pharmacyId : ${pharmacyId}");
                   icon: Icon(medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
                 ),
               ),
-              Expanded(
-                child: IconButton(
-                  onPressed: () {
-                    unhideMedicine(index);
-                  },
-                  icon: Icon(Icons.visibility),
-                ),
-              ),
             ],
           ),
         ),
@@ -163,6 +156,7 @@ print("pharmacyId : ${pharmacyId}");
     ),
   );
 }
+
   Future<void> showAddMedicineDialog() async {
     final TextEditingController textController = TextEditingController();
 

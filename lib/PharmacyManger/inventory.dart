@@ -102,46 +102,50 @@ print("pharmacyId : ${pharmacyId}");
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildMedicineCard(int index, Map<String, dynamic> medicine) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Card(
-        elevation: 20,
-        shadowColor: Color(0xff41b2d6),
-        color: Color(0xffEDFAFF),
-        child: ListTile(
-          title: Text(medicine['Mname']),
-          trailing: Container(
-            width: 140,
-            child: Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showUpdateMedicineDialog(index, medicine);
-                    },
-                    icon: Icon(Icons.edit),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      unhideMedicine(index);
-                    },
-                    icon: Icon(Icons.visibility),
-                  ),
-                ),
-
-              ],
-            ),
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff41b2d6),
+        onPressed: () {
+          showAddMedicineDialog();
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
+
+Widget buildMedicineCard(int index, Map<String, dynamic> medicine) {
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Card(
+      elevation: 20,
+      shadowColor: Color(0xff41b2d6),
+      color: Color(0xffEDFAFF),
+      child: ListTile(
+        title: Text(medicine['Mname']),
+        trailing: Container(
+          width: 110, // Set the width according to your preference
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  showUpdateMedicineDialog(index, medicine);
+                },
+                icon: Icon(Icons.edit),
+              ),
+              SizedBox(width: 8),
+              IconButton(
+                onPressed: () {
+                  unhideMedicine(index);
+                },
+                icon: Icon(Icons.visibility),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 
   Future<void> unhideMedicine(int index) async {
     try {
@@ -324,4 +328,73 @@ print("pharmacyId : ${pharmacyId}");
       print('Error updating medicine: $e');
     }
   }
+  Future<void> showAddMedicineDialog() async {
+    final TextEditingController textController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Add Medicine',
+          style: TextStyle(
+            fontSize: 25,
+            color: Color(0xff41b2d6),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: TextField(
+          controller: textController,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              try {
+                await addMedicine(textController.text);
+                textController.clear();
+                Navigator.of(context).pop(); // Close the dialog
+              } catch (e) {
+                print('Error adding medicine: $e');
+              }
+            },
+            child: Text('Add'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> addMedicine(String medicineName) async {
+  if (medicineName.trim().isNotEmpty) {
+    try {
+      print('Pharmacy ID in addMedicine: ${widget.pharmacyId}');
+
+      final DocumentReference<Map<String, dynamic>> pharmacyRef =
+          _firestore.collection('Pharmacies').doc(widget.pharmacyId);
+
+      final DocumentReference<Map<String, dynamic>> newDocRef =
+          await pharmacyRef.collection('medicine').add({
+            'Mname': medicineName,
+            'isVisible': true, 
+          });
+
+      final DocumentSnapshot<Map<String, dynamic>> newDocSnapshot =
+          await newDocRef.get();
+
+      setState(() {
+        medicines.add({...?newDocSnapshot.data(), 'isVisible': true});
+      });
+    } catch (e) {
+      print('Error adding medicine: $e');
+    }
+  } else {
+    print('Medicine name cannot be null or empty');
+  }
+}
+
 }
