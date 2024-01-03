@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/PharmacyManger/current.dart';
 import 'package:flutter_application_2/PharmacyManger/homeph.dart';
+import 'package:flutter_application_2/PharmacyManger/inventory.dart';
 import 'package:flutter_application_2/PharmacyManger/profileM.dart';
 import 'package:flutter_application_2/auth/welcome.dart';
 import 'package:flutter_application_2/home/UserProfile.dart';
@@ -88,7 +89,7 @@ class MyApp extends StatelessWidget {
           "YourPersc": (context) => const perscShow(),
           "searchph":(context) => const SearchPharmacy(),
           'UserProfile':(context) => const UserProfile(),
-          
+
           'homeph': (context) {
             final Map<String, dynamic> args = ModalRoute.of(context)!
                 .settings
@@ -100,6 +101,12 @@ class MyApp extends StatelessWidget {
                 .settings
                 .arguments as Map<String, dynamic>;
             return PharmacyMedicinesPage(pharmacyId: args['id']);
+          },
+           'inventory': (context) {
+            final Map<String, dynamic> args = ModalRoute.of(context)!
+                .settings
+                .arguments as Map<String, dynamic>;
+            return PharmacyInventoryPage(pharmacyId: args['id']);
           },
           /* "homeph": (context) {
   final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;

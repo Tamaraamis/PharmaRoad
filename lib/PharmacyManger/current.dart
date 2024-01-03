@@ -49,7 +49,7 @@ print("pharmacyId : ${pharmacyId}");
       for (QueryDocumentSnapshot doc in querySnapshot.docs) {
          Map<String, dynamic> medicineData =  doc.data() as Map<String, dynamic>;
           setState(() {
-        medicines.add(medicineData  );
+        medicines.add(medicineData);
          });
       }
     
@@ -94,6 +94,7 @@ print("pharmacyId : ${pharmacyId}");
 
   
       if (medicine != null && medicine['Mname'] != null && medicine['isVisible']) {
+
         return buildMedicineCard(index);
       } else {
         return Container();
@@ -119,58 +120,49 @@ print("pharmacyId : ${pharmacyId}");
   }
 
   Widget buildMedicineCard(int index) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Card(
-        elevation: 20,
-        shadowColor: Color(0xff41b2d6),
-        color: Color(0xffEDFAFF),
-        child: ListTile(
-          title: Text(medicines[index]['Mname']),
-          trailing: Container(
-            width: 140,
-            child: Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showUpdateMedicineDialog(index);
-                    },
-                    icon: Icon(Icons.edit),
-                  ),
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Card(
+      elevation: 20,
+      shadowColor: Color(0xff41b2d6),
+      color: Color(0xffEDFAFF),
+      child: ListTile(
+        title: Text(medicines[index]['Mname']),
+        trailing: Container(
+          width: 140,
+          child: Row(
+            children: [
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    showUpdateMedicineDialog(index);
+                  },
+                  icon: Icon(Icons.edit),
                 ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      toggleMedicineVisibility(index);
-                    },
-                    icon: Icon(medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
-                  ),
+              ),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    toggleMedicineVisibility(index);
+                  },
+                  icon: Icon(medicines[index]['isVisible'] ? Icons.visibility_off : Icons.visibility),
                 ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      showDeleteDialog(index);
-                    },
-                    icon: Icon(Icons.delete),
-                  ),
+              ),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    unhideMedicine(index);
+                  },
+                  icon: Icon(Icons.visibility),
                 ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      unhideMedicine(index);
-                    },
-                    icon: Icon(Icons.visibility),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
   Future<void> showAddMedicineDialog() async {
     final TextEditingController textController = TextEditingController();
 
